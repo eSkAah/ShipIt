@@ -1,0 +1,160 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Language {
+  fr
+  en
+}
+
+enum Theme {
+  light
+  dark
+  system
+}
+
+enum Role {
+  admin
+  member
+  viewer
+}
+
+enum SubscriptionTier {
+  free
+  premium
+}
+
+enum SubscriptionStatus {
+  active
+  past_due
+  canceled
+  trialing
+  incomplete
+}
+
+enum InvitationStatus {
+  pending
+  accepted
+  expired
+  canceled
+}
+
+model User {
+  id                   String               @id @default(uuid()) @db.Uuid
+  email                String               @unique
+  passwordHash         String?              @map("password_hash")
+  firstName            String               @map("first_name")
+  lastName             String               @map("last_name")
+  phone                String?
+  address              Json?
+  avatarUrl            String?              @map("avatar_url")
+  language             Language             @default(fr)
+  theme                Theme                @default(system)
+  notificationsEnabled Boolean              @default(true) @map("notifications_enabled")
+  emailVerified        Boolean              @default(false) @map("email_verified")
+  isSuperAdmin         Boolean              @default(false) @map("is_super_admin")
+  createdAt            DateTime             @default(now()) @map("created_at")
+  updatedAt            DateTime             @updatedAt @map("updated_at")
+  sessions             Session[]
+  accounts             Account[]
+  memberships          OrganizationMember[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  expiresAt DateTime @map("expires_at")
+  ipAddress String?  @map("ip_address")
+  userAgent String?  @map("user_agent")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Account {
+  id                String  @id @default(uuid()) @db.Uuid
+  userId            String  @map("user_id") @db.Uuid
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  accessToken       String? @map("access_token")
+  refreshToken      String? @map("refresh_token")
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model VerificationToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  token     String   @unique
+  email     String
+  type      String
+  expiresAt DateTime @map("expires_at")
+
+  @@map("verification_tokens")
+}
+
+model Organization {
+  id                   String               @id @default(uuid()) @db.Uuid
+  name                 String
+  slug                 String               @unique
+  stripeCustomerId     String?              @unique @map("stripe_customer_id")
+  stripeSubscriptionId String?              @unique @map("stripe_subscription_id")
+  subscriptionTier     SubscriptionTier     @default(free) @map("subscription_tier")
+  subscriptionStatus   SubscriptionStatus   @default(active) @map("subscription_status")
+  createdAt            DateTime             @default(now()) @map("created_at")
+  updatedAt            DateTime             @updatedAt @map("updated_at")
+  members              OrganizationMember[]
+  invitations          Invitation[]
+
+  @@map("organizations")
+}
+
+model OrganizationMember {
+  id             String       @id @default(uuid()) @db.Uuid
+  userId         String       @map("user_id") @db.Uuid
+  organizationId String       @map("organization_id") @db.Uuid
+  role           Role         @default(member)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@map("organization_members")
+}
+
+model Invitation {
+  id             String           @id @default(uuid()) @db.Uuid
+  email          String
+  organizationId String           @map("organization_id") @db.Uuid
+  role           Role             @default(member)
+  token          String           @unique
+  status         InvitationStatus @default(pending)
+  invitedById    String           @map("invited_by_id") @db.Uuid
+  expiresAt      DateTime         @map("expires_at")
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@map("invitations")
+}
+
+model AppLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  level     String
+  message   String
+  context   Json?
+  userId    String?  @map("user_id") @db.Uuid
+  orgId     String?  @map("org_id") @db.Uuid
+  requestId String?  @map("request_id")
+  timestamp DateTime @default(now())
+
+  @@map("app_logs")
+}
