@@ -38,7 +38,7 @@ A modern, production-ready SaaS boilerplate featuring authentication, billing, m
 
 ### Infrastructure
 
-- **Monorepo**: Nx + pnpm
+- **Monorepo**: Turborepo + pnpm
 - **Containerization**: Docker + Docker Compose
 - **CI/CD**: GitHub Actions
 - **Deployment**: Azure Container Apps
@@ -203,7 +203,7 @@ ShipIt/
 │   ├── migrations/              # Database migrations
 │   └── seed.ts                  # Seed script
 ├── docker-compose.yml           # Local development services
-└── nx.json                      # Nx workspace configuration
+└── turbo.json                   # Turborepo configuration
 ```
 
 ## Environment Variables
