@@ -49,6 +49,46 @@ export class ConfigService {
     return this.configService.get<string>('SENTRY_DSN', '');
   }
 
+  get sessionExpiryDays(): number {
+    return this.configService.get<number>('SESSION_EXPIRY_DAYS', 7);
+  }
+
+  get betterAuthBasePath(): string {
+    return this.configService.get<string>('BETTER_AUTH_BASE_PATH', '/api/auth');
+  }
+
+  get fromEmail(): string {
+    return this.configService.get<string>('FROM_EMAIL', 'noreply@shipit.com');
+  }
+
+  get supportEmail(): string {
+    return this.configService.get<string>('SUPPORT_EMAIL', 'support@shipit.com');
+  }
+
+  get googleClientId(): string {
+    return this.configService.get<string>('GOOGLE_CLIENT_ID', '');
+  }
+
+  get googleClientSecret(): string {
+    return this.configService.get<string>('GOOGLE_CLIENT_SECRET', '');
+  }
+
+  get appleClientId(): string {
+    return this.configService.get<string>('APPLE_CLIENT_ID', '');
+  }
+
+  get appleTeamId(): string {
+    return this.configService.get<string>('APPLE_TEAM_ID', '');
+  }
+
+  get appleKeyId(): string {
+    return this.configService.get<string>('APPLE_KEY_ID', '');
+  }
+
+  get applePrivateKey(): string {
+    return this.configService.get<string>('APPLE_PRIVATE_KEY', '');
+  }
+
   get isProd(): boolean {
     return this.nodeEnv === 'production';
   }
