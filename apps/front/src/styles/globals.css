@@ -1,19 +1,42 @@
+/* Manrope Font Import - ShipIt Design System */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    /* ShipIt Light Mode Colors (Default) */
+    --background: 255 255 255; /* White */
+    --foreground: 0 0 0; /* Black */
+    --card-background: 255 255 255;
+    --card-border: 229 231 235; /* gray-200 */
+
+    /* Gold Primary */
+    --primary: 255 215 0;
+    --primary-foreground: 0 0 0;
+
+    /* Purple Secondary */
+    --secondary: 124 58 237;
+    --secondary-foreground: 255 255 255;
+
+    /* Semantic Colors */
+    --success: 16 185 129;
+    --error: 239 68 68;
+    --warning: 245 158 11;
+    --info: 59 130 246;
+
+    /* Text Opacity Variants (Creatikk pattern) */
+    --text-primary: 1;
+    --text-secondary: 0.6;
+    --text-tertiary: 0.4;
+
+    /* shadcn/ui compatibility - keep for existing components */
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 240 4.8% 95.9%;
@@ -51,9 +74,83 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-gray-200;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-white text-black font-sans antialiased;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  /* Typography Defaults - ShipIt Design System */
+  h1 {
+    @apply text-hero font-bold leading-hero;
+  }
+
+  h2 {
+    @apply text-section font-bold leading-section;
+  }
+
+  h3 {
+    @apply text-2xl font-normal leading-8;
+  }
+
+  /* Focus Ring (Accessibility) */
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold-500 ring-offset-2;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card - ShipIt Design System */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-accent border border-gray-200/50 rounded-premium;
+  }
+
+  /* Premium Button (Creatikk style) */
+  .btn-primary {
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-full px-4
+           bg-white text-black font-semibold shadow-gold-glow
+           transition-shadow duration-700 ease-smooth
+           hover:shadow-gold-glow-hover;
+  }
+
+  .btn-secondary {
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-full px-4
+           bg-transparent text-black font-semibold border-2 border-gold-500
+           transition-all duration-700 ease-smooth
+           hover:bg-gold-50;
+  }
+
+  /* Input Field */
+  .input-field {
+    @apply w-full rounded-input border border-gray-300 px-4 py-2
+           focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20
+           transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  /* Text Opacity Utilities (Creatikk pattern) */
+  .text-primary {
+    opacity: var(--text-primary);
+  }
+
+  .text-secondary {
+    opacity: var(--text-secondary);
+  }
+
+  .text-tertiary {
+    opacity: var(--text-tertiary);
+  }
+
+  /* Section Padding (Creatikk standard) */
+  .section-padding {
+    @apply py-19 px-4;
+  }
+
+  /* Gradient Text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-gold-500 to-purple-500 bg-clip-text text-transparent;
   }
 }

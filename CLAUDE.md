@@ -370,6 +370,82 @@ All endpoints return JSON. Protected endpoints require session cookie and approp
 - `/health/ready` - Database and Redis connectivity check
 - Use for container orchestration readiness probes
 
+## Design System Rules
+
+**CRITICAL**: ShipIt has a strict design system. You MUST follow these rules when creating UI components:
+
+### Color Usage
+
+- **Primary Actions**: Gold #FFD700 (use `bg-gold-500`, `text-gold-500`, `border-gold-500`)
+- **Secondary Actions**: Purple #7C3AED (use `bg-purple-500`, `text-purple-500`)
+- **Backgrounds**: White (light mode default) - `bg-white`
+- **Text**: Black for primary text `text-black`, 60% opacity for secondary `text-black/60`
+- **NEVER use arbitrary colors** - only use tokens defined in [tailwind.config.js](apps/front/tailwind.config.js)
+
+### Typography
+
+- **Font**: Manrope only - `font-sans`
+- **Headings**:
+  - H1: `text-hero font-bold leading-hero` (72px)
+  - H2: `text-section font-bold leading-section` (52px)
+  - H3: `text-2xl font-normal`
+- **Body**: `text-base leading-normal` (16px)
+- **NEVER use other fonts** or arbitrary font sizes outside the scale
+
+### Spacing
+
+- **Section Gaps**: Use `gap-8` (32px) between components
+- **Section Padding**: Use `section-padding` class (76px vertical)
+- **Component Padding**: `px-4` (16px), `py-2` (8px) standard
+- **NEVER use arbitrary spacing** - stick to Tailwind scale
+
+### Shadows & Effects
+
+- **Primary Button Shadow**: `shadow-gold-glow` (signature offset glow)
+- **Hover State**: `shadow-gold-glow-hover`
+- **Cards**: `shadow-card` (subtle elevation)
+- **Glassmorphism**: `glass-card` class for semi-transparent cards
+
+### Border Radius
+
+- **Buttons/Pills**: `rounded-full` (9999px)
+- **Cards**: `rounded-premium` (22px)
+- **Inputs**: `rounded-input` (12px)
+- **NEVER use `rounded` or `rounded-lg`** - use design system values
+
+### Animations
+
+- **Transitions**: Use `transition-all duration-700 ease-smooth`
+- **Hover Effects**: 500ms-700ms transitions
+- **Page Entrance**: `animate-fade-in` or `animate-slide-up`
+- **NEVER use instant changes** - always animate
+
+### Component Patterns
+
+- **Primary Button**: Use `btn-primary` class or build with `rounded-full px-4 h-10 bg-white text-black shadow-gold-glow`
+- **Secondary Button**: Use `btn-secondary` class
+- **Input Fields**: Use `input-field` class
+- **Cards**: Use `glass-card` class for premium look
+
+### Accessibility
+
+- **Focus States**: Automatically styled with gold ring - don't override
+- **Color Contrast**: Ensure WCAG AA compliance (4.5:1 minimum)
+- **Keyboard Navigation**: All interactive elements must be keyboard accessible
+
+### What NOT to Do
+
+- ❌ Don't use arbitrary values like `w-[350px]` - use Tailwind scale
+- ❌ Don't use `bg-blue-500` or other non-design-system colors
+- ❌ Don't use `font-inter` or other fonts
+- ❌ Don't create components without animations
+- ❌ Don't use sharp corners - use design system radius values
+- ❌ Don't skip hover states
+
+### Reference
+
+For detailed design specifications, see [docs/DESIGN.md](docs/DESIGN.md).
+
 ## Coding Conventions
 
 - **Files:** kebab-case (e.g., `user.service.ts`)
