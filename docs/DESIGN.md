@@ -12,9 +12,31 @@ This document defines the complete design system for ShipIt, a production-ready 
 
 ## Color Palette
 
+### Theme-Aware Color Strategy
+
+**Important**: Due to contrast and visibility constraints, accent colors differ by theme:
+
+| Context                  | Light Mode                       | Dark Mode                    |
+| ------------------------ | -------------------------------- | ---------------------------- |
+| **Links**                | Purple (`text-purple-600`)       | Gold (`text-gold-500`)       |
+| **Link Hover**           | Purple (`hover:text-purple-700`) | Gold (`hover:text-gold-400`) |
+| **Button Hover Borders** | Purple (`border-purple-500`)     | Gold (`border-gold-500`)     |
+| **Input Focus Ring**     | Purple (`ring-purple-500`)       | Gold (`ring-gold-500`)       |
+| **Dot Grid Pattern**     | Purple tint                      | White/gray                   |
+| **Background Accents**   | Purple + subtle gold             | Purple + gold                |
+
+**Reasoning**: Gold (#FFD700) has poor contrast on white backgrounds (1.4:1 ratio), so we use purple for interactive elements in light mode. Gold works beautifully against dark backgrounds where it provides excellent visibility.
+
+**Tailwind Pattern**:
+
+```tsx
+// Conditional colors for links and accents
+className = 'text-purple-600 dark:text-gold-500 hover:text-purple-700 dark:hover:text-gold-400';
+```
+
 ### Primary: Gold
 
-Our signature color, used for primary actions, accents, and brand identity.
+Our signature color, used for primary actions, accents, and brand identity. **Best for dark mode accents.**
 
 | Shade        | Hex           | Usage                                   |
 | ------------ | ------------- | --------------------------------------- |
@@ -329,9 +351,139 @@ Recommended properties for smooth performance:
 
 ---
 
+## Background Patterns
+
+Premium background effects inspired by Creatikk.io for both light and dark modes.
+
+### Dot Grid Pattern
+
+A perfectly aligned grid of subtle dots creating depth and premium feel. Theme-aware with different colors.
+
+**Visual Characteristics**:
+
+- **Alignment**: Perfectly regular grid (not random)
+- **Size**: 1px dots (very precise)
+- **Spacing**: 24px between each dot
+- **Mask**: Fades out towards edges using radial gradient mask (ellipse 70% 50%)
+
+**Theme Differences**:
+| Theme | Dot Color | Opacity |
+|-------|-----------|---------|
+| Light | Purple (`rgba(124, 58, 237, 0.08)`) | 8% |
+| Dark | White (`rgba(255, 255, 255, 0.12)`) | 12% |
+
+**Implementation** (React component with theme awareness):
+
+```tsx
+export function DotGrid({ className = '' }: DotGridProps) {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
+  return (
+    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: isDark
+            ? `radial-gradient(circle, rgba(255, 255, 255, 0.12) 1px, transparent 1px)`
+            : `radial-gradient(circle, rgba(124, 58, 237, 0.08) 1px, transparent 1px)`,
+          backgroundSize: '24px 24px',
+          maskImage: 'radial-gradient(ellipse 70% 50% at 50% 50%, black 0%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 70% 50% at 50% 50%, black 0%, transparent 80%)',
+        }}
+      />
+    </div>
+  );
+}
+```
+
+**Usage**:
+
+```tsx
+import { DotGrid } from '../components/ui/dot-grid';
+
+// Add to any full-screen container
+<div className="relative min-h-screen">
+  <DotGrid />
+  {/* Content with z-10 */}
+</div>;
+```
+
+### Gradient Background
+
+Multi-layered radial gradients with purple and gold accents. Different implementations for light and dark modes.
+
+#### Dark Mode Background
+
+**Visual Characteristics**:
+
+- **Base**: Dark gradient (#0B0F19 → #111827 → #0f172a)
+- **Purple Accent**: Large ellipse at bottom center (15% opacity)
+- **Purple Secondary**: Smaller ellipse on left (10% opacity)
+- **Gold Accent**: Subtle ellipse on right (8% opacity)
+- **Direction**: Gradients positioned towards bottom of viewport
+
+**Implementation**:
+
+```css
+html.dark body {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 40%),
+    radial-gradient(ellipse 50% 30% at 80% 90%, rgba(255, 215, 0, 0.08) 0%, transparent 35%),
+    linear-gradient(180deg, #0b0f19 0%, #111827 40%, #0f172a 100%);
+  background-attachment: fixed;
+}
+```
+
+#### Light Mode Background
+
+**Visual Characteristics**:
+
+- **Base**: Subtle gray gradient (#fafafa → #f5f5f7 → #fafafa)
+- **Purple Accent**: Large ellipse at bottom center (6% opacity) - more subtle than dark mode
+- **Purple Secondary**: Smaller ellipse on left (4% opacity)
+- **Gold Accent**: Subtle ellipse on right (5% opacity)
+- **Overall Feel**: Clean, minimal, professional
+
+**Implementation**:
+
+```css
+html:not(.dark) body {
+  background:
+    radial-gradient(ellipse 100% 50% at 50% 100%, rgba(124, 58, 237, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 40% at 0% 100%, rgba(124, 58, 237, 0.04) 0%, transparent 40%),
+    radial-gradient(ellipse 50% 30% at 100% 100%, rgba(255, 215, 0, 0.05) 0%, transparent 35%),
+    linear-gradient(180deg, #fafafa 0%, #f5f5f7 50%, #fafafa 100%);
+  background-attachment: fixed;
+}
+```
+
+### Combined Effect
+
+For premium auth pages and landing sections:
+
+1. **Base Layer**: Dark gradient background (via body styles)
+2. **Dot Layer**: DotGrid component with mask
+3. **Content Layer**: Glass cards with z-10
+
+```tsx
+<div className="min-h-screen relative overflow-hidden">
+  {/* Dot grid background */}
+  <DotGrid />
+
+  {/* Content on top */}
+  <div className="relative z-10">
+    <div className="glass-card p-8">{/* Form content */}</div>
+  </div>
+</div>
+```
+
+---
+
 ## Glassmorphism Effects
 
-Inspired by Creatikk, adapted for light mode.
+Inspired by Creatikk, adapted for both light and dark modes.
 
 ### Backdrop Blur
 

@@ -20,12 +20,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center gap-2 font-semibold transition-all duration-700 ease-smooth disabled:opacity-50 disabled:cursor-not-allowed';
+      'inline-flex items-center justify-center gap-2 font-semibold transition-all duration-700 ease-smooth disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer';
 
     const variantStyles = {
-      primary: 'rounded-full bg-white text-black shadow-gold-glow hover:shadow-gold-glow-hover',
-      secondary: 'rounded-full bg-transparent text-black border-2 border-gold-500 hover:bg-gold-50',
-      ghost: 'rounded-full bg-transparent text-black hover:bg-gray-100',
+      primary: 'btn-primary',
+      secondary: 'btn-secondary',
+      ghost: 'btn-ghost',
     };
 
     const sizeStyles = {

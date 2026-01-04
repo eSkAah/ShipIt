@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../components/ui/button';
+import { ThemeToggle } from '../components/ui/theme-toggle';
+import { DotGrid } from '../components/ui/dot-grid';
 import { authService } from '../services/auth.service';
 
 export function VerifyEmailPage() {
@@ -29,8 +31,14 @@ export function VerifyEmailPage() {
   }, [token]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center section-padding bg-white">
-      <div className="w-full max-w-md animate-fade-in text-center">
+    <div className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden">
+      <DotGrid />
+
+      <div className="absolute top-6 right-6 z-10">
+        <ThemeToggle />
+      </div>
+
+      <div className="w-full max-w-md animate-fade-in text-center relative z-10">
         <div className="glass-card p-8 space-y-4">
           {status === 'loading' && (
             <>
@@ -56,7 +64,9 @@ export function VerifyEmailPage() {
                   />
                 </svg>
               </div>
-              <h2 className="text-2xl font-bold">{t('auth.verifyEmail.verifying')}</h2>
+              <h2 className="text-2xl font-bold text-foreground">
+                {t('auth.verifyEmail.verifying')}
+              </h2>
             </>
           )}
 
@@ -77,7 +87,9 @@ export function VerifyEmailPage() {
                   />
                 </svg>
               </div>
-              <h2 className="text-2xl font-bold">{t('auth.verifyEmail.success')}</h2>
+              <h2 className="text-2xl font-bold text-foreground">
+                {t('auth.verifyEmail.success')}
+              </h2>
               <Link to="/login">
                 <Button variant="primary" className="mt-4">
                   {t('auth.verifyEmail.backToLogin')}
@@ -103,7 +115,7 @@ export function VerifyEmailPage() {
                   />
                 </svg>
               </div>
-              <h2 className="text-2xl font-bold">{t('auth.verifyEmail.error')}</h2>
+              <h2 className="text-2xl font-bold text-foreground">{t('auth.verifyEmail.error')}</h2>
               <Link to="/login">
                 <Button variant="secondary" className="mt-4">
                   {t('auth.verifyEmail.backToLogin')}

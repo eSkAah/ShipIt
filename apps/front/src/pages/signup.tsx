@@ -9,6 +9,8 @@ import { Button } from '../components/ui/button';
 import { FormField } from '../components/forms/form-field';
 import { PasswordStrength } from '../components/forms/password-strength';
 import { OAuthButton } from '../components/auth/oauth-button';
+import { ThemeToggle } from '../components/ui/theme-toggle';
+import { DotGrid } from '../components/ui/dot-grid';
 import { authService } from '../services/auth.service';
 
 export function SignupPage() {
@@ -44,8 +46,12 @@ export function SignupPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center section-padding bg-white">
-        <div className="w-full max-w-md animate-fade-in text-center">
+      <div className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden">
+        <DotGrid />
+        <div className="absolute top-6 right-6 z-10">
+          <ThemeToggle />
+        </div>
+        <div className="w-full max-w-md animate-fade-in text-center relative z-10">
           <div className="glass-card p-8 space-y-4">
             <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mx-auto">
               <svg
@@ -62,7 +68,7 @@ export function SignupPage() {
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold">{t('auth.signup.success')}</h2>
+            <h2 className="text-2xl font-bold text-foreground">{t('auth.signup.success')}</h2>
             <Link to="/login">
               <Button variant="primary" className="mt-4">
                 {t('auth.login.title')}
@@ -75,11 +81,19 @@ export function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center section-padding bg-white">
-      <div className="w-full max-w-md animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden">
+      <DotGrid />
+
+      <div className="absolute top-6 right-6 z-10">
+        <ThemeToggle />
+      </div>
+
+      <div className="w-full max-w-md animate-fade-in relative z-10">
         <div className="text-center mb-8">
-          <h1 className="text-section font-bold leading-section mb-2">{t('auth.signup.title')}</h1>
-          <p className="text-base text-black/60">{t('auth.signup.subtitle')}</p>
+          <h1 className="text-2xl md:text-4xl font-bold mb-2 text-foreground">
+            {t('auth.signup.title')}
+          </h1>
+          <p className="text-base text-muted">{t('auth.signup.subtitle')}</p>
         </div>
 
         <div className="glass-card p-8 space-y-6">
@@ -138,10 +152,10 @@ export function SignupPage() {
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
+              <div className="w-full border-t border-theme" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-black/60">{t('auth.signup.orContinueWith')}</span>
+              <span className="px-4 divider-text">{t('auth.signup.orContinueWith')}</span>
             </div>
           </div>
 
@@ -150,11 +164,11 @@ export function SignupPage() {
             <OAuthButton provider="apple" onClick={authService.loginWithApple} />
           </div>
 
-          <p className="text-center text-sm text-black/60">
+          <p className="text-center text-sm text-muted">
             {t('auth.signup.hasAccount')}{' '}
             <Link
               to="/login"
-              className="text-gold-500 hover:text-gold-600 font-semibold transition-colors duration-300"
+              className="text-purple-600 dark:text-gold-500 hover:text-purple-700 dark:hover:text-gold-400 font-semibold transition-colors duration-300"
             >
               {t('auth.signup.loginLink')}
             </Link>

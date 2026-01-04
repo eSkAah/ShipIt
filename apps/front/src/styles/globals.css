@@ -1,85 +1,165 @@
 /* Manrope Font Import - ShipIt Design System */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind CSS v4 */
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    /* ShipIt Light Mode Colors (Default) */
-    --background: 255 255 255; /* White */
-    --foreground: 0 0 0; /* Black */
-    --card-background: 255 255 255;
-    --card-border: 229 231 235; /* gray-200 */
+/* Configure content sources for Tailwind */
+@source "../../index.html";
+@source "../**/*.{js,ts,jsx,tsx}";
 
-    /* Gold Primary */
-    --primary: 255 215 0;
-    --primary-foreground: 0 0 0;
+/* ShipIt Design System Theme - Tailwind v4 CSS-first configuration */
+@theme {
+  /* Typography - Manrope font */
+  --font-sans: 'Manrope', system-ui, sans-serif;
 
-    /* Purple Secondary */
-    --secondary: 124 58 237;
-    --secondary-foreground: 255 255 255;
+  /* Color System - Primary: Gold */
+  --color-gold-50: #FFFEF0;
+  --color-gold-100: #FFFBD6;
+  --color-gold-200: #FFF7AD;
+  --color-gold-300: #FFF284;
+  --color-gold-400: #FFED5B;
+  --color-gold-500: #FFD700;
+  --color-gold-600: #E6C200;
+  --color-gold-700: #B39700;
+  --color-gold-800: #806C00;
+  --color-gold-900: #4D4100;
+  --color-gold-950: #332B00;
 
-    /* Semantic Colors */
-    --success: 16 185 129;
-    --error: 239 68 68;
-    --warning: 245 158 11;
-    --info: 59 130 246;
+  /* Color System - Secondary: Purple */
+  --color-purple-50: #F5F3FF;
+  --color-purple-100: #EDE9FE;
+  --color-purple-200: #DDD6FE;
+  --color-purple-300: #C4B5FD;
+  --color-purple-400: #A78BFA;
+  --color-purple-500: #7C3AED;
+  --color-purple-600: #6D28D9;
+  --color-purple-700: #5B21B6;
+  --color-purple-800: #4C1D95;
+  --color-purple-900: #3B0764;
+  --color-purple-950: #2E0550;
 
-    /* Text Opacity Variants (Creatikk pattern) */
-    --text-primary: 1;
-    --text-secondary: 0.6;
-    --text-tertiary: 0.4;
+  /* Gray scale for dark mode */
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-850: #18202F;
+  --color-gray-900: #111827;
+  --color-gray-950: #0B0F19;
 
-    /* shadcn/ui compatibility - keep for existing components */
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.5rem;
+  /* Semantic Colors */
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  --color-info: #3B82F6;
+
+  /* Custom Spacing (Creatikk pattern) */
+  --spacing-19: 76px;
+  --spacing-30: 120px;
+
+  /* Custom Shadows - ShipIt signature glows */
+  --shadow-gold-glow: -7px 0px 20px -4px rgba(255, 215, 0, 0.5);
+  --shadow-gold-glow-hover: -7px 0px 30px -4px rgba(255, 215, 0, 0.7);
+  --shadow-purple-glow: -7px 0px 20px -4px rgba(124, 58, 237, 0.5);
+  --shadow-purple-glow-hover: -7px 0px 30px -4px rgba(124, 58, 237, 0.7);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-card-dark: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+  /* Custom Border Radius */
+  --radius-premium: 22px;
+  --radius-input: 12px;
+
+  /* Custom Easing */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Custom Animations */
+  --animate-fade-in: fade-in 700ms cubic-bezier(0.4, 0, 0.2, 1);
+  --animate-slide-up: slide-up 700ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+  @keyframes slide-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+
 }
 
+/* Base Layer - Global Styles */
 @layer base {
+  /* Light Mode (default when no class) */
+  :root {
+    --background: 255 255 255;
+    --foreground: 0 0 0;
+    --card-background: 255 255 255;
+    --card-border: 229 231 235;
+    --text-primary-opacity: 1;
+    --text-secondary-opacity: 0.6;
+    --text-tertiary-opacity: 0.4;
+  }
+
+  /* Dark Mode - Premium Creatikk-inspired dark theme */
+  .dark {
+    --background: 11 15 25;
+    --foreground: 255 255 255;
+    --card-background: 24 32 47;
+    --card-border: 55 65 81;
+    --text-primary-opacity: 1;
+    --text-secondary-opacity: 0.7;
+    --text-tertiary-opacity: 0.5;
+  }
+
+  /* Light mode body with premium gradient */
+  html:not(.dark) body {
+    background:
+      radial-gradient(ellipse 100% 50% at 50% 100%, rgba(124, 58, 237, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 40% at 0% 100%, rgba(124, 58, 237, 0.04) 0%, transparent 40%),
+      radial-gradient(ellipse 50% 30% at 100% 100%, rgba(255, 215, 0, 0.05) 0%, transparent 35%),
+      linear-gradient(180deg, #fafafa 0%, #f5f5f7 50%, #fafafa 100%);
+    background-attachment: fixed;
+    color: #1a1a1a;
+  }
+
+  /* Dark mode body with premium gradient background */
+  html.dark body {
+    background:
+      radial-gradient(ellipse 120% 60% at 50% 100%, rgba(124, 58, 237, 0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 50% at 0% 100%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255, 215, 0, 0.12) 0%, transparent 45%),
+      linear-gradient(180deg, #0a0e17 0%, #0f1629 50%, #0a0e17 100%);
+    background-attachment: fixed;
+    color: #ffffff;
+    min-height: 100vh;
+  }
+
   body {
-    background-color: white;
-    color: black;
     font-family: 'Manrope', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: 'rlig' 1, 'calt' 1;
+    min-height: 100vh;
+    transition: background-color 500ms ease, color 500ms ease;
   }
 
   /* Typography Defaults - ShipIt Design System */
@@ -109,16 +189,35 @@
   }
 }
 
+/* Components Layer - Reusable Component Classes */
 @layer components {
-  /* Glassmorphism Card - ShipIt Design System */
+  /* Glassmorphism Card - Light Mode */
   .glass-card {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(30px);
-    border: 1px solid rgba(229, 231, 235, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 22px;
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.06),
+      0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: all 500ms ease;
   }
 
-  /* Premium Button (Creatikk style) */
+  /* Glassmorphism Card - Dark Mode */
+  .dark .glass-card {
+    background: linear-gradient(
+      135deg,
+      rgba(24, 32, 47, 0.9) 0%,
+      rgba(31, 41, 55, 0.8) 100%
+    );
+    backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    box-shadow:
+      0 4px 30px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Premium Button - Light Mode */
   .btn-primary {
     display: inline-flex;
     height: 2.5rem;
@@ -128,18 +227,80 @@
     border-radius: 9999px;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: white;
-    color: black;
+    background: linear-gradient(135deg, #FFD700 0%, #FFC200 100%);
+    color: #1a1a1a;
     font-weight: 600;
-    box-shadow: -7px 0px 20px -4px rgba(255, 215, 0, 0.5);
-    transition: box-shadow 700ms cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow:
+      0 2px 8px rgba(255, 215, 0, 0.3),
+      0 1px 2px rgba(0, 0, 0, 0.08);
+    transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
   }
 
   .btn-primary:hover {
-    box-shadow: -7px 0px 30px -4px rgba(255, 215, 0, 0.7);
+    box-shadow:
+      0 4px 16px rgba(255, 215, 0, 0.4),
+      0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
   }
 
+  /* Premium Button - Dark Mode */
+  .dark .btn-primary {
+    background: linear-gradient(135deg, #FFD700 0%, #FFC000 100%);
+    color: #0B0F19;
+    box-shadow:
+      -7px 0px 25px -4px rgba(255, 215, 0, 0.4),
+      0 0 20px rgba(255, 215, 0, 0.2);
+  }
+
+  .dark .btn-primary:hover {
+    box-shadow:
+      -7px 0px 35px -4px rgba(255, 215, 0, 0.6),
+      0 0 30px rgba(255, 215, 0, 0.3);
+    transform: translateY(-1px);
+  }
+
+  /* Secondary Button - Light Mode */
   .btn-secondary {
+    display: inline-flex;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+    font-weight: 600;
+    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 1);
+    border-color: rgba(124, 58, 237, 0.4);
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+  }
+
+  /* Secondary Button - Dark Mode */
+  .dark .btn-secondary {
+    color: #FFD700;
+    border-color: rgba(255, 215, 0, 0.5);
+    background: transparent;
+  }
+
+  .dark .btn-secondary:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+  }
+
+  /* Ghost Button */
+  .btn-ghost {
     display: inline-flex;
     height: 2.5rem;
     align-items: center;
@@ -151,42 +312,117 @@
     background-color: transparent;
     color: black;
     font-weight: 600;
-    border: 2px solid #FFD700;
     transition: all 700ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
   }
 
-  .btn-secondary:hover {
-    background-color: #FFFEF0;
+  .btn-ghost:hover {
+    background-color: rgba(0, 0, 0, 0.05);
   }
 
-  /* Input Field */
+  .dark .btn-ghost {
+    color: white;
+  }
+
+  .dark .btn-ghost:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Input Field - Light Mode */
   .input-field {
     width: 100%;
     border-radius: 12px;
-    border: 1px solid rgb(209, 213, 219);
+    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 0.5rem 1rem;
     transition: all 300ms;
+    color: #1a1a1a;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   }
 
   .input-field:focus {
-    border-color: #FFD700;
-    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+    border-color: #7C3AED;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
     outline: none;
+    background-color: white;
+  }
+
+  .input-field::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  /* Input Field - Dark Mode */
+  .dark .input-field {
+    background: rgba(17, 24, 39, 0.8);
+    border-color: rgba(75, 85, 99, 0.6);
+    color: white;
+  }
+
+  .dark .input-field:focus {
+    border-color: #FFD700;
+    background: rgba(17, 24, 39, 0.95);
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.15);
+  }
+
+  .dark .input-field::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Divider styling */
+  .divider-text {
+    background-color: white;
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 0.875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .dark .divider-text {
+    background: rgba(24, 32, 47, 0.9);
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* OAuth Button - Light Mode */
+  .oauth-btn {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    color: #1a1a1a;
+    transition: all 300ms;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .oauth-btn:hover {
+    background-color: white;
+    border-color: rgba(124, 58, 237, 0.4);
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+  }
+
+  .dark .oauth-btn {
+    background: rgba(17, 24, 39, 0.8);
+    border-color: rgba(75, 85, 99, 0.6);
+    color: white;
+  }
+
+  .dark .oauth-btn:hover {
+    background: rgba(17, 24, 39, 0.95);
+    border-color: rgba(255, 215, 0, 0.3);
   }
 }
 
+/* Utilities Layer - Custom Utility Classes */
 @layer utilities {
   /* Text Opacity Utilities (Creatikk pattern) */
-  .text-primary {
-    opacity: var(--text-primary);
+  .text-opacity-primary {
+    opacity: var(--text-primary-opacity);
   }
 
-  .text-secondary {
-    opacity: var(--text-secondary);
+  .text-opacity-secondary {
+    opacity: var(--text-secondary-opacity);
   }
 
-  .text-tertiary {
-    opacity: var(--text-tertiary);
+  .text-opacity-tertiary {
+    opacity: var(--text-tertiary-opacity);
   }
 
   /* Section Padding (Creatikk standard) */
@@ -203,5 +439,59 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+  /* Text colors */
+  .text-foreground {
+    color: #1a1a1a;
+  }
+
+  .dark .text-foreground {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .text-muted {
+    color: rgba(0, 0, 0, 0.55);
+  }
+
+  .dark .text-muted {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Label styling */
+  .label-text {
+    color: #374151;
+    font-weight: 500;
+  }
+
+  .dark .label-text {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Background utilities for theme */
+  .bg-background {
+    background-color: white;
+  }
+
+  .dark .bg-background {
+    background-color: #0B0F19;
+  }
+
+  /* Border utilities for theme */
+  .border-theme {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .border-theme {
+    border-color: rgba(75, 85, 99, 0.5);
+  }
+
+  /* Subtle glow effect for dark mode */
+  .dark .glow-gold {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.1);
+  }
+
+  .dark .glow-purple {
+    box-shadow: 0 0 40px rgba(124, 58, 237, 0.1);
   }
 }

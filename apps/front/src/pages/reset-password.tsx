@@ -7,6 +7,8 @@ import { resetPasswordSchema, type ResetPasswordDto } from '@shipit/validators';
 import { Button } from '../components/ui/button';
 import { FormField } from '../components/forms/form-field';
 import { PasswordStrength } from '../components/forms/password-strength';
+import { ThemeToggle } from '../components/ui/theme-toggle';
+import { DotGrid } from '../components/ui/dot-grid';
 import { authService } from '../services/auth.service';
 
 export function ResetPasswordPage() {
@@ -44,8 +46,12 @@ export function ResetPasswordPage() {
 
   if (!token) {
     return (
-      <div className="min-h-screen flex items-center justify-center section-padding bg-white">
-        <div className="w-full max-w-md animate-fade-in text-center">
+      <div className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden">
+        <DotGrid />
+        <div className="absolute top-6 right-6 z-10">
+          <ThemeToggle />
+        </div>
+        <div className="w-full max-w-md animate-fade-in text-center relative z-10">
           <div className="glass-card p-8 space-y-4">
             <div className="w-16 h-16 rounded-full bg-error/10 flex items-center justify-center mx-auto">
               <svg
@@ -62,7 +68,9 @@ export function ResetPasswordPage() {
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold">{t('auth.resetPassword.errors.invalidToken')}</h2>
+            <h2 className="text-2xl font-bold text-foreground">
+              {t('auth.resetPassword.errors.invalidToken')}
+            </h2>
             <Link to="/forgot-password">
               <Button variant="secondary" className="mt-4">
                 {t('auth.forgotPassword.title')}
@@ -76,8 +84,12 @@ export function ResetPasswordPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center section-padding bg-white">
-        <div className="w-full max-w-md animate-fade-in text-center">
+      <div className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden">
+        <DotGrid />
+        <div className="absolute top-6 right-6 z-10">
+          <ThemeToggle />
+        </div>
+        <div className="w-full max-w-md animate-fade-in text-center relative z-10">
           <div className="glass-card p-8 space-y-4">
             <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mx-auto">
               <svg
@@ -94,7 +106,9 @@ export function ResetPasswordPage() {
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold">{t('auth.resetPassword.success')}</h2>
+            <h2 className="text-2xl font-bold text-foreground">
+              {t('auth.resetPassword.success')}
+            </h2>
           </div>
         </div>
       </div>
@@ -102,13 +116,19 @@ export function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center section-padding bg-white">
-      <div className="w-full max-w-md animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden">
+      <DotGrid />
+
+      <div className="absolute top-6 right-6 z-10">
+        <ThemeToggle />
+      </div>
+
+      <div className="w-full max-w-md animate-fade-in relative z-10">
         <div className="text-center mb-8">
-          <h1 className="text-section font-bold leading-section mb-2">
+          <h1 className="text-2xl md:text-4xl font-bold mb-2 text-foreground">
             {t('auth.resetPassword.title')}
           </h1>
-          <p className="text-base text-black/60">{t('auth.resetPassword.subtitle')}</p>
+          <p className="text-base text-muted">{t('auth.resetPassword.subtitle')}</p>
         </div>
 
         <div className="glass-card p-8 space-y-6">

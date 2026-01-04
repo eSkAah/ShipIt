@@ -21,6 +21,7 @@ build
 .vite
 
 # misc
+.docs
 .DS_Store
 *.pem
 .env

@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { forgotPasswordSchema, type ForgotPasswordDto } from '@shipit/validators';
 import { Button } from '../components/ui/button';
 import { FormField } from '../components/forms/form-field';
+import { ThemeToggle } from '../components/ui/theme-toggle';
+import { DotGrid } from '../components/ui/dot-grid';
 import { authService } from '../services/auth.service';
 
 export function ForgotPasswordPage() {
@@ -33,8 +35,12 @@ export function ForgotPasswordPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center section-padding bg-white">
-        <div className="w-full max-w-md animate-fade-in text-center">
+      <div className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden">
+        <DotGrid />
+        <div className="absolute top-6 right-6 z-10">
+          <ThemeToggle />
+        </div>
+        <div className="w-full max-w-md animate-fade-in text-center relative z-10">
           <div className="glass-card p-8 space-y-4">
             <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mx-auto">
               <svg
@@ -51,7 +57,9 @@ export function ForgotPasswordPage() {
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold">{t('auth.forgotPassword.success')}</h2>
+            <h2 className="text-2xl font-bold text-foreground">
+              {t('auth.forgotPassword.success')}
+            </h2>
             <Link to="/login">
               <Button variant="secondary" className="mt-4">
                 {t('auth.forgotPassword.backToLogin')}
@@ -64,13 +72,19 @@ export function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center section-padding bg-white">
-      <div className="w-full max-w-md animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden">
+      <DotGrid />
+
+      <div className="absolute top-6 right-6 z-10">
+        <ThemeToggle />
+      </div>
+
+      <div className="w-full max-w-md animate-fade-in relative z-10">
         <div className="text-center mb-8">
-          <h1 className="text-section font-bold leading-section mb-2">
+          <h1 className="text-2xl md:text-4xl font-bold mb-2 text-foreground">
             {t('auth.forgotPassword.title')}
           </h1>
-          <p className="text-base text-black/60">{t('auth.forgotPassword.subtitle')}</p>
+          <p className="text-base text-muted">{t('auth.forgotPassword.subtitle')}</p>
         </div>
 
         <div className="glass-card p-8 space-y-6">
@@ -98,7 +112,7 @@ export function ForgotPasswordPage() {
           <div className="text-center">
             <Link
               to="/login"
-              className="text-sm text-gold-500 hover:text-gold-600 transition-colors duration-300"
+              className="text-sm text-purple-600 dark:text-gold-500 hover:text-purple-700 dark:hover:text-gold-400 transition-colors duration-300"
             >
               {t('auth.forgotPassword.backToLogin')}
             </Link>

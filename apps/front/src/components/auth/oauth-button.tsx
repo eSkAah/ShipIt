@@ -1,5 +1,3 @@
-import { Button } from '../ui/button';
-
 interface OAuthButtonProps {
   provider: 'google' | 'apple';
   onClick: () => void;
@@ -43,14 +41,13 @@ export function OAuthButton({ provider, onClick }: OAuthButtonProps) {
   const { label, icon } = config[provider];
 
   return (
-    <Button
+    <button
       type="button"
-      variant="ghost"
-      className="w-full border border-gray-300"
+      className="oauth-btn w-full h-10 rounded-full inline-flex items-center justify-center gap-2 font-semibold"
       onClick={onClick}
     >
       {icon}
       {label}
-    </Button>
+    </button>
   );
 }
