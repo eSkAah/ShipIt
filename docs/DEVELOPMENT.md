@@ -8,10 +8,10 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ## Epic 1: Project Setup (3-4 days) ✅
 
-**Goal:** Bootstrap Nx monorepo with all infrastructure dependencies
+**Goal:** Bootstrap Turborepo monorepo with all infrastructure dependencies
 
-- [x] Initialize Nx workspace with pnpm
-  - [x] Create nx.json with appropriate build/test configurations
+- [x] Initialize Turborepo workspace with pnpm
+  - [x] Create turbo.json with appropriate build/test configurations
   - [x] Configure package.json workspaces
   - [x] Set up pnpm workspace structure
 - [x] Create React application (apps/front/)

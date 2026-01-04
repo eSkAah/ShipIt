@@ -4,18 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**ShipIt** is a production-ready SaaS boilerplate featuring authentication, billing, multi-tenancy, and admin capabilities. Built as an Nx monorepo with React 19 frontend and NestJS 11 backend.
+**ShipIt** is a production-ready SaaS boilerplate featuring authentication, billing, multi-tenancy, and admin capabilities. Built as a Turborepo monorepo with React 19 frontend and NestJS 11 backend.
 
 **Tech Stack:**
 
 - Frontend: React 19, TypeScript, Tailwind CSS 4, shadcn/ui v2, TanStack Query, React Hook Form + Zod
 - Backend: NestJS 11, TypeScript, Prisma 6, Better Auth, BullMQ, Swagger
 - Infrastructure: Supabase (PostgreSQL), Upstash (Redis), Azure Blob Storage, Stripe, Resend, Sentry
-- Monorepo: Nx + pnpm
+- Monorepo: Turborepo + pnpm
 
 ## Development Commands
 
-Since the project uses Nx monorepo, all commands should be run through Nx:
+Since the project uses Turborepo monorepo, all commands are managed through pnpm scripts and Turborepo:
 
 ### Setup
 
@@ -53,10 +53,6 @@ pnpm e2e:front                   # Run Playwright E2E tests
 pnpm test:back                  # Run all API tests
 pnpm test:back:watch            # Run tests in watch mode
 pnpm test:back:e2e              # Run Supertest E2E tests
-
-# Run specific test file
-pnpm nx test web --testFile=path/to/test.spec.tsx
-pnpm nx test back --testFile=path/to/test.spec.ts
 ```
 
 ### Build & Deployment
