@@ -23,6 +23,8 @@ build
 # misc
 .docs
 .DS_Store
+.claude
+.mcp.json
 *.pem
 .env
 .env.local

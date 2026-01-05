@@ -9,3 +9,6 @@ coverage
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+.claude
+.mcp.json
+docs

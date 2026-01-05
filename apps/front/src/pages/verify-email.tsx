@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../components/ui/button';
 import { ThemeToggle } from '../components/ui/theme-toggle';
@@ -8,9 +8,11 @@ import { authService } from '../services/auth.service';
 
 export function VerifyEmailPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token') || '';
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
+  const hasVerified = useRef(false);
 
   useEffect(() => {
     if (!token) {
@@ -18,17 +20,23 @@ export function VerifyEmailPage() {
       return;
     }
 
+    // Prevent double execution in React Strict Mode
+    if (hasVerified.current) return;
+    hasVerified.current = true;
+
     const verifyEmail = async () => {
       try {
         await authService.verifyEmail(token);
         setStatus('success');
+        // Redirect to login after 2 seconds
+        setTimeout(() => navigate('/login'), 2000);
       } catch (err) {
         setStatus('error');
       }
     };
 
     verifyEmail();
-  }, [token]);
+  }, [token, navigate]);
 
   return (
     <div className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden">

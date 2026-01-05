@@ -27,8 +27,12 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('currentOrganizationId');
-      window.location.href = '/login';
+      // Don't redirect for auth endpoints (session check, login, signup, etc.)
+      const isAuthEndpoint = error.config?.url?.startsWith('/auth/');
+      if (!isAuthEndpoint && window.location.pathname !== '/login') {
+        localStorage.removeItem('currentOrganizationId');
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   },

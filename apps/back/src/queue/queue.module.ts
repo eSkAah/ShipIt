@@ -10,12 +10,18 @@ import { QueueService } from './queue.service';
     BullModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        connection: {
-          host: configService.redisUrl.split(':')[0].replace('redis://', ''),
-          port: parseInt(configService.redisUrl.split(':')[1] || '6379'),
-        },
-      }),
+      useFactory: (configService: ConfigService) => {
+        const redisUrl = new URL(configService.redisUrl);
+        return {
+          connection: {
+            host: redisUrl.hostname,
+            port: parseInt(redisUrl.port || '6379', 10),
+            username: redisUrl.username || undefined,
+            password: redisUrl.password || undefined,
+            tls: redisUrl.protocol === 'rediss:' ? {} : undefined,
+          },
+        };
+      },
     }),
     BullModule.registerQueue({
       name: 'email',
