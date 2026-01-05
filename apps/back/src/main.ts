@@ -1,10 +1,19 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
+import { SessionGuard } from './common/guards/session.guard';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { AuthService } from './auth/auth.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Security middleware
+  app.use(helmet());
+  app.use(cookieParser());
 
   // Global validation pipe
   app.useGlobalPipes(
@@ -14,6 +23,14 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  // Global exception filter
+  app.useGlobalFilters(new HttpExceptionFilter());
+
+  // Global session guard
+  const reflector = app.get(Reflector);
+  const authService = app.get(AuthService);
+  app.useGlobalGuards(new SessionGuard(authService, reflector));
 
   // CORS configuration
   app.enableCors({
@@ -26,7 +43,7 @@ async function bootstrap() {
     .setTitle('ShipIt API')
     .setDescription('Production-ready SaaS boilerplate API')
     .setVersion('1.0')
-    .addBearerAuth()
+    .addCookieAuth('shipit_session')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);

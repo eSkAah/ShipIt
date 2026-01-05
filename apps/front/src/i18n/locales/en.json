@@ -1,0 +1,105 @@
+{
+  "auth": {
+    "login": {
+      "title": "Login",
+      "subtitle": "Sign in to your account",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Sign in",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "signupLink": "Create account",
+      "orContinueWith": "Or continue with",
+      "errors": {
+        "invalidCredentials": "Invalid email or password",
+        "serverError": "An error occurred. Please try again."
+      }
+    },
+    "signup": {
+      "title": "Create account",
+      "subtitle": "Start your free trial",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Create account",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in",
+      "orContinueWith": "Or continue with",
+      "passwordStrength": {
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong"
+      },
+      "success": "Account created! Check your email to verify your address.",
+      "errors": {
+        "emailExists": "An account already exists with this email",
+        "serverError": "An error occurred. Please try again."
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot password",
+      "subtitle": "Enter your email to receive a reset link",
+      "email": "Email address",
+      "submit": "Send link",
+      "backToLogin": "Back to login",
+      "success": "Email sent! Check your inbox.",
+      "errors": {
+        "emailNotFound": "No account found with this email",
+        "serverError": "An error occurred. Please try again."
+      }
+    },
+    "resetPassword": {
+      "title": "Reset password",
+      "subtitle": "Choose a new password",
+      "password": "New password",
+      "confirmPassword": "Confirm password",
+      "submit": "Reset password",
+      "success": "Password reset! You can now sign in.",
+      "errors": {
+        "invalidToken": "Invalid or expired link",
+        "passwordMismatch": "Passwords don't match",
+        "serverError": "An error occurred. Please try again."
+      }
+    },
+    "verifyEmail": {
+      "title": "Email verification",
+      "verifying": "Verifying...",
+      "success": "Email verified! You can now access your account.",
+      "error": "Invalid or expired verification link.",
+      "backToLogin": "Back to login"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "validation": {
+      "required": "This field is required",
+      "email": "Invalid email",
+      "minLength": "Minimum {{count}} characters",
+      "maxLength": "Maximum {{count}} characters",
+      "passwordMinLength": "Password must be at least 8 characters"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{name}}",
+    "overview": "Overview",
+    "emailVerified": "Verified",
+    "emailNotVerified": "Not verified"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you are looking for does not exist or has been moved.",
+      "backHome": "Back to home"
+    }
+  }
+}

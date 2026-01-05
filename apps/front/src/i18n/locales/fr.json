@@ -1,0 +1,105 @@
+{
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Connectez-vous à votre compte",
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "forgotPassword": "Mot de passe oublié ?",
+      "noAccount": "Pas encore de compte ?",
+      "signupLink": "Créer un compte",
+      "orContinueWith": "Ou continuer avec",
+      "errors": {
+        "invalidCredentials": "Email ou mot de passe incorrect",
+        "serverError": "Une erreur est survenue. Veuillez réessayer."
+      }
+    },
+    "signup": {
+      "title": "Créer un compte",
+      "subtitle": "Commencez votre essai gratuit",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "submit": "Créer mon compte",
+      "hasAccount": "Vous avez déjà un compte ?",
+      "loginLink": "Se connecter",
+      "orContinueWith": "Ou continuer avec",
+      "passwordStrength": {
+        "weak": "Faible",
+        "medium": "Moyen",
+        "strong": "Fort"
+      },
+      "success": "Compte créé ! Vérifiez vos emails pour confirmer votre adresse.",
+      "errors": {
+        "emailExists": "Un compte existe déjà avec cet email",
+        "serverError": "Une erreur est survenue. Veuillez réessayer."
+      }
+    },
+    "forgotPassword": {
+      "title": "Mot de passe oublié",
+      "subtitle": "Entrez votre email pour recevoir un lien de réinitialisation",
+      "email": "Adresse email",
+      "submit": "Envoyer le lien",
+      "backToLogin": "Retour à la connexion",
+      "success": "Email envoyé ! Vérifiez votre boîte de réception.",
+      "errors": {
+        "emailNotFound": "Aucun compte trouvé avec cet email",
+        "serverError": "Une erreur est survenue. Veuillez réessayer."
+      }
+    },
+    "resetPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Choisissez un nouveau mot de passe",
+      "password": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "Réinitialiser",
+      "success": "Mot de passe réinitialisé ! Vous pouvez maintenant vous connecter.",
+      "errors": {
+        "invalidToken": "Lien invalide ou expiré",
+        "passwordMismatch": "Les mots de passe ne correspondent pas",
+        "serverError": "Une erreur est survenue. Veuillez réessayer."
+      }
+    },
+    "verifyEmail": {
+      "title": "Vérification de l'email",
+      "verifying": "Vérification en cours...",
+      "success": "Email vérifié ! Vous pouvez maintenant accéder à votre compte.",
+      "error": "Lien de vérification invalide ou expiré.",
+      "backToLogin": "Retour à la connexion"
+    }
+  },
+  "common": {
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "back": "Retour",
+    "next": "Suivant",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "validation": {
+      "required": "Ce champ est requis",
+      "email": "Email invalide",
+      "minLength": "Minimum {{count}} caractères",
+      "maxLength": "Maximum {{count}} caractères",
+      "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bienvenue, {{name}}",
+    "overview": "Vue d'ensemble",
+    "emailVerified": "Vérifié",
+    "emailNotVerified": "Non vérifié"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page non trouvée",
+      "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+      "backHome": "Retour à l'accueil"
+    }
+  }
+}
