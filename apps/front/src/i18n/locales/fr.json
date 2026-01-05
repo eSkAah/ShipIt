@@ -81,6 +81,10 @@
     "search": "Rechercher",
     "filter": "Filtrer",
     "sort": "Trier",
+    "login": "Se connecter",
+    "signup": "Créer un compte",
+    "backToLogin": "Retour à la connexion",
+    "organizations": "Organisations",
     "validation": {
       "required": "Ce champ est requis",
       "email": "Email invalide",
@@ -89,11 +93,73 @@
       "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères"
     }
   },
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "team": "Équipe",
+    "logout": "Déconnexion"
+  },
   "dashboard": {
     "welcome": "Bienvenue, {{name}}",
     "overview": "Vue d'ensemble",
     "emailVerified": "Vérifié",
     "emailNotVerified": "Non vérifié"
+  },
+  "settings": {
+    "team": {
+      "title": "Membres de l'équipe",
+      "description": "Gérez votre équipe et leurs niveaux d'accès",
+      "members": "Membres",
+      "inviteButton": "Inviter un membre",
+      "inviteTitle": "Inviter un membre",
+      "emailLabel": "Adresse email",
+      "emailPlaceholder": "collegue@entreprise.com",
+      "roleLabel": "Rôle",
+      "sendInvite": "Envoyer l'invitation",
+      "role": {
+        "admin": "Admin",
+        "member": "Membre",
+        "viewer": "Lecteur"
+      },
+      "you": "vous",
+      "removeConfirm": "Êtes-vous sûr de vouloir retirer ce membre ?",
+      "pendingInvitations": "Invitations en attente",
+      "noInvitations": "Aucune invitation en attente",
+      "noMembers": "Aucun membre",
+      "cancelInvite": "Annuler",
+      "cancelInviteConfirm": "Êtes-vous sûr de vouloir annuler cette invitation ?",
+      "expires": "Expire le {{date}}"
+    },
+    "organization": {
+      "title": "Paramètres de l'organisation",
+      "description": "Gérez les paramètres de votre organisation",
+      "general": "Informations générales",
+      "name": "Nom de l'organisation",
+      "createNew": "Créer une nouvelle organisation",
+      "createButton": "Nouvelle organisation",
+      "newName": "Nom de l'organisation",
+      "newNamePlaceholder": "Mon Entreprise",
+      "create": "Créer l'organisation",
+      "dangerZone": "Zone de danger",
+      "leaveTitle": "Quitter l'organisation",
+      "leaveDescription": "Quittez cette organisation. Vous pourrez y revenir si vous êtes invité à nouveau.",
+      "leave": "Quitter",
+      "leaveConfirm": "Êtes-vous sûr de vouloir quitter cette organisation ?",
+      "deleteTitle": "Supprimer l'organisation",
+      "deleteDescription": "Supprimez définitivement cette organisation et toutes ses données.",
+      "delete": "Supprimer",
+      "confirmDelete": "Oui, supprimer",
+      "cannotDelete": "Vous ne pouvez pas quitter ou supprimer votre seule organisation."
+    }
+  },
+  "invitation": {
+    "title": "Invitation d'équipe",
+    "invitedTo": "Vous avez été invité à rejoindre {{organization}}",
+    "asRole": "en tant que {{role}}",
+    "loginRequired": "Veuillez vous connecter ou créer un compte pour accepter cette invitation.",
+    "accept": "Accepter l'invitation",
+    "decline": "Refuser",
+    "invalid": "Invitation invalide",
+    "invalidDescription": "Ce lien d'invitation est invalide ou a expiré."
   },
   "errors": {
     "notFound": {

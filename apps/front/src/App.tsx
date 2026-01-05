@@ -10,6 +10,9 @@ import { ForgotPasswordPage } from './pages/forgot-password';
 import { ResetPasswordPage } from './pages/reset-password';
 import { VerifyEmailPage } from './pages/verify-email';
 import { DashboardPage } from './pages/dashboard';
+import { TeamSettingsPage } from './pages/settings/team';
+import { OrganizationSettingsPage } from './pages/settings/organization';
+import { AcceptInvitationPage } from './pages/invitations/accept';
 import { NotFoundPage } from './pages/not-found';
 import './i18n/config';
 
@@ -43,6 +46,23 @@ export default function App() {
                     </ProtectedRoute>
                   }
                 />
+                <Route
+                  path="/settings/team"
+                  element={
+                    <ProtectedRoute>
+                      <TeamSettingsPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/settings/organization"
+                  element={
+                    <ProtectedRoute>
+                      <OrganizationSettingsPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="/invitations/:token/accept" element={<AcceptInvitationPage />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

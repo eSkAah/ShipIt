@@ -37,7 +37,7 @@ export function DashboardPage() {
               <h3 className="font-semibold text-lg">Organisation</h3>
             </div>
             <p className="text-2xl font-bold">{currentOrganization?.name}</p>
-            <p className="text-sm text-black/60">{currentOrganization?.membership.role}</p>
+            <p className="text-sm text-black/60">{currentOrganization?.role}</p>
           </div>
 
           <div className="glass-card p-6 space-y-2">

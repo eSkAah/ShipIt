@@ -5,8 +5,19 @@ import { HealthModule } from './health/health.module';
 import { QueueModule } from './queue/queue.module';
 import { MailModule } from './mail/mail.module';
 import { AuthModule } from './auth/auth.module';
+import { OrganizationsModule } from './organizations/organizations.module';
+import { InvitationsModule } from './invitations/invitations.module';
 
 @Module({
-  imports: [ConfigModule, DatabaseModule, QueueModule, MailModule, AuthModule, HealthModule],
+  imports: [
+    ConfigModule,
+    DatabaseModule,
+    QueueModule,
+    MailModule,
+    AuthModule,
+    OrganizationsModule,
+    InvitationsModule,
+    HealthModule,
+  ],
 })
 export class AppModule {}
