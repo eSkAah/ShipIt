@@ -2,11 +2,39 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
 import { Language } from '@prisma/client';
+import { ConfigService } from '../config/config.service';
+
+interface VerificationEmailData {
+  token: string;
+  verificationUrl: string;
+}
+
+interface ResetPasswordEmailData {
+  token: string;
+  resetUrl: string;
+}
+
+interface WelcomeEmailData {
+  firstName: string;
+}
+
+interface InvitationEmailData {
+  token: string;
+  invitationUrl: string;
+  organizationName: string;
+  role: string;
+}
+
+export type EmailJobData =
+  | { type: 'verification'; data: VerificationEmailData }
+  | { type: 'reset-password'; data: ResetPasswordEmailData }
+  | { type: 'welcome'; data: WelcomeEmailData }
+  | { type: 'invitation'; data: InvitationEmailData };
 
 export interface EmailJob {
   type: 'verification' | 'reset-password' | 'welcome' | 'invitation';
   to: string;
-  data: Record<string, unknown>;
+  data: VerificationEmailData | ResetPasswordEmailData | WelcomeEmailData | InvitationEmailData;
   language: Language;
 }
 
@@ -14,7 +42,10 @@ export interface EmailJob {
 export class MailService {
   private readonly logger = new Logger(MailService.name);
 
-  constructor(@InjectQueue('email') private emailQueue: Queue) {}
+  constructor(
+    @InjectQueue('email') private emailQueue: Queue,
+    private readonly configService: ConfigService,
+  ) {}
 
   async sendVerificationEmail(
     email: string,
@@ -28,7 +59,7 @@ export class MailService {
       to: email,
       data: {
         token,
-        verificationUrl: `${process.env.FRONTEND_URL}/verify-email?token=${token}`,
+        verificationUrl: `${this.configService.frontendUrl}/verify-email?token=${token}`,
       },
       language,
     };
@@ -54,7 +85,7 @@ export class MailService {
       to: email,
       data: {
         token,
-        resetUrl: `${process.env.FRONTEND_URL}/reset-password?token=${token}`,
+        resetUrl: `${this.configService.frontendUrl}/reset-password?token=${token}`,
       },
       language,
     };
@@ -107,7 +138,7 @@ export class MailService {
       to: email,
       data: {
         token,
-        invitationUrl: `${process.env.FRONTEND_URL}/invitations/${token}/accept`,
+        invitationUrl: `${this.configService.frontendUrl}/invitations/${token}/accept`,
         organizationName,
         role,
       },

@@ -7,6 +7,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Response } from 'express';
+import * as Sentry from '@sentry/node';
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -39,6 +40,23 @@ export class HttpExceptionFilter implements ExceptionFilter {
     } else if (exception instanceof Error) {
       message = exception.message;
       this.logger.error(`Unhandled exception: ${exception.message}`, exception.stack);
+
+      // Capture unhandled exceptions in Sentry with user context
+      Sentry.withScope((scope) => {
+        scope.setTag('type', 'unhandled_exception');
+        scope.setExtra('url', request.url);
+        scope.setExtra('method', request.method);
+        if (request.user) {
+          scope.setUser({
+            id: request.user.id,
+            email: request.user.email,
+          });
+        }
+        if (request.currentOrganization) {
+          scope.setTag('organizationId', request.currentOrganization.id);
+        }
+        Sentry.captureException(exception);
+      });
     }
 
     const errorResponse = {

@@ -80,7 +80,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const setCurrentOrganization = (org: OrganizationWithMembership) => {
     setCurrentOrganizationState(org);
     localStorage.setItem('currentOrganizationId', org.id);
-    queryClient.invalidateQueries();
+    // Only invalidate organization-scoped queries, not all queries
+    queryClient.invalidateQueries({ queryKey: ['organization-data'] });
   };
 
   const value: AuthContextType = {

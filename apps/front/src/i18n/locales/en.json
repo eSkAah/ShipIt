@@ -91,6 +91,15 @@
   },
   "dashboard": {
     "welcome": "Welcome, {{name}}",
-    "overview": "Overview"
+    "overview": "Overview",
+    "emailVerified": "Verified",
+    "emailNotVerified": "Not verified"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you are looking for does not exist or has been moved.",
+      "backHome": "Back to home"
+    }
   }
 }

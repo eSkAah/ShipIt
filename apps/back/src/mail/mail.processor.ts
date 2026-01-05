@@ -31,34 +31,46 @@ export class MailProcessor extends WorkerHost {
       let subject: string;
 
       switch (type) {
-        case 'verification':
-          html = renderVerificationEmail(data.verificationUrl, language);
+        case 'verification': {
+          const verificationData = data as { verificationUrl: string };
+          html = renderVerificationEmail(verificationData.verificationUrl, language);
           subject =
             language === 'fr' ? 'Vérifiez votre adresse email' : 'Verify your email address';
           break;
+        }
 
-        case 'reset-password':
-          html = renderResetPasswordEmail(data.resetUrl, language);
+        case 'reset-password': {
+          const resetData = data as { resetUrl: string };
+          html = renderResetPasswordEmail(resetData.resetUrl, language);
           subject = language === 'fr' ? 'Réinitialisez votre mot de passe' : 'Reset your password';
           break;
+        }
 
-        case 'welcome':
-          html = renderWelcomeEmail(data.firstName, language);
+        case 'welcome': {
+          const welcomeData = data as { firstName: string };
+          html = renderWelcomeEmail(welcomeData.firstName, language);
           subject = language === 'fr' ? 'Bienvenue sur ShipIt!' : 'Welcome to ShipIt!';
           break;
+        }
 
-        case 'invitation':
+        case 'invitation': {
+          const invitationData = data as {
+            invitationUrl: string;
+            organizationName: string;
+            role: string;
+          };
           html = renderInvitationEmail(
-            data.invitationUrl,
-            data.organizationName,
-            data.role,
+            invitationData.invitationUrl,
+            invitationData.organizationName,
+            invitationData.role,
             language,
           );
           subject =
             language === 'fr'
-              ? `Invitation à rejoindre ${data.organizationName}`
-              : `Invitation to join ${data.organizationName}`;
+              ? `Invitation à rejoindre ${invitationData.organizationName}`
+              : `Invitation to join ${invitationData.organizationName}`;
           break;
+        }
 
         default:
           throw new Error(`Unknown email type: ${type}`);

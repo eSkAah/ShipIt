@@ -13,8 +13,14 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [showOrgMenu, setShowOrgMenu] = useState(false);
 
   const handleLogout = async () => {
-    await logout();
-    navigate('/login');
+    try {
+      await logout();
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      localStorage.removeItem('currentOrganizationId');
+      navigate('/login');
+    }
   };
 
   return (

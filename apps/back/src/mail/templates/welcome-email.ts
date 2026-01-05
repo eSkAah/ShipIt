@@ -1,10 +1,13 @@
 import { Language } from '@prisma/client';
+import { escapeHtml } from './utils';
 
 export function renderWelcomeEmail(firstName: string, language: Language): string {
+  const safeName = escapeHtml(firstName);
+
   const content =
     language === 'fr'
-      ? { title: 'Bienvenue!', body: `Bonjour ${firstName}, bienvenue sur ShipIt!` }
-      : { title: 'Welcome!', body: `Hello ${firstName}, welcome to ShipIt!` };
+      ? { title: 'Bienvenue!', body: `Bonjour ${safeName}, bienvenue sur ShipIt!` }
+      : { title: 'Welcome!', body: `Hello ${safeName}, welcome to ShipIt!` };
 
   return `<!DOCTYPE html>
 <html><body style="font-family: sans-serif; padding: 40px;">

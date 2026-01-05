@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/auth-context';
 
 interface ProtectedRouteProps {
@@ -7,6 +8,7 @@ interface ProtectedRouteProps {
 }
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
+  const { t } = useTranslation();
   const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
@@ -33,7 +35,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          <p className="mt-4 text-black/60">Chargement...</p>
+          <p className="mt-4 text-black/60">{t('common.loading')}</p>
         </div>
       </div>
     );

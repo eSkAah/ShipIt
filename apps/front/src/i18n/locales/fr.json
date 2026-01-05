@@ -91,6 +91,15 @@
   },
   "dashboard": {
     "welcome": "Bienvenue, {{name}}",
-    "overview": "Vue d'ensemble"
+    "overview": "Vue d'ensemble",
+    "emailVerified": "Vérifié",
+    "emailNotVerified": "Non vérifié"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page non trouvée",
+      "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+      "backHome": "Retour à l'accueil"
+    }
   }
 }

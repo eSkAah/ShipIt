@@ -1,7 +1,8 @@
 import { Controller, Post, Get, Body, Res, Req, HttpCode, HttpStatus } from '@nestjs/common';
-import { Response, Request } from 'express';
+import { Response, Request, CookieOptions } from 'express';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
+import { ConfigService } from '../config/config.service';
 import { Public } from '../common/decorators/public.decorator';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
 import {
@@ -16,7 +17,21 @@ import { User } from '@prisma/client';
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private configService: ConfigService,
+  ) {}
+
+  private getCookieOptions(): CookieOptions {
+    const isProduction = this.configService.nodeEnv === 'production';
+    return {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'strict' : 'lax',
+      maxAge: this.configService.sessionExpiryDays * 24 * 60 * 60 * 1000,
+      path: '/',
+    };
+  }
 
   @Public()
   @Post('signup')
@@ -38,16 +53,17 @@ export class AuthController {
   @ApiOperation({ summary: 'Login with email and password' })
   @ApiResponse({ status: 200, description: 'Successfully logged in' })
   @ApiResponse({ status: 401, description: 'Invalid credentials or email not verified' })
-  async login(@Body() dto: LoginDto, @Res({ passthrough: true }) response: Response) {
-    const { user, session } = await this.authService.login(dto);
+  async login(
+    @Body() dto: LoginDto,
+    @Req() request: Request,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    const ipAddress = request.ip || request.headers['x-forwarded-for']?.toString();
+    const userAgent = request.headers['user-agent'];
 
-    response.cookie('shipit_session', session.id, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      path: '/',
-    });
+    const { user, session } = await this.authService.login(dto, ipAddress, userAgent);
+
+    response.cookie('shipit_session', session.id, this.getCookieOptions());
 
     return {
       success: true,
@@ -66,12 +82,7 @@ export class AuthController {
       await this.authService.logout(sessionId);
     }
 
-    response.clearCookie('shipit_session', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
-      path: '/',
-    });
+    response.clearCookie('shipit_session', this.getCookieOptions());
 
     return {
       success: true,

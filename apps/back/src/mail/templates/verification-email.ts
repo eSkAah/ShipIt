@@ -1,6 +1,9 @@
 import { Language } from '@prisma/client';
+import { escapeHtml, sanitizeUrl } from './utils';
 
 export function renderVerificationEmail(verificationUrl: string, language: Language): string {
+  const safeUrl = sanitizeUrl(verificationUrl);
+  const displayUrl = escapeHtml(verificationUrl);
   const content =
     language === 'fr'
       ? {
@@ -39,12 +42,12 @@ export function renderVerificationEmail(verificationUrl: string, language: Langu
       <p style="margin: 0 0 20px; font-size: 16px;">${content.greeting}</p>
       <p style="margin: 0 0 20px; font-size: 16px;">${content.body}</p>
       <div style="text-align: center;">
-        <a href="${verificationUrl}" style="display: inline-block; padding: 14px 30px; background: #18181b; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">${content.button}</a>
+        <a href="${safeUrl}" style="display: inline-block; padding: 14px 30px; background: #18181b; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">${content.button}</a>
       </div>
       <p style="margin: 20px 0 0; font-size: 14px; color: #666;">${content.expiry}</p>
       <p style="margin: 20px 0 0; font-size: 12px; color: #666; word-break: break-all;">
         <small>${content.alt}:</small><br/>
-        <small>${verificationUrl}</small>
+        <small>${displayUrl}</small>
       </p>
     </div>
     <div style="padding: 30px; text-align: center; font-size: 14px; color: #666; background: #f9fafb;">

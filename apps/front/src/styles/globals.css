@@ -162,17 +162,17 @@
     transition: background-color 500ms ease, color 500ms ease;
   }
 
-  /* Typography Defaults - ShipIt Design System */
+  /* Typography Defaults - ShipIt Design System (responsive) */
   h1 {
-    font-size: 72px;
+    font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
     font-weight: 700;
-    line-height: 84px;
+    line-height: 1.2;
   }
 
   h2 {
-    font-size: 52px;
+    font-size: clamp(2rem, 4vw + 0.5rem, 3.25rem);
     font-weight: 700;
-    line-height: 62px;
+    line-height: 1.2;
   }
 
   h3 {

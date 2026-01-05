@@ -86,7 +86,7 @@ export function DashboardPage() {
             </div>
             <p className="text-base font-medium break-all">{user?.email}</p>
             <p className="text-sm text-black/60">
-              {user?.emailVerified ? 'Vérifié' : 'Non vérifié'}
+              {user?.emailVerified ? t('dashboard.emailVerified') : t('dashboard.emailNotVerified')}
             </p>
           </div>
         </div>
