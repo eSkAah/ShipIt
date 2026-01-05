@@ -58,13 +58,13 @@ export function MemberCard({
   };
 
   const roleColors: Record<string, string> = {
-    admin: 'bg-gold-100 text-gold-700',
-    member: 'bg-purple-100 text-purple-700',
-    viewer: 'bg-gray-100 text-gray-700',
+    admin: 'bg-gold-500/20 text-gold-600 dark:text-gold-400',
+    member: 'bg-purple-500/20 text-purple-600 dark:text-purple-400',
+    viewer: 'bg-muted/20 text-muted',
   };
 
   return (
-    <div className="flex items-center justify-between p-4 rounded-premium border border-gray-200 hover:border-gold-300 transition-all duration-300">
+    <div className="flex items-center justify-between p-4 rounded-premium border border-theme hover:border-gold-500/50 transition-all duration-300">
       <div className="flex items-center gap-4">
         {member.user.avatarUrl ? (
           <img
@@ -79,13 +79,13 @@ export function MemberCard({
         )}
 
         <div>
-          <p className="font-medium text-black">
+          <p className="font-medium text-foreground">
             {member.user.firstName} {member.user.lastName}
             {isCurrentUser && (
-              <span className="ml-2 text-sm text-black/60">({t('settings.team.you')})</span>
+              <span className="ml-2 text-sm text-muted">({t('settings.team.you')})</span>
             )}
           </p>
-          <p className="text-sm text-black/60">{member.user.email}</p>
+          <p className="text-sm text-muted">{member.user.email}</p>
         </div>
       </div>
 
@@ -120,8 +120,10 @@ export function MemberCard({
                     <button
                       key={role}
                       onClick={() => handleRoleChange(role)}
-                      className={`w-full text-left px-3 py-2 rounded-input text-sm transition-all duration-300 ${
-                        role === member.role ? 'bg-gold-50 font-semibold' : 'hover:bg-gray-50'
+                      className={`w-full text-left px-3 py-2 rounded-input text-sm transition-all duration-300 text-foreground ${
+                        role === member.role
+                          ? 'bg-gold-500/10 font-semibold'
+                          : 'hover:bg-white/5 dark:hover:bg-white/10'
                       }`}
                     >
                       {t(`settings.team.role.${role}`)}
@@ -143,7 +145,7 @@ export function MemberCard({
             size="sm"
             onClick={handleRemove}
             disabled={isUpdating}
-            className="text-red-500 hover:bg-red-50"
+            className="text-red-500 hover:bg-red-500/10"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path

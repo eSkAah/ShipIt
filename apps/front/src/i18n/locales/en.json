@@ -127,7 +127,15 @@
       "noMembers": "No members yet",
       "cancelInvite": "Cancel",
       "cancelInviteConfirm": "Are you sure you want to cancel this invitation?",
-      "expires": "Expires {{date}}"
+      "expires": "Expires {{date}}",
+      "roleUpdated": "Role updated successfully",
+      "roleUpdateError": "Failed to update role",
+      "memberRemoved": "Member removed successfully",
+      "memberRemoveError": "Failed to remove member",
+      "inviteSent": "Invitation sent successfully",
+      "inviteError": "Failed to send invitation",
+      "inviteCanceled": "Invitation canceled",
+      "inviteCancelError": "Failed to cancel invitation"
     },
     "organization": {
       "title": "Organization Settings",
@@ -148,7 +156,15 @@
       "deleteDescription": "Permanently delete this organization and all its data.",
       "delete": "Delete",
       "confirmDelete": "Yes, delete",
-      "cannotDelete": "You cannot leave or delete your only organization."
+      "cannotDelete": "You cannot leave or delete your only organization.",
+      "updateSuccess": "Organization updated successfully",
+      "updateError": "Failed to update organization",
+      "createSuccess": "Organization created successfully",
+      "createError": "Failed to create organization",
+      "deleteSuccess": "Organization deleted successfully",
+      "deleteError": "Failed to delete organization",
+      "leaveSuccess": "You have left the organization",
+      "leaveError": "Failed to leave organization"
     }
   },
   "invitation": {

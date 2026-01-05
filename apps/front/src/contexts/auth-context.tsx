@@ -41,15 +41,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     queryKey: ['organizations'],
     queryFn: organizationsService.getMyOrganizations,
     enabled: !!session?.user,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 30 * 1000, // 30 seconds - shorter to catch new orgs faster
   });
 
   useEffect(() => {
-    if (organizations.length > 0 && !currentOrganization) {
+    if (organizations.length > 0) {
       const savedOrgId = localStorage.getItem('currentOrganizationId');
-      const org = organizations.find((o) => o.id === savedOrgId) || organizations[0];
-      setCurrentOrganizationState(org);
-      localStorage.setItem('currentOrganizationId', org.id);
+      const currentOrgId = currentOrganization?.id;
+
+      // Find the org to use (saved, current, or first)
+      const targetOrg =
+        organizations.find((o) => o.id === savedOrgId) ||
+        organizations.find((o) => o.id === currentOrgId) ||
+        organizations[0];
+
+      // Update if no current org or if current org data changed (e.g., name update)
+      const currentOrgInList = currentOrgId
+        ? organizations.find((o) => o.id === currentOrgId)
+        : null;
+      const hasDataChanged =
+        currentOrgInList &&
+        (currentOrgInList.name !== currentOrganization?.name ||
+          currentOrgInList.role !== currentOrganization?.role);
+
+      if (!currentOrganization || hasDataChanged) {
+        setCurrentOrganizationState(targetOrg);
+        localStorage.setItem('currentOrganizationId', targetOrg.id);
+      }
     }
   }, [organizations, currentOrganization]);
 

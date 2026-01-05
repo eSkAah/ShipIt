@@ -427,6 +427,46 @@ All endpoints return JSON. Protected endpoints require session cookie and approp
 - **Input Fields**: Use `input-field` class
 - **Cards**: Use `glass-card` class for premium look
 
+### Toast Notifications (REQUIRED)
+
+**CRITICAL**: All user actions that modify data MUST show toast notifications for feedback.
+
+We use **Sonner** for toast notifications. The Toaster is already configured in App.tsx.
+
+**Usage:**
+
+```typescript
+import { toast } from 'sonner';
+
+// In mutation onSuccess/onError callbacks:
+const mutation = useMutation({
+  mutationFn: someApiCall,
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['data'] });
+    toast.success(t('success.message')); // REQUIRED
+  },
+  onError: () => {
+    toast.error(t('error.message')); // REQUIRED
+  },
+});
+```
+
+**Toast Rules:**
+
+1. ✅ **Always use translations** - `toast.success(t('key'))` not `toast.success('text')`
+2. ✅ **Add to all mutations** - Every `useMutation` must have toast in onSuccess AND onError
+3. ✅ **Use correct type** - `toast.success()`, `toast.error()`, `toast.warning()`, `toast.info()`
+4. ✅ **Keep messages concise** - Max 2 sentences
+5. ❌ **Don't use for navigation** - Use loading states instead
+6. ❌ **Don't use for form validation** - Use field-level errors
+
+**When to Use:**
+
+- After CRUD operations (create, update, delete)
+- After form submissions
+- When API calls fail
+- For important state changes
+
 ### Accessibility
 
 - **Focus States**: Automatically styled with gold ring - don't override

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { OrganizationWithMembership } from '../../services/organizations.service';
+import { CreateOrganizationDialog } from './create-organization-dialog';
 
 interface OrganizationSwitcherProps {
   organizations: OrganizationWithMembership[];
@@ -17,6 +18,14 @@ export function OrganizationSwitcher({
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
+
+  const handleOrganizationCreated = (newOrg: OrganizationWithMembership) => {
+    setShowCreateDialog(false);
+    setIsOpen(false);
+    onSwitch(newOrg);
+    navigate('/settings/organization');
+  };
 
   if (!currentOrganization) return null;
 
@@ -24,14 +33,16 @@ export function OrganizationSwitcher({
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-50 transition-all duration-300"
+        className="flex items-center gap-2 px-4 py-2 rounded-full border border-theme hover:bg-white/5 dark:hover:bg-white/10 transition-all duration-300"
       >
         <div className="w-6 h-6 rounded-full bg-gradient-to-br from-gold-400 to-purple-500 flex items-center justify-center text-white text-xs font-semibold">
           {currentOrganization.name.charAt(0).toUpperCase()}
         </div>
-        <span className="font-medium max-w-32 truncate">{currentOrganization.name}</span>
+        <span className="font-medium max-w-32 truncate text-foreground">
+          {currentOrganization.name}
+        </span>
         <svg
-          className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 transition-transform duration-300 text-muted ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -42,10 +53,10 @@ export function OrganizationSwitcher({
 
       {isOpen && (
         <>
-          <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)} />
-          <div className="absolute top-full left-0 mt-2 w-72 glass-card shadow-card animate-fade-in z-20">
+          <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
+          <div className="absolute top-full left-0 mt-2 w-72 glass-card animate-fade-in z-50">
             <div className="p-2">
-              <p className="px-3 py-2 text-xs font-semibold text-black/60 uppercase">
+              <p className="px-3 py-2 text-xs font-semibold text-muted uppercase">
                 {t('common.organizations')}
               </p>
               <div className="space-y-1">
@@ -58,8 +69,8 @@ export function OrganizationSwitcher({
                     }}
                     className={`w-full text-left px-3 py-2 rounded-input transition-all duration-300 ${
                       org.id === currentOrganization.id
-                        ? 'bg-gold-50 border border-gold-200'
-                        : 'hover:bg-gray-50'
+                        ? 'bg-gold-500/10 border border-gold-500/30'
+                        : 'hover:bg-white/5 dark:hover:bg-white/10'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -67,8 +78,8 @@ export function OrganizationSwitcher({
                         {org.name.charAt(0).toUpperCase()}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="font-medium truncate">{org.name}</div>
-                        <div className="text-xs text-black/60">
+                        <div className="font-medium truncate text-foreground">{org.name}</div>
+                        <div className="text-xs text-muted">
                           {t(`settings.team.role.${org.role}`)}
                         </div>
                       </div>
@@ -91,13 +102,30 @@ export function OrganizationSwitcher({
               </div>
             </div>
 
-            <div className="border-t border-gray-200 p-2">
+            <div className="border-t border-theme p-2 space-y-1">
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  setShowCreateDialog(true);
+                }}
+                className="w-full text-left px-3 py-2 rounded-input hover:bg-white/5 dark:hover:bg-white/10 transition-all duration-300 flex items-center gap-2 text-muted"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+                {t('settings.organization.createNew')}
+              </button>
               <button
                 onClick={() => {
                   setIsOpen(false);
                   navigate('/settings/organization');
                 }}
-                className="w-full text-left px-3 py-2 rounded-input hover:bg-gray-50 transition-all duration-300 flex items-center gap-2 text-black/60"
+                className="w-full text-left px-3 py-2 rounded-input hover:bg-white/5 dark:hover:bg-white/10 transition-all duration-300 flex items-center gap-2 text-muted"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
@@ -119,6 +147,12 @@ export function OrganizationSwitcher({
           </div>
         </>
       )}
+
+      <CreateOrganizationDialog
+        isOpen={showCreateDialog}
+        onClose={() => setShowCreateDialog(false)}
+        onCreated={handleOrganizationCreated}
+      />
     </div>
   );
 }

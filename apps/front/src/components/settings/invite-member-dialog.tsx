@@ -36,6 +36,8 @@ export function InviteMemberDialog({ isOpen, onClose, onInvite }: InviteMemberDi
       await onInvite(data.email, data.role);
       reset();
       onClose();
+    } catch {
+      // Error is handled by the parent component
     } finally {
       setIsSubmitting(false);
     }
@@ -57,10 +59,10 @@ export function InviteMemberDialog({ isOpen, onClose, onInvite }: InviteMemberDi
 
       <div className="relative glass-card shadow-card w-full max-w-md p-6 animate-slide-up">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold">{t('settings.team.inviteTitle')}</h2>
+          <h2 className="text-xl font-bold text-foreground">{t('settings.team.inviteTitle')}</h2>
           <button
             onClick={handleClose}
-            className="p-2 rounded-full hover:bg-gray-100 transition-all duration-300"
+            className="p-2 rounded-full hover:bg-white/5 dark:hover:bg-white/10 transition-all duration-300 text-muted"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path

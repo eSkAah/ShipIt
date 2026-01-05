@@ -127,7 +127,15 @@
       "noMembers": "Aucun membre",
       "cancelInvite": "Annuler",
       "cancelInviteConfirm": "Êtes-vous sûr de vouloir annuler cette invitation ?",
-      "expires": "Expire le {{date}}"
+      "expires": "Expire le {{date}}",
+      "roleUpdated": "Rôle mis à jour avec succès",
+      "roleUpdateError": "Échec de la mise à jour du rôle",
+      "memberRemoved": "Membre retiré avec succès",
+      "memberRemoveError": "Échec du retrait du membre",
+      "inviteSent": "Invitation envoyée avec succès",
+      "inviteError": "Échec de l'envoi de l'invitation",
+      "inviteCanceled": "Invitation annulée",
+      "inviteCancelError": "Échec de l'annulation de l'invitation"
     },
     "organization": {
       "title": "Paramètres de l'organisation",
@@ -148,7 +156,15 @@
       "deleteDescription": "Supprimez définitivement cette organisation et toutes ses données.",
       "delete": "Supprimer",
       "confirmDelete": "Oui, supprimer",
-      "cannotDelete": "Vous ne pouvez pas quitter ou supprimer votre seule organisation."
+      "cannotDelete": "Vous ne pouvez pas quitter ou supprimer votre seule organisation.",
+      "updateSuccess": "Organisation mise à jour avec succès",
+      "updateError": "Échec de la mise à jour de l'organisation",
+      "createSuccess": "Organisation créée avec succès",
+      "createError": "Échec de la création de l'organisation",
+      "deleteSuccess": "Organisation supprimée avec succès",
+      "deleteError": "Échec de la suppression de l'organisation",
+      "leaveSuccess": "Vous avez quitté l'organisation",
+      "leaveError": "Échec pour quitter l'organisation"
     }
   },
   "invitation": {

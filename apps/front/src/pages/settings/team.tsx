@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import { useAuth } from '../../contexts/auth-context';
 import { DashboardLayout } from '../../components/layouts/dashboard-layout';
 import { MemberList } from '../../components/settings/member-list';
@@ -33,6 +34,10 @@ export function TeamSettingsPage() {
       organizationsService.updateMemberRole(currentOrganization!.id, userId, role),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['members', currentOrganization?.id] });
+      toast.success(t('settings.team.roleUpdated'));
+    },
+    onError: () => {
+      toast.error(t('settings.team.roleUpdateError'));
     },
   });
 
@@ -41,6 +46,10 @@ export function TeamSettingsPage() {
       organizationsService.removeMember(currentOrganization!.id, userId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['members', currentOrganization?.id] });
+      toast.success(t('settings.team.memberRemoved'));
+    },
+    onError: () => {
+      toast.error(t('settings.team.memberRemoveError'));
     },
   });
 
@@ -49,6 +58,10 @@ export function TeamSettingsPage() {
       invitationsService.createInvitation(currentOrganization!.id, email, role),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['invitations', currentOrganization?.id] });
+      toast.success(t('settings.team.inviteSent'));
+    },
+    onError: () => {
+      toast.error(t('settings.team.inviteError'));
     },
   });
 
@@ -56,24 +69,44 @@ export function TeamSettingsPage() {
     mutationFn: (invitationId: string) => invitationsService.cancelInvitation(invitationId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['invitations', currentOrganization?.id] });
+      toast.success(t('settings.team.inviteCanceled'));
+    },
+    onError: () => {
+      toast.error(t('settings.team.inviteCancelError'));
     },
   });
 
   const handleUpdateRole = async (userId: string, role: 'admin' | 'member' | 'viewer') => {
-    await updateRoleMutation.mutateAsync({ userId, role });
+    try {
+      await updateRoleMutation.mutateAsync({ userId, role });
+    } catch {
+      // Error is handled by onError callback in mutation
+    }
   };
 
   const handleRemoveMember = async (userId: string) => {
-    await removeMemberMutation.mutateAsync(userId);
+    try {
+      await removeMemberMutation.mutateAsync(userId);
+    } catch {
+      // Error is handled by onError callback in mutation
+    }
   };
 
   const handleInvite = async (email: string, role: 'admin' | 'member' | 'viewer') => {
-    await inviteMutation.mutateAsync({ email, role });
+    try {
+      await inviteMutation.mutateAsync({ email, role });
+    } catch {
+      // Error is handled by onError callback in mutation
+    }
   };
 
   const handleCancelInvitation = async (invitationId: string) => {
     if (!window.confirm(t('settings.team.cancelInviteConfirm'))) return;
-    await cancelInvitationMutation.mutateAsync(invitationId);
+    try {
+      await cancelInvitationMutation.mutateAsync(invitationId);
+    } catch {
+      // Error is handled by onError callback in mutation
+    }
   };
 
   const isAdmin = currentOrganization?.role === 'admin';
@@ -83,8 +116,8 @@ export function TeamSettingsPage() {
       <div className="space-y-8 animate-fade-in">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold">{t('settings.team.title')}</h1>
-            <p className="text-black/60 mt-1">{t('settings.team.description')}</p>
+            <h1 className="text-2xl font-bold text-foreground">{t('settings.team.title')}</h1>
+            <p className="text-muted mt-1">{t('settings.team.description')}</p>
           </div>
           {isAdmin && (
             <Button variant="primary" onClick={() => setShowInviteDialog(true)}>
@@ -102,7 +135,7 @@ export function TeamSettingsPage() {
         </div>
 
         <div className="glass-card p-6">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-foreground">
             {t('settings.team.members')} ({members.length})
           </h2>
           <MemberList
@@ -117,30 +150,30 @@ export function TeamSettingsPage() {
 
         {isAdmin && (
           <div className="glass-card p-6">
-            <h2 className="text-lg font-semibold mb-4">
+            <h2 className="text-lg font-semibold mb-4 text-foreground">
               {t('settings.team.pendingInvitations')} ({invitations.length})
             </h2>
 
             {isInvitationsLoading ? (
               <div className="space-y-3">
                 {[1, 2].map((i) => (
-                  <div key={i} className="p-4 rounded-premium border border-gray-200 animate-pulse">
-                    <div className="h-4 w-48 bg-gray-200 rounded" />
+                  <div key={i} className="p-4 rounded-premium border border-theme animate-pulse">
+                    <div className="h-4 w-48 bg-muted/20 rounded" />
                   </div>
                 ))}
               </div>
             ) : invitations.length === 0 ? (
-              <p className="text-black/60 text-center py-4">{t('settings.team.noInvitations')}</p>
+              <p className="text-muted text-center py-4">{t('settings.team.noInvitations')}</p>
             ) : (
               <div className="space-y-3">
                 {invitations.map((invitation: Invitation) => (
                   <div
                     key={invitation.id}
-                    className="flex items-center justify-between p-4 rounded-premium border border-gray-200"
+                    className="flex items-center justify-between p-4 rounded-premium border border-theme"
                   >
                     <div>
-                      <p className="font-medium">{invitation.email}</p>
-                      <p className="text-sm text-black/60">
+                      <p className="font-medium text-foreground">{invitation.email}</p>
+                      <p className="text-sm text-muted">
                         {t(`settings.team.role.${invitation.role}`)} -{' '}
                         {t('settings.team.expires', {
                           date: new Date(invitation.expiresAt).toLocaleDateString(),
@@ -151,7 +184,7 @@ export function TeamSettingsPage() {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleCancelInvitation(invitation.id)}
-                      className="text-red-500 hover:bg-red-50"
+                      className="text-red-500 hover:bg-red-500/10"
                     >
                       {t('settings.team.cancelInvite')}
                     </Button>
