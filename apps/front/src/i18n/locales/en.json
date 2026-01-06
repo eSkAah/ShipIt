@@ -85,6 +85,7 @@
     "signup": "Create account",
     "backToLogin": "Back to login",
     "organizations": "Organizations",
+    "retry": "Try again",
     "dangerAction": "This action cannot be undone",
     "typeToConfirm": "Type \"{{text}}\" to confirm",
     "textMismatch": "Text does not match",
@@ -102,6 +103,7 @@
     "profile": "Profile",
     "team": "Team",
     "organization": "Organization",
+    "billing": "Billing",
     "logout": "Sign out"
   },
   "dashboard": {
@@ -216,6 +218,63 @@
       "deleteError": "Failed to delete organization",
       "leaveSuccess": "You have left the organization",
       "leaveError": "Failed to leave organization"
+    },
+    "billing": {
+      "title": "Billing & Subscription",
+      "description": "Manage your subscription and payment methods",
+      "currentPlan": "Current Plan",
+      "organization": "Organization",
+      "checkoutSuccess": "Payment successful! Your subscription is now active.",
+      "checkoutCanceled": "Checkout canceled.",
+      "checkoutError": "Failed to start checkout. Please try again.",
+      "portalError": "Failed to open billing portal. Please try again.",
+      "status": {
+        "active": "Active",
+        "trialing": "Trial",
+        "pastDue": "Past Due",
+        "canceled": "Canceled",
+        "incomplete": "Incomplete"
+      },
+      "plans": {
+        "free": "Free Plan",
+        "freeDescription": "Basic features for personal use",
+        "premium": "Premium Plan",
+        "premiumDescription": "Full access to all features"
+      },
+      "renewsOn": "Renews on",
+      "endsOn": "Ends on",
+      "cancelScheduled": "Your subscription will be canceled at the end of the billing period.",
+      "pastDueWarning": {
+        "title": "Payment Failed",
+        "description": "We couldn't process your last payment. Please update your payment method to avoid service interruption."
+      },
+      "actions": "Billing Actions",
+      "upgrade": {
+        "title": "Upgrade to Premium",
+        "description": "Unlock all features and remove limitations.",
+        "button": "Upgrade"
+      },
+      "manageSubscription": {
+        "title": "Manage Subscription",
+        "description": "Update payment method, view invoices, or cancel.",
+        "button": "Manage"
+      },
+      "stripeNotConfigured": "Billing is not configured. Contact support for assistance.",
+      "adminOnly": {
+        "title": "Admin Access Required",
+        "description": "Only organization admins can manage billing settings."
+      },
+      "features": {
+        "title": "Premium Features",
+        "feature1": "Unlimited team members",
+        "feature2": "Advanced analytics",
+        "feature3": "Priority support",
+        "feature4": "Custom integrations"
+      },
+      "error": {
+        "title": "Unable to Load Billing",
+        "description": "We couldn't load your billing information. Please try again."
+      }
     }
   },
   "invitation": {

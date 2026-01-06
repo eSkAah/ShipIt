@@ -85,6 +85,7 @@
     "signup": "Créer un compte",
     "backToLogin": "Retour à la connexion",
     "organizations": "Organisations",
+    "retry": "Réessayer",
     "dangerAction": "Cette action est irréversible",
     "typeToConfirm": "Tapez \"{{text}}\" pour confirmer",
     "textMismatch": "Le texte ne correspond pas",
@@ -102,6 +103,7 @@
     "profile": "Profil",
     "team": "Équipe",
     "organization": "Organisation",
+    "billing": "Facturation",
     "logout": "Déconnexion"
   },
   "dashboard": {
@@ -216,6 +218,63 @@
       "deleteError": "Échec de la suppression de l'organisation",
       "leaveSuccess": "Vous avez quitté l'organisation",
       "leaveError": "Échec pour quitter l'organisation"
+    },
+    "billing": {
+      "title": "Facturation & Abonnement",
+      "description": "Gérez votre abonnement et vos moyens de paiement",
+      "currentPlan": "Plan actuel",
+      "organization": "Organisation",
+      "checkoutSuccess": "Paiement réussi ! Votre abonnement est maintenant actif.",
+      "checkoutCanceled": "Paiement annulé.",
+      "checkoutError": "Échec du paiement. Veuillez réessayer.",
+      "portalError": "Échec de l'ouverture du portail. Veuillez réessayer.",
+      "status": {
+        "active": "Actif",
+        "trialing": "Essai",
+        "pastDue": "En retard",
+        "canceled": "Annulé",
+        "incomplete": "Incomplet"
+      },
+      "plans": {
+        "free": "Plan Gratuit",
+        "freeDescription": "Fonctionnalités de base pour un usage personnel",
+        "premium": "Plan Premium",
+        "premiumDescription": "Accès complet à toutes les fonctionnalités"
+      },
+      "renewsOn": "Renouvellement le",
+      "endsOn": "Se termine le",
+      "cancelScheduled": "Votre abonnement sera annulé à la fin de la période de facturation.",
+      "pastDueWarning": {
+        "title": "Paiement échoué",
+        "description": "Nous n'avons pas pu traiter votre dernier paiement. Veuillez mettre à jour votre moyen de paiement pour éviter une interruption de service."
+      },
+      "actions": "Actions de facturation",
+      "upgrade": {
+        "title": "Passer au Premium",
+        "description": "Débloquez toutes les fonctionnalités et supprimez les limitations.",
+        "button": "Mettre à niveau"
+      },
+      "manageSubscription": {
+        "title": "Gérer l'abonnement",
+        "description": "Mettre à jour le moyen de paiement, voir les factures ou annuler.",
+        "button": "Gérer"
+      },
+      "stripeNotConfigured": "La facturation n'est pas configurée. Contactez le support pour obtenir de l'aide.",
+      "adminOnly": {
+        "title": "Accès administrateur requis",
+        "description": "Seuls les administrateurs de l'organisation peuvent gérer les paramètres de facturation."
+      },
+      "features": {
+        "title": "Fonctionnalités Premium",
+        "feature1": "Membres d'équipe illimités",
+        "feature2": "Analytiques avancées",
+        "feature3": "Support prioritaire",
+        "feature4": "Intégrations personnalisées"
+      },
+      "error": {
+        "title": "Impossible de charger la facturation",
+        "description": "Nous n'avons pas pu charger vos informations de facturation. Veuillez réessayer."
+      }
     }
   },
   "invitation": {

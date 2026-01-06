@@ -26,6 +26,9 @@ import { QueueService } from './queue.service';
     BullModule.registerQueue({
       name: 'email',
     }),
+    BullModule.registerQueue({
+      name: 'stripe',
+    }),
   ],
   providers: [QueueService],
   exports: [QueueService, BullModule],

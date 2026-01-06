@@ -33,5 +33,8 @@ export default defineConfig({
       reportsDirectory: 'coverage',
       provider: 'v8',
     },
+    env: {
+      VITE_STRIPE_PRICE_PREMIUM: 'price_test_123',
+    },
   },
 });

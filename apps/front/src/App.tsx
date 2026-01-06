@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
 import { AuthProvider } from './contexts/auth-context';
+import { OrganizationProvider } from './contexts/organization-context';
 import { ThemeProvider, useTheme } from './contexts/theme-context';
 import { ErrorBoundary } from './components/common/error-boundary';
 import { ProtectedRoute } from './components/auth/protected-route';
@@ -14,6 +15,7 @@ import { DashboardPage } from './pages/dashboard';
 import { TeamSettingsPage } from './pages/settings/team';
 import { OrganizationSettingsPage } from './pages/settings/organization';
 import { ProfileSettingsPage } from './pages/settings/profile';
+import { BillingSettingsPage } from './pages/settings/billing';
 import { AcceptInvitationPage } from './pages/invitations/accept';
 import { NotFoundPage } from './pages/not-found';
 import './i18n/config';
@@ -57,48 +59,58 @@ export default function App() {
           <ThemedToaster />
           <BrowserRouter>
             <AuthProvider>
-              <Routes>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignupPage />} />
-                <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-                <Route path="/reset-password" element={<ResetPasswordPage />} />
-                <Route path="/verify-email" element={<VerifyEmailPage />} />
-                <Route
-                  path="/dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <DashboardPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/settings/profile"
-                  element={
-                    <ProtectedRoute>
-                      <ProfileSettingsPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/settings/team"
-                  element={
-                    <ProtectedRoute>
-                      <TeamSettingsPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/settings/organization"
-                  element={
-                    <ProtectedRoute>
-                      <OrganizationSettingsPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="/invitations/:token/accept" element={<AcceptInvitationPage />} />
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
+              <OrganizationProvider>
+                <Routes>
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/signup" element={<SignupPage />} />
+                  <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                  <Route path="/reset-password" element={<ResetPasswordPage />} />
+                  <Route path="/verify-email" element={<VerifyEmailPage />} />
+                  <Route
+                    path="/dashboard"
+                    element={
+                      <ProtectedRoute>
+                        <DashboardPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/settings/profile"
+                    element={
+                      <ProtectedRoute>
+                        <ProfileSettingsPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/settings/team"
+                    element={
+                      <ProtectedRoute>
+                        <TeamSettingsPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/settings/organization"
+                    element={
+                      <ProtectedRoute>
+                        <OrganizationSettingsPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/settings/billing"
+                    element={
+                      <ProtectedRoute>
+                        <BillingSettingsPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/invitations/:token/accept" element={<AcceptInvitationPage />} />
+                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+              </OrganizationProvider>
             </AuthProvider>
           </BrowserRouter>
         </ThemeProvider>

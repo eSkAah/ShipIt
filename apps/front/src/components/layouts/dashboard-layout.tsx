@@ -30,6 +30,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     { href: '/dashboard', label: t('nav.dashboard') },
     { href: '/settings/team', label: t('nav.team') },
     { href: '/settings/organization', label: t('nav.organization') },
+    { href: '/settings/billing', label: t('nav.billing') },
   ];
 
   return (
