@@ -81,6 +81,10 @@
     "search": "Search",
     "filter": "Filter",
     "sort": "Sort",
+    "login": "Sign in",
+    "signup": "Create account",
+    "backToLogin": "Back to login",
+    "organizations": "Organizations",
     "validation": {
       "required": "This field is required",
       "email": "Invalid email",
@@ -89,11 +93,89 @@
       "passwordMinLength": "Password must be at least 8 characters"
     }
   },
+  "nav": {
+    "dashboard": "Dashboard",
+    "team": "Team",
+    "logout": "Sign out"
+  },
   "dashboard": {
     "welcome": "Welcome, {{name}}",
     "overview": "Overview",
     "emailVerified": "Verified",
     "emailNotVerified": "Not verified"
+  },
+  "settings": {
+    "team": {
+      "title": "Team Members",
+      "description": "Manage your team and their access levels",
+      "members": "Members",
+      "inviteButton": "Invite Member",
+      "inviteTitle": "Invite a team member",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "colleague@company.com",
+      "roleLabel": "Role",
+      "sendInvite": "Send Invitation",
+      "role": {
+        "admin": "Admin",
+        "member": "Member",
+        "viewer": "Viewer"
+      },
+      "you": "you",
+      "removeConfirm": "Are you sure you want to remove this member?",
+      "pendingInvitations": "Pending Invitations",
+      "noInvitations": "No pending invitations",
+      "noMembers": "No members yet",
+      "cancelInvite": "Cancel",
+      "cancelInviteConfirm": "Are you sure you want to cancel this invitation?",
+      "expires": "Expires {{date}}",
+      "roleUpdated": "Role updated successfully",
+      "roleUpdateError": "Failed to update role",
+      "memberRemoved": "Member removed successfully",
+      "memberRemoveError": "Failed to remove member",
+      "inviteSent": "Invitation sent successfully",
+      "inviteError": "Failed to send invitation",
+      "inviteCanceled": "Invitation canceled",
+      "inviteCancelError": "Failed to cancel invitation"
+    },
+    "organization": {
+      "title": "Organization Settings",
+      "description": "Manage your organization settings",
+      "general": "General Information",
+      "name": "Organization name",
+      "createNew": "Create New Organization",
+      "createButton": "New Organization",
+      "newName": "Organization name",
+      "newNamePlaceholder": "My Company",
+      "create": "Create Organization",
+      "dangerZone": "Danger Zone",
+      "leaveTitle": "Leave Organization",
+      "leaveDescription": "Leave this organization. You can rejoin if invited again.",
+      "leave": "Leave",
+      "leaveConfirm": "Are you sure you want to leave this organization?",
+      "deleteTitle": "Delete Organization",
+      "deleteDescription": "Permanently delete this organization and all its data.",
+      "delete": "Delete",
+      "confirmDelete": "Yes, delete",
+      "cannotDelete": "You cannot leave or delete your only organization.",
+      "updateSuccess": "Organization updated successfully",
+      "updateError": "Failed to update organization",
+      "createSuccess": "Organization created successfully",
+      "createError": "Failed to create organization",
+      "deleteSuccess": "Organization deleted successfully",
+      "deleteError": "Failed to delete organization",
+      "leaveSuccess": "You have left the organization",
+      "leaveError": "Failed to leave organization"
+    }
+  },
+  "invitation": {
+    "title": "Team Invitation",
+    "invitedTo": "You've been invited to join {{organization}}",
+    "asRole": "as {{role}}",
+    "loginRequired": "Please sign in or create an account to accept this invitation.",
+    "accept": "Accept Invitation",
+    "decline": "Decline",
+    "invalid": "Invalid Invitation",
+    "invalidDescription": "This invitation link is invalid or has expired."
   },
   "errors": {
     "notFound": {

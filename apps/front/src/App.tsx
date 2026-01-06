@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'sonner';
 import { AuthProvider } from './contexts/auth-context';
-import { ThemeProvider } from './contexts/theme-context';
+import { ThemeProvider, useTheme } from './contexts/theme-context';
 import { ErrorBoundary } from './components/common/error-boundary';
 import { ProtectedRoute } from './components/auth/protected-route';
 import { LoginPage } from './pages/login';
@@ -10,6 +11,9 @@ import { ForgotPasswordPage } from './pages/forgot-password';
 import { ResetPasswordPage } from './pages/reset-password';
 import { VerifyEmailPage } from './pages/verify-email';
 import { DashboardPage } from './pages/dashboard';
+import { TeamSettingsPage } from './pages/settings/team';
+import { OrganizationSettingsPage } from './pages/settings/organization';
+import { AcceptInvitationPage } from './pages/invitations/accept';
 import { NotFoundPage } from './pages/not-found';
 import './i18n/config';
 
@@ -22,11 +26,34 @@ const queryClient = new QueryClient({
   },
 });
 
+function ThemedToaster() {
+  const { theme } = useTheme();
+  return (
+    <Toaster
+      theme={theme}
+      position="bottom-right"
+      toastOptions={{
+        duration: 4000,
+        classNames: {
+          toast: 'font-sans rounded-premium border border-theme shadow-card',
+          title: 'text-foreground font-semibold',
+          description: 'text-muted',
+          success: 'bg-success/10 border-success/30 text-success',
+          error: 'bg-error/10 border-error/30 text-error',
+          warning: 'bg-warning/10 border-warning/30 text-warning',
+          info: 'bg-info/10 border-info/30 text-info',
+        },
+      }}
+    />
+  );
+}
+
 export default function App() {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
+          <ThemedToaster />
           <BrowserRouter>
             <AuthProvider>
               <Routes>
@@ -43,6 +70,23 @@ export default function App() {
                     </ProtectedRoute>
                   }
                 />
+                <Route
+                  path="/settings/team"
+                  element={
+                    <ProtectedRoute>
+                      <TeamSettingsPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/settings/organization"
+                  element={
+                    <ProtectedRoute>
+                      <OrganizationSettingsPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="/invitations/:token/accept" element={<AcceptInvitationPage />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

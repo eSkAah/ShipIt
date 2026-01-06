@@ -16,11 +16,13 @@ async function bootstrap() {
   app.use(cookieParser());
 
   // Global validation pipe
+  // Note: We use Zod for validation via ZodValidationPipe in controllers
+  // ValidationPipe is only used for basic transformation without strict whitelist
+  // to allow Zod schemas to handle validation
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
       transform: true,
+      transformOptions: { enableImplicitConversion: true },
     }),
   );
 

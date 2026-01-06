@@ -10,18 +10,18 @@ export function DashboardPage() {
     <DashboardLayout>
       <div className="space-y-8 animate-fade-in">
         <div>
-          <h1 className="text-section font-bold leading-section">
+          <h1 className="text-section font-bold leading-section text-foreground">
             {t('dashboard.welcome', { name: user?.firstName })}
           </h1>
-          <p className="text-black/60 mt-2">{t('dashboard.overview')}</p>
+          <p className="text-muted mt-2">{t('dashboard.overview')}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="glass-card p-6 space-y-2">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-gold-500/20 dark:bg-gold-500/10 flex items-center justify-center">
                 <svg
-                  className="w-5 h-5 text-gold-500"
+                  className="w-5 h-5 text-gold-600 dark:text-gold-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -34,17 +34,17 @@ export function DashboardPage() {
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold text-lg">Organisation</h3>
+              <h3 className="font-semibold text-lg text-foreground">Organisation</h3>
             </div>
-            <p className="text-2xl font-bold">{currentOrganization?.name}</p>
-            <p className="text-sm text-black/60">{currentOrganization?.membership.role}</p>
+            <p className="text-2xl font-bold text-foreground">{currentOrganization?.name}</p>
+            <p className="text-sm text-muted capitalize">{currentOrganization?.role}</p>
           </div>
 
           <div className="glass-card p-6 space-y-2">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-purple-500/20 dark:bg-purple-500/10 flex items-center justify-center">
                 <svg
-                  className="w-5 h-5 text-purple-500"
+                  className="w-5 h-5 text-purple-600 dark:text-purple-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -57,17 +57,17 @@ export function DashboardPage() {
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold text-lg">Status</h3>
+              <h3 className="font-semibold text-lg text-foreground">Status</h3>
             </div>
-            <p className="text-2xl font-bold capitalize">
+            <p className="text-2xl font-bold capitalize text-foreground">
               {currentOrganization?.subscriptionStatus}
             </p>
-            <p className="text-sm text-black/60">{currentOrganization?.subscriptionTier}</p>
+            <p className="text-sm text-muted capitalize">{currentOrganization?.subscriptionTier}</p>
           </div>
 
           <div className="glass-card p-6 space-y-2">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-success/20 dark:bg-success/10 flex items-center justify-center">
                 <svg
                   className="w-5 h-5 text-success"
                   fill="none"
@@ -82,10 +82,10 @@ export function DashboardPage() {
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold text-lg">Email</h3>
+              <h3 className="font-semibold text-lg text-foreground">Email</h3>
             </div>
-            <p className="text-base font-medium break-all">{user?.email}</p>
-            <p className="text-sm text-black/60">
+            <p className="text-base font-medium break-all text-foreground">{user?.email}</p>
+            <p className="text-sm text-muted">
               {user?.emailVerified ? t('dashboard.emailVerified') : t('dashboard.emailNotVerified')}
             </p>
           </div>

@@ -1,23 +1,25 @@
 import { User, LoginCredentials, SignupData, ResetPasswordData } from '@shipit/shared-types';
 import { apiClient } from '../lib/axios';
 
+interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+  message?: string;
+}
+
 export interface AuthResponse {
   user: User;
-  session: {
-    id: string;
-    expiresAt: string;
-  };
 }
 
 export const authService = {
   async signup(data: SignupData): Promise<AuthResponse> {
-    const response = await apiClient.post<AuthResponse>('/auth/signup', data);
-    return response.data;
+    const response = await apiClient.post<ApiResponse<User>>('/auth/signup', data);
+    return { user: response.data.data };
   },
 
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
-    const response = await apiClient.post<AuthResponse>('/auth/login', credentials);
-    return response.data;
+    const response = await apiClient.post<ApiResponse<{ user: User }>>('/auth/login', credentials);
+    return { user: response.data.data.user };
   },
 
   async logout(): Promise<void> {
@@ -27,9 +29,9 @@ export const authService = {
 
   async getSession(): Promise<AuthResponse | null> {
     try {
-      const response = await apiClient.get<AuthResponse>('/auth/session');
-      return response.data;
-    } catch (error) {
+      const response = await apiClient.get<ApiResponse<{ user: User }>>('/auth/session');
+      return { user: response.data.data.user };
+    } catch {
       return null;
     }
   },

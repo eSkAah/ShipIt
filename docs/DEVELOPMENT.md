@@ -101,15 +101,15 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
   - [x] Create Exception filter
   - [x] Update main.ts with security middleware
   - [x] Auto-create "Personal" organization on signup
-- [ ] Frontend Auth (Next PR)
-  - [ ] Create login page UI
-  - [ ] Create signup page UI
-  - [ ] Create forgot password page UI
-  - [ ] Create reset password page UI
-  - [ ] Create email verification page UI
-  - [ ] Implement auth context provider
-  - [ ] Create protected route wrapper
-  - [ ] Add OAuth buttons (Google, Apple)
+- [x] Frontend Auth
+  - [x] Create login page UI
+  - [x] Create signup page UI
+  - [x] Create forgot password page UI
+  - [x] Create reset password page UI
+  - [x] Create email verification page UI
+  - [x] Implement auth context provider
+  - [x] Create protected route wrapper
+  - [x] Add OAuth buttons (Google, Apple)
 - [ ] Testing (Next PR)
   - [ ] Unit tests for auth service
   - [ ] E2E tests for signup flow
@@ -119,48 +119,48 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ---
 
-## Epic 3: Multi-Tenancy (3-4 days)
+## Epic 3: Multi-Tenancy (3-4 days) ✅
 
 **Goal:** Implement organization system with RBAC
 
-- [ ] Organization CRUD
-  - [ ] Implement POST /organizations endpoint
-  - [ ] Implement GET /organizations endpoint
-  - [ ] Auto-create "Personal" org on signup
-  - [ ] Create organization context service
-- [ ] Organization Members
-  - [ ] Implement GET /organizations/:id/members endpoint
-  - [ ] Implement PATCH /organizations/:id/members/:uid (role update)
-  - [ ] Implement DELETE /organizations/:id/members/:uid (remove member)
-  - [ ] Validate membership before operations
-- [ ] Invitations System
-  - [ ] Implement POST /organizations/:id/invitations endpoint
-  - [ ] Implement POST /invitations/:token/accept endpoint
-  - [ ] Generate invitation tokens
-  - [ ] Handle invitation expiration
-  - [ ] Create invitation email template
-  - [ ] Prevent duplicate invitations
-- [ ] RBAC Implementation
-  - [ ] Create RolesGuard
-  - [ ] Create @Roles() decorator
-  - [ ] Implement role hierarchy (admin > member > viewer)
-  - [ ] Create TenantGuard for org context
-  - [ ] Implement @CurrentOrganization() decorator
-  - [ ] Implement @CurrentMembership() decorator
-- [ ] Tenant Middleware
-  - [ ] Create TenantMiddleware
-  - [ ] Validate X-Organization-Id header
-  - [ ] Attach currentOrganization to request
-  - [ ] Attach currentMembership to request
-  - [ ] Handle missing or invalid org context
-- [ ] Frontend Multi-Tenancy
-  - [ ] Create organization switcher component
-  - [ ] Persist selected org in local storage
-  - [ ] Add X-Organization-Id to API client
-  - [ ] Create team settings page UI
-  - [ ] Create member management UI
-  - [ ] Create invitation UI
-  - [ ] Show current organization in layout
+- [x] Organization CRUD
+  - [x] Implement POST /organizations endpoint
+  - [x] Implement GET /organizations endpoint
+  - [x] Auto-create "Personal" org on signup
+  - [x] Create organization context service
+- [x] Organization Members
+  - [x] Implement GET /organizations/:id/members endpoint
+  - [x] Implement PATCH /organizations/:id/members/:uid (role update)
+  - [x] Implement DELETE /organizations/:id/members/:uid (remove member)
+  - [x] Validate membership before operations
+- [x] Invitations System
+  - [x] Implement POST /organizations/:id/invitations endpoint
+  - [x] Implement POST /invitations/:token/accept endpoint
+  - [x] Generate invitation tokens
+  - [x] Handle invitation expiration
+  - [x] Create invitation email template
+  - [x] Prevent duplicate invitations
+- [x] RBAC Implementation
+  - [x] Create RolesGuard
+  - [x] Create @Roles() decorator
+  - [x] Implement role hierarchy (admin > member > viewer)
+  - [x] Create TenantGuard for org context
+  - [x] Implement @CurrentOrganization() decorator
+  - [x] Implement @CurrentMembership() decorator
+- [x] Tenant Middleware
+  - [x] Create TenantGuard (used instead of middleware)
+  - [x] Validate X-Organization-Id header
+  - [x] Attach currentOrganization to request
+  - [x] Attach currentMembership to request
+  - [x] Handle missing or invalid org context
+- [x] Frontend Multi-Tenancy
+  - [x] Create organization switcher component
+  - [x] Persist selected org in local storage
+  - [x] Add X-Organization-Id to API client
+  - [x] Create team settings page UI
+  - [x] Create member management UI
+  - [x] Create invitation UI
+  - [x] Show current organization in layout
 - [ ] Testing
   - [ ] Unit tests for organization service
   - [ ] Unit tests for RBAC guards
@@ -549,14 +549,14 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ## Progress Summary
 
-**Completed Epics:** 1 / 12
-**Completed Tasks:** ~50 / ~250
+**Completed Epics:** 3 / 12
+**Completed Tasks:** ~120 / ~250
 
 ### Epic Status
 
 - [x] E1: Project Setup (100%) ✅
-- [ ] E2: Authentication (0%)
-- [ ] E3: Multi-Tenancy (0%)
+- [x] E2: Authentication (90%) ✅ (Backend complete, Frontend complete, Testing pending)
+- [x] E3: Multi-Tenancy (90%) ✅ (Backend + Frontend complete, Testing pending)
 - [ ] E4: User Profiles (0%)
 - [ ] E5: Billing (0%)
 - [ ] E6: Email System (0%)

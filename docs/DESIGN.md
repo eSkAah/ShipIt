@@ -623,6 +623,86 @@ Small accent elements.
 - Success: `bg-green-100 text-green-800`
 - Error: `bg-red-100 text-red-800`
 
+### Toast Notifications (Sonner)
+
+All user actions must provide feedback via toast notifications. We use **Sonner** for this purpose.
+
+**Configuration** (in App.tsx):
+
+```tsx
+import { Toaster } from 'sonner';
+
+<Toaster
+  theme={theme}
+  position="top-right"
+  toastOptions={{
+    duration: 4000,
+    classNames: {
+      toast: 'font-sans rounded-premium border border-theme shadow-card',
+      title: 'text-foreground font-semibold',
+      description: 'text-muted',
+      success: 'bg-success/10 border-success/30 text-success',
+      error: 'bg-error/10 border-error/30 text-error',
+      warning: 'bg-warning/10 border-warning/30 text-warning',
+      info: 'bg-info/10 border-info/30 text-info',
+    },
+  }}
+/>;
+```
+
+**Usage**:
+
+```tsx
+import { toast } from 'sonner';
+
+// Success notification
+toast.success(t('settings.organization.updateSuccess'));
+
+// Error notification
+toast.error(t('settings.organization.updateError'));
+
+// Warning notification
+toast.warning('Warning message');
+
+// Info notification
+toast.info('Information message');
+
+// Custom toast with description
+toast.success('Title', {
+  description: 'Additional details here',
+});
+
+// Loading toast (for async operations)
+toast.promise(asyncOperation(), {
+  loading: 'Loading...',
+  success: 'Success!',
+  error: 'Error occurred',
+});
+```
+
+**When to Use Toasts**:
+
+- ✅ After successful CRUD operations (create, update, delete)
+- ✅ After form submissions
+- ✅ When API calls fail
+- ✅ For important state changes
+- ✅ After user actions that need confirmation
+
+**When NOT to Use Toasts**:
+
+- ❌ For navigation feedback (use loading states instead)
+- ❌ For inline form validation (use field-level errors)
+- ❌ For every micro-interaction
+- ❌ For real-time data updates (unless user-initiated)
+
+**Toast Rules**:
+
+1. **Always use translations** - Never hardcode toast messages
+2. **Keep messages concise** - Max 2 sentences
+3. **Use appropriate type** - success/error/warning/info
+4. **Pair with mutations** - Add toasts in onSuccess/onError callbacks
+5. **Duration** - 4 seconds default, 6 seconds for errors
+
 ---
 
 ## Accessibility
