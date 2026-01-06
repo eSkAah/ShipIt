@@ -16,6 +16,12 @@ apiClient.interceptors.request.use(
     if (organizationId) {
       config.headers['X-Organization-Id'] = organizationId;
     }
+
+    // Let axios set the correct Content-Type with boundary for FormData
+    if (config.data instanceof FormData) {
+      delete config.headers['Content-Type'];
+    }
+
     return config;
   },
   (error) => {

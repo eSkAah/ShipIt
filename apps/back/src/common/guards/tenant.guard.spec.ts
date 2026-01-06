@@ -93,7 +93,7 @@ describe('TenantGuard', () => {
       expect(request.currentMembership).toEqual(mockMembership);
     });
 
-    it('should accept organization ID from route params (id)', async () => {
+    it('should accept organization ID from route params (organizationId in params)', async () => {
       const mockMembership = {
         id: 'membership-123',
         userId: 'user-123',
@@ -111,7 +111,7 @@ describe('TenantGuard', () => {
       const request: Record<string, unknown> = {
         user: { id: 'user-123' },
         headers: {},
-        params: { id: 'org-456' },
+        params: { organizationId: 'org-456' },
       };
       const context = createMockExecutionContext(request);
 

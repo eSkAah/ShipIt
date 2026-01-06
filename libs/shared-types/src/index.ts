@@ -77,6 +77,16 @@ export interface ResetPasswordData {
   password: string;
 }
 
+export interface UpdateProfileData {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  address?: Record<string, unknown>;
+  language?: 'fr' | 'en';
+  theme?: 'light' | 'dark' | 'system';
+  notificationsEnabled?: boolean;
+}
+
 // API Response types
 export interface ApiResponse<T = unknown> {
   success: boolean;

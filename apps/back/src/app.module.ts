@@ -7,6 +7,8 @@ import { MailModule } from './mail/mail.module';
 import { AuthModule } from './auth/auth.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { InvitationsModule } from './invitations/invitations.module';
+import { StorageModule } from './storage/storage.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -14,9 +16,11 @@ import { InvitationsModule } from './invitations/invitations.module';
     DatabaseModule,
     QueueModule,
     MailModule,
+    StorageModule,
     AuthModule,
     OrganizationsModule,
     InvitationsModule,
+    UsersModule,
     HealthModule,
   ],
 })

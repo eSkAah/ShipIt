@@ -99,7 +99,9 @@
   },
   "nav": {
     "dashboard": "Tableau de bord",
+    "profile": "Profil",
     "team": "Équipe",
+    "organization": "Organisation",
     "logout": "Déconnexion"
   },
   "dashboard": {
@@ -109,6 +111,48 @@
     "emailNotVerified": "Non vérifié"
   },
   "settings": {
+    "profile": {
+      "title": "Mon profil",
+      "description": "Gérez vos informations personnelles et vos préférences",
+      "personalInfo": "Informations personnelles",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Adresse email",
+      "emailHint": "L'email ne peut pas être modifié",
+      "phone": "Téléphone",
+      "phonePlaceholder": "+33 6 12 34 56 78",
+      "preferences": "Préférences",
+      "language": "Langue",
+      "languages": {
+        "fr": "Français",
+        "en": "English"
+      },
+      "theme": "Thème",
+      "themeLight": "Mode clair",
+      "themeDark": "Mode sombre",
+      "themes": {
+        "light": "Clair",
+        "dark": "Sombre"
+      },
+      "notifications": "Notifications",
+      "notificationsHint": "Recevez des notifications par email",
+      "updateSuccess": "Profil mis à jour avec succès",
+      "updateError": "Échec de la mise à jour du profil",
+      "avatar": {
+        "title": "Photo de profil",
+        "alt": "Photo de profil",
+        "change": "Modifier",
+        "delete": "Supprimer",
+        "selectFile": "Sélectionner un fichier",
+        "hint": "JPG, PNG ou WebP. Max 5MB.",
+        "invalidType": "Type de fichier invalide. Utilisez JPG, PNG ou WebP.",
+        "tooLarge": "Fichier trop volumineux. Maximum 5MB.",
+        "uploadSuccess": "Photo de profil mise à jour",
+        "uploadError": "Échec de l'upload de la photo",
+        "deleteSuccess": "Photo de profil supprimée",
+        "deleteError": "Échec de la suppression de la photo"
+      }
+    },
     "team": {
       "title": "Membres de l'équipe",
       "description": "Gérez votre équipe et leurs niveaux d'accès",

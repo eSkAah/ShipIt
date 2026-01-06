@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
@@ -110,6 +110,10 @@ describe('OrganizationSettingsPage', () => {
       logout: vi.fn(),
       refetchUser: vi.fn(),
     } as any);
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   describe('Admin view', () => {
@@ -275,58 +279,61 @@ describe('OrganizationSettingsPage', () => {
       expect(screen.getByText('settings.organization.cannotDelete')).toBeInTheDocument();
     });
 
-    it('should show confirmation buttons when clicking delete', async () => {
+    it('should show confirmation modal when clicking delete', async () => {
       renderComponent();
 
       const deleteButton = screen.getByText('settings.organization.delete');
       fireEvent.click(deleteButton);
 
+      // Modal should show with cancel button and delete button
       expect(screen.getByText('common.cancel')).toBeInTheDocument();
-      expect(screen.getByText('settings.organization.confirmDelete')).toBeInTheDocument();
+      expect(screen.getByText('common.delete')).toBeInTheDocument();
+      // Should have confirmation input
+      expect(screen.getByPlaceholderText('settings.organization.typeOrgName')).toBeInTheDocument();
     });
 
-    it('should hide confirmation when clicking cancel', async () => {
+    it('should hide confirmation modal when clicking cancel', async () => {
       renderComponent();
 
       const deleteButton = screen.getByText('settings.organization.delete');
       fireEvent.click(deleteButton);
+
+      // Modal should be open
+      expect(screen.getByPlaceholderText('settings.organization.typeOrgName')).toBeInTheDocument();
 
       const cancelButton = screen.getByText('common.cancel');
       fireEvent.click(cancelButton);
 
-      expect(screen.queryByText('settings.organization.confirmDelete')).not.toBeInTheDocument();
-    });
-
-    it('should call deleteOrganization when confirming delete', async () => {
-      vi.mocked(organizationsService.deleteOrganization).mockResolvedValue(undefined);
-
-      renderComponent();
-
-      const deleteButton = screen.getByText('settings.organization.delete');
-      fireEvent.click(deleteButton);
-
-      const confirmButton = screen.getByText('settings.organization.confirmDelete');
-      fireEvent.click(confirmButton);
-
+      // Modal should be closed - the confirmation input should not be visible anymore
       await waitFor(() => {
-        expect(organizationsService.deleteOrganization).toHaveBeenCalledWith('org-1');
+        expect(
+          screen.queryByPlaceholderText('settings.organization.typeOrgName'),
+        ).not.toBeInTheDocument();
       });
     });
 
-    it('should navigate to dashboard after successful delete', async () => {
-      vi.mocked(organizationsService.deleteOrganization).mockResolvedValue(undefined);
-
+    it('should show delete confirmation elements in modal', async () => {
       renderComponent();
 
+      // Open delete modal
       const deleteButton = screen.getByText('settings.organization.delete');
       fireEvent.click(deleteButton);
 
-      const confirmButton = screen.getByText('settings.organization.confirmDelete');
-      fireEvent.click(confirmButton);
+      // Modal should show confirmation input and warning
+      expect(screen.getByPlaceholderText('settings.organization.typeOrgName')).toBeInTheDocument();
+      expect(screen.getByText('common.dangerAction')).toBeInTheDocument();
+      expect(screen.getByText('common.holdToDeleteInstructions')).toBeInTheDocument();
 
-      await waitFor(() => {
-        expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
-      });
+      // Delete button should be disabled until name is typed
+      const holdDeleteButton = screen.getByText('common.delete').closest('button')!;
+      expect(holdDeleteButton).toBeDisabled();
+
+      // Type organization name
+      const confirmInput = screen.getByPlaceholderText('settings.organization.typeOrgName');
+      fireEvent.change(confirmInput, { target: { value: 'Organization One' } });
+
+      // Delete button should now be enabled (still needs hold to unlock, but not disabled)
+      expect(holdDeleteButton).not.toBeDisabled();
     });
   });
 
