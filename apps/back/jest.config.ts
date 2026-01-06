@@ -2,9 +2,9 @@ export default {
   displayName: 'back',
   testEnvironment: 'node',
   transform: {
-    '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
+    '^.+\\.[tj]sx?$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
-  moduleFileExtensions: ['ts', 'js', 'html'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
   coverageDirectory: '../../coverage/apps/back',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
@@ -14,5 +14,5 @@ export default {
     '^@shipit/constants$': '<rootDir>/../../libs/constants/src/index.ts',
   },
   testMatch: ['**/*.spec.ts'],
-  collectCoverageFrom: ['src/**/*.ts', '!src/main.ts'],
+  collectCoverageFrom: ['src/**/*.ts', 'src/**/*.tsx', '!src/main.ts'],
 };

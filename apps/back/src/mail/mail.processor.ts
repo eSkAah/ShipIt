@@ -4,10 +4,10 @@ import { Job } from 'bullmq';
 import { Resend } from 'resend';
 import { ConfigService } from '../config/config.service';
 import { EmailJob } from './mail.service';
-import { renderVerificationEmail } from './templates/verification-email';
-import { renderResetPasswordEmail } from './templates/reset-password-email';
-import { renderWelcomeEmail } from './templates/welcome-email';
-import { renderInvitationEmail } from './templates/invitation-email';
+import { renderVerificationEmailReact } from './templates/verification-email';
+import { renderResetPasswordEmailReact } from './templates/reset-password-email';
+import { renderWelcomeEmailReact } from './templates/welcome-email';
+import { renderInvitationEmailReact } from './templates/invitation-email';
 
 @Processor('email')
 export class MailProcessor extends WorkerHost {
@@ -33,7 +33,7 @@ export class MailProcessor extends WorkerHost {
       switch (type) {
         case 'verification': {
           const verificationData = data as { verificationUrl: string };
-          html = renderVerificationEmail(verificationData.verificationUrl, language);
+          html = await renderVerificationEmailReact(verificationData.verificationUrl, language);
           subject =
             language === 'fr' ? 'Vérifiez votre adresse email' : 'Verify your email address';
           break;
@@ -41,14 +41,14 @@ export class MailProcessor extends WorkerHost {
 
         case 'reset-password': {
           const resetData = data as { resetUrl: string };
-          html = renderResetPasswordEmail(resetData.resetUrl, language);
+          html = await renderResetPasswordEmailReact(resetData.resetUrl, language);
           subject = language === 'fr' ? 'Réinitialisez votre mot de passe' : 'Reset your password';
           break;
         }
 
         case 'welcome': {
           const welcomeData = data as { firstName: string };
-          html = renderWelcomeEmail(welcomeData.firstName, language);
+          html = await renderWelcomeEmailReact(welcomeData.firstName, language);
           subject = language === 'fr' ? 'Bienvenue sur ShipIt!' : 'Welcome to ShipIt!';
           break;
         }
@@ -59,7 +59,7 @@ export class MailProcessor extends WorkerHost {
             organizationName: string;
             role: string;
           };
-          html = renderInvitationEmail(
+          html = await renderInvitationEmailReact(
             invitationData.invitationUrl,
             invitationData.organizationName,
             invitationData.role,

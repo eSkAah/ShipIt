@@ -5,8 +5,9 @@
     "module": "CommonJS",
     "types": ["node", "multer"],
     "emitDecoratorMetadata": true,
-    "target": "ES2021"
+    "target": "ES2021",
+    "jsx": "react-jsx"
   },
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts", "src/__mocks__/**/*"],
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
