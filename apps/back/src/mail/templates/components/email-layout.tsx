@@ -31,8 +31,8 @@ export const EmailLayout: React.FC<EmailLayoutProps> = ({ children, preview, lan
           <Section style={footer}>
             <Text style={footerText}>
               {language === 'fr'
-                ? '© 2025 ShipIt. Tous droits réservés.'
-                : '© 2025 ShipIt. All rights reserved.'}
+                ? `© ${new Date().getFullYear()} ShipIt. Tous droits réservés.`
+                : `© ${new Date().getFullYear()} ShipIt. All rights reserved.`}
             </Text>
           </Section>
         </Container>

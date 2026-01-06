@@ -4,7 +4,7 @@ import { render } from '@react-email/render';
 import { Language } from '@prisma/client';
 import { EmailLayout } from './components/email-layout';
 import { EmailButton } from './components/email-button';
-import { sanitizeUrl } from './utils';
+import { escapeHtml, sanitizeUrl } from './utils';
 
 interface VerificationEmailProps {
   verificationUrl: string;
@@ -52,7 +52,7 @@ export const VerificationEmail: React.FC<VerificationEmailProps> = ({
       <Text style={altText}>
         <span>{content.alt}:</span>
         <br />
-        <span style={urlText}>{verificationUrl}</span>
+        <span style={urlText}>{escapeHtml(verificationUrl)}</span>
       </Text>
       <Text style={footerNote}>{content.footer}</Text>
     </EmailLayout>

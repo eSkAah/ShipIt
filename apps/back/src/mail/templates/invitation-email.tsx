@@ -70,8 +70,9 @@ export const InvitationEmail: React.FC<InvitationEmailProps> = ({
 }) => {
   const safeUrl = sanitizeUrl(invitationUrl);
   const safeOrgName = escapeHtml(organizationName);
+  const safeInviterName = inviterName ? escapeHtml(inviterName) : undefined;
   const roleLabel = getRoleLabel(role, language);
-  const content = getContent(language, safeOrgName, roleLabel, inviterName);
+  const content = getContent(language, safeOrgName, roleLabel, safeInviterName);
 
   return (
     <EmailLayout preview={content.preview} language={language}>
@@ -89,7 +90,7 @@ export const InvitationEmail: React.FC<InvitationEmailProps> = ({
       <Text style={altText}>
         <span>{content.alt}:</span>
         <br />
-        <span style={urlStyle}>{invitationUrl}</span>
+        <span style={urlStyle}>{escapeHtml(invitationUrl)}</span>
       </Text>
       <Text style={footerNote}>{content.footer}</Text>
     </EmailLayout>

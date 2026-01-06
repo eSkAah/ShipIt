@@ -4,7 +4,7 @@ import { render } from '@react-email/render';
 import { Language } from '@prisma/client';
 import { EmailLayout } from './components/email-layout';
 import { EmailButton } from './components/email-button';
-import { escapeHtml } from './utils';
+import { escapeHtml, sanitizeUrl } from './utils';
 
 interface WelcomeEmailProps {
   firstName: string;
@@ -48,6 +48,7 @@ export const WelcomeEmail: React.FC<WelcomeEmailProps> = ({
   dashboardUrl = 'https://app.shipit.com/dashboard',
 }) => {
   const safeName = escapeHtml(firstName);
+  const safeUrl = sanitizeUrl(dashboardUrl);
   const content = getContent(language, safeName);
 
   return (
@@ -65,7 +66,7 @@ export const WelcomeEmail: React.FC<WelcomeEmailProps> = ({
       </Section>
       <Hr style={divider} />
       <Section style={buttonContainer}>
-        <EmailButton href={dashboardUrl}>{content.button}</EmailButton>
+        <EmailButton href={safeUrl}>{content.button}</EmailButton>
       </Section>
       <Text style={footerNote}>{content.footer}</Text>
     </EmailLayout>
