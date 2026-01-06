@@ -86,6 +86,15 @@
     "backToLogin": "Back to login",
     "organizations": "Organizations",
     "retry": "Try again",
+    "errorTitle": "Something went wrong",
+    "errorDescription": "An unexpected error occurred. Please try again.",
+    "backToDashboard": "Back to dashboard",
+    "noResultsFound": "No results found",
+    "noResultsQuery": "No results matching \"{{query}}\". Try a different search term.",
+    "noResultsHint": "Try adjusting your search or filters.",
+    "clearSearch": "Clear search",
+    "noDataYet": "No data yet",
+    "noDataDescription": "Get started by creating your first item.",
     "dangerAction": "This action cannot be undone",
     "typeToConfirm": "Type \"{{text}}\" to confirm",
     "textMismatch": "Text does not match",
@@ -292,6 +301,165 @@
       "title": "Page not found",
       "description": "The page you are looking for does not exist or has been moved.",
       "backHome": "Back to home"
+    }
+  },
+  "marketing": {
+    "nav": {
+      "features": "Features",
+      "pricing": "Pricing"
+    },
+    "hero": {
+      "badge": "Production-ready SaaS boilerplate",
+      "title": "Ship Your SaaS",
+      "titleAccent": "Faster",
+      "subtitle": "A production-ready boilerplate with authentication, billing, multi-tenancy, and everything you need to launch your SaaS in days, not months.",
+      "cta": "Get Started Free",
+      "learnMore": "Learn More",
+      "stats": {
+        "features": "Built-in features",
+        "languages": "Languages",
+        "typescript": "TypeScript"
+      }
+    },
+    "features": {
+      "title": "Everything You Need",
+      "subtitle": "Stop rebuilding the same features. Focus on what makes your product unique.",
+      "auth": {
+        "title": "Authentication",
+        "description": "Email/password, OAuth, email verification, password reset - all implemented and ready to use."
+      },
+      "multiTenancy": {
+        "title": "Multi-Tenancy",
+        "description": "Organizations, team members, role-based access control, and invitations out of the box."
+      },
+      "billing": {
+        "title": "Stripe Billing",
+        "description": "Subscriptions, checkout sessions, customer portal, and webhook handlers configured."
+      },
+      "email": {
+        "title": "Email System",
+        "description": "React Email templates, async queue processing, and Resend integration ready."
+      },
+      "i18n": {
+        "title": "Internationalization",
+        "description": "Full i18n support with French and English translations included."
+      },
+      "performance": {
+        "title": "Optimized Stack",
+        "description": "React 19, NestJS 11, Prisma 6, TanStack Query - modern and performant."
+      }
+    },
+    "pricing": {
+      "title": "Simple Pricing",
+      "subtitle": "Start free, upgrade when you're ready. No hidden fees.",
+      "free": {
+        "name": "Free",
+        "price": "$0",
+        "description": "Perfect to get started and explore.",
+        "feature1": "Up to 3 team members",
+        "feature2": "Basic features",
+        "feature3": "Community support",
+        "feature4": "1 organization",
+        "cta": "Get Started"
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "$29",
+        "period": "/month",
+        "description": "For teams that need more power.",
+        "feature1": "Unlimited team members",
+        "feature2": "All premium features",
+        "feature3": "Priority support",
+        "feature4": "Unlimited organizations",
+        "feature5": "Advanced analytics",
+        "cta": "Start Free Trial"
+      }
+    },
+    "cta": {
+      "title": "Ready to Ship Faster?",
+      "subtitle": "Join thousands of developers who've saved weeks of development time.",
+      "button": "Start Building Now"
+    },
+    "footer": {
+      "description": "The production-ready SaaS boilerplate that helps you ship faster.",
+      "product": "Product",
+      "legal": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "copyright": "© {{year}} ShipIt. All rights reserved."
+    }
+  },
+  "admin": {
+    "nav": {
+      "overview": "Overview",
+      "users": "Users",
+      "organizations": "Organizations",
+      "logs": "Logs",
+      "backToDashboard": "Back to Dashboard"
+    },
+    "users": {
+      "title": "User Management",
+      "description": "View and manage all platform users",
+      "search": "Search users...",
+      "total": "{{count}} users total",
+      "noUsers": "No users found",
+      "columns": {
+        "user": "User",
+        "email": "Email",
+        "status": "Status",
+        "organizations": "Organizations",
+        "createdAt": "Created"
+      },
+      "status": {
+        "verified": "Verified",
+        "pending": "Pending"
+      }
+    },
+    "organizations": {
+      "title": "Organization Management",
+      "description": "View and manage all organizations",
+      "search": "Search organizations...",
+      "total": "{{count}} organizations total",
+      "noOrganizations": "No organizations found",
+      "filterByTier": "Filter by tier",
+      "allTiers": "All tiers",
+      "columns": {
+        "name": "Name",
+        "tier": "Tier",
+        "members": "Members",
+        "owner": "Owner",
+        "createdAt": "Created"
+      }
+    },
+    "logs": {
+      "title": "Application Logs",
+      "description": "View and search application logs",
+      "search": "Search logs...",
+      "filterByLevel": "Filter by level",
+      "allLevels": "All levels",
+      "noLogs": "No logs found",
+      "columns": {
+        "timestamp": "Timestamp",
+        "level": "Level",
+        "message": "Message",
+        "context": "Context"
+      },
+      "levels": {
+        "info": "Info",
+        "warn": "Warning",
+        "error": "Error",
+        "debug": "Debug"
+      }
+    },
+    "overview": {
+      "title": "Admin Overview",
+      "description": "Platform statistics and quick actions",
+      "stats": {
+        "totalUsers": "Total Users",
+        "totalOrganizations": "Total Organizations",
+        "premiumOrganizations": "Premium Organizations",
+        "activeToday": "Active Today"
+      }
     }
   }
 }
