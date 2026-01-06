@@ -200,11 +200,11 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
   - [x] Create theme switcher
   - [x] Update i18n based on user preference
   - [x] Apply theme based on user preference
-- [ ] Testing
-  - [ ] Unit tests for user service
-  - [ ] E2E tests for profile updates
-  - [ ] E2E tests for avatar upload
-  - [ ] Test file validation logic
+- [x] Testing
+  - [x] Unit tests for UsersService (getProfile, updateProfile, uploadAvatar, deleteAvatar)
+  - [x] Unit tests for StorageService (file validation, mime types, file size)
+  - [x] Frontend tests for ProfileSettingsPage
+  - [x] Frontend tests for UserMenu component
 
 ---
 
