@@ -48,7 +48,7 @@ export function Modal({
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-md animate-fade-in"
@@ -74,7 +74,7 @@ export function Modal({
           {showCloseButton && (
             <button
               onClick={onClose}
-              className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 text-black/60 dark:text-white/60"
+              className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-700 ease-smooth text-black/60 dark:text-white/60"
               aria-label="Close modal"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
