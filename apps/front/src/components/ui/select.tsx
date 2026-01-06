@@ -32,7 +32,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             focus:outline-none
             transition-all duration-300
             disabled:opacity-50 disabled:cursor-not-allowed
-            ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''}
+            ${error ? 'border-error focus:border-error focus:ring-error/20' : ''}
             ${className}
           `}
           onChange={handleChange}
