@@ -109,6 +109,7 @@ model Organization {
   id                   String               @id @default(uuid()) @db.Uuid
   name                 String
   slug                 String               @unique
+  logoUrl              String?              @map("logo_url")
   stripeCustomerId     String?              @unique @map("stripe_customer_id")
   stripeSubscriptionId String?              @unique @map("stripe_subscription_id")
   subscriptionTier     SubscriptionTier     @default(free) @map("subscription_tier")

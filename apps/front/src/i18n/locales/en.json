@@ -84,6 +84,7 @@
     "login": "Sign in",
     "signup": "Create account",
     "backToLogin": "Back to login",
+    "organization": "Organization",
     "organizations": "Organizations",
     "retry": "Try again",
     "errorTitle": "Something went wrong",
@@ -113,13 +114,26 @@
     "team": "Team",
     "organization": "Organization",
     "billing": "Billing",
+    "settings": "Settings",
+    "admin": "Admin",
+    "adminPanel": "Admin Panel",
     "logout": "Sign out"
   },
   "dashboard": {
     "welcome": "Welcome, {{name}}",
-    "overview": "Overview",
+    "overview": "Here's an overview of your workspace",
     "emailVerified": "Verified",
-    "emailNotVerified": "Not verified"
+    "emailNotVerified": "Not verified",
+    "quickActions": "Quick Actions",
+    "viewTeam": "View Team",
+    "manageBilling": "Manage Billing",
+    "editProfile": "Edit Profile",
+    "stats": {
+      "organization": "Organization",
+      "subscription": "Subscription",
+      "email": "Email",
+      "teamMembers": "Team Members"
+    }
   },
   "settings": {
     "profile": {
@@ -226,7 +240,21 @@
       "deleteSuccess": "Organization deleted successfully",
       "deleteError": "Failed to delete organization",
       "leaveSuccess": "You have left the organization",
-      "leaveError": "Failed to leave organization"
+      "leaveError": "Failed to leave organization",
+      "logo": {
+        "title": "Organization Logo",
+        "description": "Upload your organization logo. It will be displayed in navigation and on documents.",
+        "change": "Change",
+        "delete": "Delete",
+        "selectFile": "Select file",
+        "hint": "JPG, PNG or WebP. Max 5MB.",
+        "invalidType": "Invalid file type. Use JPG, PNG or WebP.",
+        "tooLarge": "File too large. Maximum 5MB."
+      },
+      "logoUploadSuccess": "Logo updated successfully",
+      "logoUploadError": "Failed to upload logo",
+      "logoDeleteSuccess": "Logo deleted successfully",
+      "logoDeleteError": "Failed to delete logo"
     },
     "billing": {
       "title": "Billing & Subscription",

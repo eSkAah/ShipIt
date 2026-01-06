@@ -84,6 +84,7 @@
     "login": "Se connecter",
     "signup": "Créer un compte",
     "backToLogin": "Retour à la connexion",
+    "organization": "Organisation",
     "organizations": "Organisations",
     "retry": "Réessayer",
     "errorTitle": "Une erreur est survenue",
@@ -113,13 +114,26 @@
     "team": "Équipe",
     "organization": "Organisation",
     "billing": "Facturation",
+    "settings": "Paramètres",
+    "admin": "Administration",
+    "adminPanel": "Panel Admin",
     "logout": "Déconnexion"
   },
   "dashboard": {
     "welcome": "Bienvenue, {{name}}",
-    "overview": "Vue d'ensemble",
+    "overview": "Voici un aperçu de votre espace de travail",
     "emailVerified": "Vérifié",
-    "emailNotVerified": "Non vérifié"
+    "emailNotVerified": "Non vérifié",
+    "quickActions": "Actions rapides",
+    "viewTeam": "Voir l'équipe",
+    "manageBilling": "Gérer la facturation",
+    "editProfile": "Modifier le profil",
+    "stats": {
+      "organization": "Organisation",
+      "subscription": "Abonnement",
+      "email": "Email",
+      "teamMembers": "Membres de l'équipe"
+    }
   },
   "settings": {
     "profile": {
@@ -226,7 +240,21 @@
       "deleteSuccess": "Organisation supprimée avec succès",
       "deleteError": "Échec de la suppression de l'organisation",
       "leaveSuccess": "Vous avez quitté l'organisation",
-      "leaveError": "Échec pour quitter l'organisation"
+      "leaveError": "Échec pour quitter l'organisation",
+      "logo": {
+        "title": "Logo de l'organisation",
+        "description": "Téléchargez le logo de votre organisation. Il sera affiché dans la navigation et sur les documents.",
+        "change": "Modifier",
+        "delete": "Supprimer",
+        "selectFile": "Sélectionner un fichier",
+        "hint": "JPG, PNG ou WebP. Max 5MB.",
+        "invalidType": "Type de fichier invalide. Utilisez JPG, PNG ou WebP.",
+        "tooLarge": "Fichier trop volumineux. Maximum 5MB."
+      },
+      "logoUploadSuccess": "Logo mis à jour avec succès",
+      "logoUploadError": "Échec de l'upload du logo",
+      "logoDeleteSuccess": "Logo supprimé avec succès",
+      "logoDeleteError": "Échec de la suppression du logo"
     },
     "billing": {
       "title": "Facturation & Abonnement",

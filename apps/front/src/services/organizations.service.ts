@@ -83,4 +83,27 @@ export const organizationsService = {
   async leaveOrganization(organizationId: string): Promise<void> {
     await apiClient.post(`/organizations/${organizationId}/leave`);
   },
+
+  async uploadLogo(organizationId: string, file: File): Promise<{ logoUrl: string }> {
+    const formData = new FormData();
+    formData.append('logo', file);
+
+    const response = await apiClient.post<ApiResponse<{ logoUrl: string }>>(
+      `/organizations/${organizationId}/logo`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+    if (!response.data.data) {
+      throw new Error('Failed to upload logo');
+    }
+    return response.data.data;
+  },
+
+  async deleteLogo(organizationId: string): Promise<void> {
+    await apiClient.delete(`/organizations/${organizationId}/logo`);
+  },
 };

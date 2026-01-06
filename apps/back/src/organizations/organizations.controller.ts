@@ -9,7 +9,13 @@ import {
   UseGuards,
   HttpCode,
   HttpStatus,
+  UseInterceptors,
+  UploadedFile,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { User, Organization } from '@prisma/client';
 import { SessionGuard } from '../common/guards/session.guard';
 import { TenantGuard } from '../common/guards/tenant.guard';
@@ -117,5 +123,33 @@ export class OrganizationsController {
   ) {
     await this.organizationsService.leaveOrganization(organization.id, user.id);
     return { success: true };
+  }
+
+  @Post(':id/logo')
+  @UseGuards(SessionGuard, TenantGuard, RolesGuard)
+  @Roles('admin')
+  @UseInterceptors(FileInterceptor('logo'))
+  async uploadLogo(
+    @CurrentOrganization() organization: Organization,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }), // 5MB
+          new FileTypeValidator({ fileType: /^image\/(jpeg|png|webp)$/ }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    const result = await this.organizationsService.uploadLogo(organization.id, file);
+    return { success: true, data: result };
+  }
+
+  @Delete(':id/logo')
+  @UseGuards(SessionGuard, TenantGuard, RolesGuard)
+  @Roles('admin')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteLogo(@CurrentOrganization() organization: Organization) {
+    await this.organizationsService.deleteLogo(organization.id);
   }
 }
