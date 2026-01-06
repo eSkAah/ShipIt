@@ -1,12 +1,18 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import { Injectable, NotFoundException, ForbiddenException, Logger } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
+import { QueueService } from '../queue/queue.service';
 import { User, Role } from '@prisma/client';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
 
 @Injectable()
 export class OrganizationsService {
-  constructor(private prisma: PrismaService) {}
+  private readonly logger = new Logger(OrganizationsService.name);
+
+  constructor(
+    private prisma: PrismaService,
+    private queueService: QueueService,
+  ) {}
 
   private generateSlug(name: string): string {
     return name
@@ -72,6 +78,30 @@ export class OrganizationsService {
         },
       },
     });
+
+    // Queue Stripe customer creation job asynchronously
+    try {
+      await this.queueService.getStripeQueue().add(
+        'create-customer',
+        {
+          type: 'create-customer',
+          organizationId: organization.id,
+        },
+        {
+          attempts: 3,
+          backoff: {
+            type: 'exponential',
+            delay: 1000,
+          },
+        },
+      );
+      this.logger.log(`Queued Stripe customer creation for organization ${organization.id}`);
+    } catch (error) {
+      // Don't fail organization creation if queue fails
+      this.logger.warn(
+        `Failed to queue Stripe customer creation for org ${organization.id}: ${error}`,
+      );
+    }
 
     return organization;
   }

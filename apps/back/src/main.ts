@@ -9,7 +9,9 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { AuthService } from './auth/auth.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    rawBody: true,
+  });
 
   // Security middleware
   app.use(helmet());

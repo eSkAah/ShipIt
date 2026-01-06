@@ -113,10 +113,21 @@ export interface SubscriptionInfo {
   status: 'active' | 'past_due' | 'canceled' | 'trialing' | 'incomplete';
   currentPeriodEnd?: Date;
   cancelAtPeriodEnd?: boolean;
+  stripeCustomerId?: string;
+  stripeSubscriptionId?: string;
 }
 
 export interface CheckoutSessionData {
   priceId: string;
   successUrl: string;
   cancelUrl: string;
+}
+
+export interface CheckoutSessionResult {
+  url: string;
+  sessionId: string;
+}
+
+export interface PortalSessionResult {
+  url: string;
 }

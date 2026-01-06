@@ -37,6 +37,10 @@ export class ConfigService {
     return this.configService.get<string>('STRIPE_WEBHOOK_SECRET', '');
   }
 
+  get stripePricePremium(): string {
+    return this.configService.get<string>('STRIPE_PRICE_PREMIUM', '');
+  }
+
   get resendApiKey(): string {
     return this.configService.get<string>('RESEND_API_KEY', '');
   }

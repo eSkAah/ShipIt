@@ -208,53 +208,53 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ---
 
-## Epic 5: Billing (3-4 days)
+## Epic 5: Billing (3-4 days) ✅
 
 **Goal:** Stripe integration for subscriptions
 
-- [ ] Stripe Configuration
-  - [ ] Install Stripe SDK
-  - [ ] Configure Stripe API keys
-  - [ ] Create Stripe module in NestJS
-  - [ ] Set up webhook endpoint security
-- [ ] Customer Management
-  - [ ] Create BullMQ job for customer creation
-  - [ ] Trigger customer creation on org creation
-  - [ ] Store Stripe customer ID in Organization
-  - [ ] Handle customer creation failures
-- [ ] Subscription Management
-  - [ ] Implement GET /billing endpoint
-  - [ ] Implement POST /billing/checkout endpoint
-  - [ ] Create Stripe checkout session
-  - [ ] Implement POST /billing/portal endpoint
-  - [ ] Generate customer portal URL
-- [ ] Webhook Handlers
-  - [ ] Implement POST /billing/webhooks endpoint
-  - [ ] Verify Stripe webhook signatures
-  - [ ] Handle checkout.session.completed event
-  - [ ] Handle customer.subscription.created event
-  - [ ] Handle customer.subscription.updated event
-  - [ ] Handle customer.subscription.deleted event
-  - [ ] Handle invoice.payment_failed event
-  - [ ] Update Subscription model from webhook data
-- [ ] Subscription Guards
-  - [ ] Create SubscriptionGuard
-  - [ ] Check subscription status before premium features
-  - [ ] Handle trial periods
-  - [ ] Handle past_due status
-- [ ] Frontend Billing
-  - [ ] Create billing settings page UI
-  - [ ] Show current subscription status
-  - [ ] Show plan details (tier, status, renewal date)
-  - [ ] Create upgrade/downgrade UI
-  - [ ] Implement checkout redirect
-  - [ ] Implement customer portal redirect
-  - [ ] Show payment method info
-- [ ] Testing
-  - [ ] Unit tests for billing service
-  - [ ] Test webhook handlers with Stripe test events
-  - [ ] E2E tests for checkout flow
-  - [ ] Test subscription guard logic
+- [x] Stripe Configuration
+  - [x] Install Stripe SDK
+  - [x] Configure Stripe API keys (via ConfigService)
+  - [x] Create Stripe module in NestJS (BillingModule)
+  - [x] Set up webhook endpoint security (signature verification)
+- [x] Customer Management
+  - [x] Create BullMQ job for customer creation (stripe queue)
+  - [x] Trigger customer creation on org creation
+  - [x] Store Stripe customer ID in Organization
+  - [x] Handle customer creation failures (graceful fallback)
+- [x] Subscription Management
+  - [x] Implement GET /billing endpoint
+  - [x] Implement POST /billing/checkout endpoint
+  - [x] Create Stripe checkout session
+  - [x] Implement POST /billing/portal endpoint
+  - [x] Generate customer portal URL
+- [x] Webhook Handlers
+  - [x] Implement POST /billing/webhooks endpoint
+  - [x] Verify Stripe webhook signatures
+  - [x] Handle checkout.session.completed event
+  - [x] Handle customer.subscription.created event
+  - [x] Handle customer.subscription.updated event
+  - [x] Handle customer.subscription.deleted event
+  - [x] Handle invoice.payment_failed event
+  - [x] Update Subscription model from webhook data
+- [x] Subscription Guards
+  - [x] Create SubscriptionGuard
+  - [x] Check subscription status before premium features
+  - [x] Handle trial periods
+  - [x] Handle past_due status
+- [x] Frontend Billing
+  - [x] Create billing settings page UI
+  - [x] Show current subscription status
+  - [x] Show plan details (tier, status, renewal date)
+  - [x] Create upgrade/downgrade UI
+  - [x] Implement checkout redirect
+  - [x] Implement customer portal redirect
+  - [x] Show payment method info
+- [x] Testing
+  - [x] Unit tests for billing service
+  - [x] Frontend tests for billing page
+  - [ ] E2E tests for checkout flow (requires Stripe test keys)
+  - [ ] Test webhook handlers with Stripe CLI (requires Stripe test keys)
 
 ---
 
@@ -549,8 +549,8 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ## Progress Summary
 
-**Completed Epics:** 4 / 12
-**Completed Tasks:** ~150 / ~250
+**Completed Epics:** 5 / 12
+**Completed Tasks:** ~180 / ~250
 
 ### Epic Status
 
@@ -558,7 +558,7 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 - [x] E2: Authentication (90%) ✅ (Backend complete, Frontend complete, Testing pending)
 - [x] E3: Multi-Tenancy (90%) ✅ (Backend + Frontend complete, Testing pending)
 - [x] E4: User Profiles (90%) ✅ (Backend + Frontend complete, Testing pending)
-- [ ] E5: Billing (0%)
+- [x] E5: Billing (95%) ✅ (Backend + Frontend complete, E2E tests pending Stripe keys)
 - [ ] E6: Email System (0%)
 - [ ] E7: Landing & UI Foundation (0%)
 - [ ] E8: Dashboard (0%)
