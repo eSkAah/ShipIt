@@ -30,13 +30,12 @@ export function ErrorState({
 
       {/* Title */}
       <h3 className="text-lg font-semibold text-black dark:text-white mb-2">
-        {title || t('common.errorTitle', 'Something went wrong')}
+        {title || t('common.errorTitle')}
       </h3>
 
       {/* Description */}
       <p className="text-black/60 dark:text-white/60 max-w-sm mb-6">
-        {description ||
-          t('common.errorDescription', 'An unexpected error occurred. Please try again.')}
+        {description || t('common.errorDescription')}
       </p>
 
       {/* Actions */}
@@ -50,7 +49,7 @@ export function ErrorState({
         {showHomeLink && (
           <Link to="/dashboard" className="btn-secondary inline-flex items-center gap-2">
             <Home size={16} />
-            {t('common.backToDashboard', 'Back to dashboard')}
+            {t('common.backToDashboard')}
           </Link>
         )}
       </div>

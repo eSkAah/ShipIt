@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Inbox, FileText, Users, FolderOpen, Search } from 'lucide-react';
 
 type EmptyStateIcon = 'inbox' | 'file' | 'users' | 'folder' | 'search';
@@ -57,23 +58,21 @@ interface NoResultsProps {
   clearLabel?: string;
 }
 
-export function NoResults({ query, onClear, clearLabel = 'Clear search' }: NoResultsProps) {
+export function NoResults({ query, onClear, clearLabel }: NoResultsProps) {
+  const { t } = useTranslation();
+
   return (
     <EmptyState
       icon="search"
-      title="No results found"
-      description={
-        query
-          ? `No results matching "${query}". Try a different search term.`
-          : 'Try adjusting your search or filters.'
-      }
+      title={t('common.noResultsFound')}
+      description={query ? t('common.noResultsQuery', { query }) : t('common.noResultsHint')}
       action={
         onClear && (
           <button
             onClick={onClear}
             className="text-purple-600 dark:text-gold-500 hover:underline font-medium"
           >
-            {clearLabel}
+            {clearLabel || t('common.clearSearch')}
           </button>
         )
       }
@@ -87,10 +86,15 @@ interface NoDataProps {
   action?: ReactNode;
 }
 
-export function NoData({
-  title = 'No data yet',
-  description = 'Get started by creating your first item.',
-  action,
-}: NoDataProps) {
-  return <EmptyState icon="folder" title={title} description={description} action={action} />;
+export function NoData({ title, description, action }: NoDataProps) {
+  const { t } = useTranslation();
+
+  return (
+    <EmptyState
+      icon="folder"
+      title={title || t('common.noDataYet')}
+      description={description || t('common.noDataDescription')}
+      action={action}
+    />
+  );
 }
