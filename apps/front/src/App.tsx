@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
 import { AuthProvider } from './contexts/auth-context';
@@ -6,6 +6,7 @@ import { OrganizationProvider } from './contexts/organization-context';
 import { ThemeProvider, useTheme } from './contexts/theme-context';
 import { ErrorBoundary } from './components/common/error-boundary';
 import { ProtectedRoute } from './components/auth/protected-route';
+import { LandingPage } from './pages/landing';
 import { LoginPage } from './pages/login';
 import { SignupPage } from './pages/signup';
 import { ForgotPasswordPage } from './pages/forgot-password';
@@ -107,7 +108,7 @@ export default function App() {
                     }
                   />
                   <Route path="/invitations/:token/accept" element={<AcceptInvitationPage />} />
-                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                  <Route path="/" element={<LandingPage />} />
                   <Route path="*" element={<NotFoundPage />} />
                 </Routes>
               </OrganizationProvider>

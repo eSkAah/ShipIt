@@ -291,40 +291,40 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ---
 
-## Epic 7: Landing & UI Foundation (3-4 days)
+## Epic 7: Landing & UI Foundation (3-4 days) ✅
 
 **Goal:** Marketing pages and design system
 
-- [ ] Design System
-  - [ ] Configure Tailwind CSS 4 with zinc palette
-  - [ ] Set up shadcn/ui components
-  - [ ] Create custom component variants
-  - [ ] Implement dark mode support
-  - [ ] Create theme provider
-- [ ] Layout Components
-  - [ ] Create marketing layout (header, footer)
-  - [ ] Create auth layout (centered forms)
-  - [ ] Create dashboard layout (sidebar)
-  - [ ] Create admin layout
-- [ ] Landing Page
-  - [ ] Create hero section
-  - [ ] Create features section
-  - [ ] Create pricing section
-  - [ ] Create CTA sections
-  - [ ] Add smooth scrolling
-  - [ ] Implement responsive design
-- [ ] Common Components
-  - [ ] Create loading states
-  - [ ] Create error states
-  - [ ] Create empty states
-  - [ ] Configure Sonner toast notifications
-  - [ ] Create confirmation dialogs
-- [ ] Internationalization
-  - [ ] Set up i18next configuration
-  - [ ] Create French translations
-  - [ ] Create English translations
-  - [ ] Create language switcher component
-  - [ ] Add translation keys to all UI text
+- [x] Design System
+  - [x] Configure Tailwind CSS 4 with zinc palette
+  - [x] Set up shadcn/ui components
+  - [x] Create custom component variants
+  - [x] Implement dark mode support
+  - [x] Create theme provider
+- [x] Layout Components
+  - [x] Create marketing layout (header, footer)
+  - [x] Create auth layout (centered forms)
+  - [x] Create dashboard layout (sidebar)
+  - [x] Create admin layout
+- [x] Landing Page
+  - [x] Create hero section
+  - [x] Create features section
+  - [x] Create pricing section
+  - [x] Create CTA sections
+  - [x] Add smooth scrolling
+  - [x] Implement responsive design
+- [x] Common Components
+  - [x] Create loading states
+  - [x] Create error states
+  - [x] Create empty states
+  - [x] Configure Sonner toast notifications
+  - [x] Create confirmation dialogs
+- [x] Internationalization
+  - [x] Set up i18next configuration
+  - [x] Create French translations
+  - [x] Create English translations
+  - [x] Create language switcher component
+  - [x] Add translation keys to all UI text
 - [ ] Testing
   - [ ] Component tests for layouts
   - [ ] Component tests for common components
@@ -549,8 +549,8 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ## Progress Summary
 
-**Completed Epics:** 6 / 12
-**Completed Tasks:** ~200 / ~250
+**Completed Epics:** 7 / 12
+**Completed Tasks:** ~220 / ~250
 
 ### Epic Status
 
@@ -560,7 +560,7 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 - [x] E4: User Profiles (90%) ✅ (Backend + Frontend complete, Testing pending)
 - [x] E5: Billing (95%) ✅ (Backend + Frontend complete, E2E tests pending Stripe keys)
 - [x] E6: Email System (100%) ✅ (React Email templates, BullMQ queue, full test coverage)
-- [ ] E7: Landing & UI Foundation (0%)
+- [x] E7: Landing & UI Foundation (95%) ✅ (Landing page, layouts, common components, i18n - Testing pending)
 - [ ] E8: Dashboard (0%)
 - [ ] E9: Admin Backoffice (0%)
 - [ ] E10: Observability (0%)

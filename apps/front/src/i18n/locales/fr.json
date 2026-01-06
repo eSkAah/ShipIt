@@ -293,5 +293,164 @@
       "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
       "backHome": "Retour à l'accueil"
     }
+  },
+  "marketing": {
+    "nav": {
+      "features": "Fonctionnalités",
+      "pricing": "Tarifs"
+    },
+    "hero": {
+      "badge": "Boilerplate SaaS prêt pour la production",
+      "title": "Lancez Votre SaaS",
+      "titleAccent": "Plus Vite",
+      "subtitle": "Un boilerplate prêt pour la production avec authentification, facturation, multi-tenant et tout ce dont vous avez besoin pour lancer votre SaaS en jours, pas en mois.",
+      "cta": "Commencer Gratuitement",
+      "learnMore": "En savoir plus",
+      "stats": {
+        "features": "Fonctionnalités intégrées",
+        "languages": "Langues",
+        "typescript": "TypeScript"
+      }
+    },
+    "features": {
+      "title": "Tout Ce Dont Vous Avez Besoin",
+      "subtitle": "Arrêtez de reconstruire les mêmes fonctionnalités. Concentrez-vous sur ce qui rend votre produit unique.",
+      "auth": {
+        "title": "Authentification",
+        "description": "Email/mot de passe, OAuth, vérification email, réinitialisation - tout implémenté et prêt à l'emploi."
+      },
+      "multiTenancy": {
+        "title": "Multi-Tenant",
+        "description": "Organisations, membres d'équipe, contrôle d'accès basé sur les rôles et invitations inclus."
+      },
+      "billing": {
+        "title": "Facturation Stripe",
+        "description": "Abonnements, sessions de paiement, portail client et webhooks configurés."
+      },
+      "email": {
+        "title": "Système d'Emails",
+        "description": "Templates React Email, traitement de file d'attente et intégration Resend prêts."
+      },
+      "i18n": {
+        "title": "Internationalisation",
+        "description": "Support i18n complet avec traductions français et anglais incluses."
+      },
+      "performance": {
+        "title": "Stack Optimisée",
+        "description": "React 19, NestJS 11, Prisma 6, TanStack Query - moderne et performant."
+      }
+    },
+    "pricing": {
+      "title": "Tarifs Simples",
+      "subtitle": "Commencez gratuitement, passez à la version supérieure quand vous êtes prêt. Pas de frais cachés.",
+      "free": {
+        "name": "Gratuit",
+        "price": "0€",
+        "description": "Parfait pour commencer et explorer.",
+        "feature1": "Jusqu'à 3 membres d'équipe",
+        "feature2": "Fonctionnalités de base",
+        "feature3": "Support communautaire",
+        "feature4": "1 organisation",
+        "cta": "Commencer"
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "29€",
+        "period": "/mois",
+        "description": "Pour les équipes qui ont besoin de plus de puissance.",
+        "feature1": "Membres d'équipe illimités",
+        "feature2": "Toutes les fonctionnalités premium",
+        "feature3": "Support prioritaire",
+        "feature4": "Organisations illimitées",
+        "feature5": "Analytiques avancées",
+        "cta": "Essai Gratuit"
+      }
+    },
+    "cta": {
+      "title": "Prêt à Livrer Plus Vite ?",
+      "subtitle": "Rejoignez des milliers de développeurs qui ont économisé des semaines de développement.",
+      "button": "Commencer à Construire"
+    },
+    "footer": {
+      "description": "Le boilerplate SaaS prêt pour la production qui vous aide à livrer plus vite.",
+      "product": "Produit",
+      "legal": "Légal",
+      "privacy": "Politique de confidentialité",
+      "terms": "Conditions d'utilisation",
+      "copyright": "© {{year}} ShipIt. Tous droits réservés."
+    }
+  },
+  "admin": {
+    "nav": {
+      "overview": "Vue d'ensemble",
+      "users": "Utilisateurs",
+      "organizations": "Organisations",
+      "logs": "Journaux",
+      "backToDashboard": "Retour au tableau de bord"
+    },
+    "users": {
+      "title": "Gestion des utilisateurs",
+      "description": "Voir et gérer tous les utilisateurs de la plateforme",
+      "search": "Rechercher des utilisateurs...",
+      "total": "{{count}} utilisateurs au total",
+      "noUsers": "Aucun utilisateur trouvé",
+      "columns": {
+        "user": "Utilisateur",
+        "email": "Email",
+        "status": "Statut",
+        "organizations": "Organisations",
+        "createdAt": "Créé le"
+      },
+      "status": {
+        "verified": "Vérifié",
+        "pending": "En attente"
+      }
+    },
+    "organizations": {
+      "title": "Gestion des organisations",
+      "description": "Voir et gérer toutes les organisations",
+      "search": "Rechercher des organisations...",
+      "total": "{{count}} organisations au total",
+      "noOrganizations": "Aucune organisation trouvée",
+      "filterByTier": "Filtrer par niveau",
+      "allTiers": "Tous les niveaux",
+      "columns": {
+        "name": "Nom",
+        "tier": "Niveau",
+        "members": "Membres",
+        "owner": "Propriétaire",
+        "createdAt": "Créé le"
+      }
+    },
+    "logs": {
+      "title": "Journaux d'application",
+      "description": "Voir et rechercher les journaux d'application",
+      "search": "Rechercher dans les journaux...",
+      "filterByLevel": "Filtrer par niveau",
+      "allLevels": "Tous les niveaux",
+      "noLogs": "Aucun journal trouvé",
+      "columns": {
+        "timestamp": "Horodatage",
+        "level": "Niveau",
+        "message": "Message",
+        "context": "Contexte"
+      },
+      "levels": {
+        "info": "Info",
+        "warn": "Avertissement",
+        "error": "Erreur",
+        "debug": "Debug"
+      }
+    },
+    "overview": {
+      "title": "Vue d'ensemble Admin",
+      "description": "Statistiques de la plateforme et actions rapides",
+      "stats": {
+        "totalUsers": "Utilisateurs totaux",
+        "totalOrganizations": "Organisations totales",
+        "premiumOrganizations": "Organisations Premium",
+        "activeToday": "Actifs aujourd'hui"
+      }
+    }
   }
 }
