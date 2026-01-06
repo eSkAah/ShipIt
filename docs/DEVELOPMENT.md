@@ -258,36 +258,36 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ---
 
-## Epic 6: Email System (2 days)
+## Epic 6: Email System (2 days) ✅
 
 **Goal:** Email sending with templates and queue
 
-- [ ] Email Infrastructure
-  - [ ] Configure Resend API
-  - [ ] Create email service in NestJS
-  - [ ] Set up React Email for templates
-  - [ ] Configure BullMQ email queue
-- [ ] Email Templates
-  - [ ] Create confirmation email template (React Email)
-  - [ ] Create reset-password email template
-  - [ ] Create welcome email template
-  - [ ] Create invitation email template
-  - [ ] Support internationalization in templates (FR/EN)
-- [ ] Email Queue
-  - [ ] Create email queue processor
-  - [ ] Implement retry logic for failed sends
-  - [ ] Log email send attempts
-  - [ ] Handle Resend API errors gracefully
-- [ ] Integration
-  - [ ] Send confirmation email on signup
-  - [ ] Send reset email on password reset request
-  - [ ] Send welcome email after email verification
-  - [ ] Send invitation email when user is invited
-- [ ] Testing
-  - [ ] Unit tests for email service
-  - [ ] Test email queue processing
-  - [ ] Test template rendering
-  - [ ] Test internationalization in emails
+- [x] Email Infrastructure
+  - [x] Configure Resend API
+  - [x] Create email service in NestJS
+  - [x] Set up React Email for templates
+  - [x] Configure BullMQ email queue
+- [x] Email Templates
+  - [x] Create confirmation email template (React Email)
+  - [x] Create reset-password email template
+  - [x] Create welcome email template
+  - [x] Create invitation email template
+  - [x] Support internationalization in templates (FR/EN)
+- [x] Email Queue
+  - [x] Create email queue processor
+  - [x] Implement retry logic for failed sends
+  - [x] Log email send attempts
+  - [x] Handle Resend API errors gracefully
+- [x] Integration
+  - [x] Send confirmation email on signup
+  - [x] Send reset email on password reset request
+  - [x] Send welcome email after email verification
+  - [x] Send invitation email when user is invited
+- [x] Testing
+  - [x] Unit tests for email service
+  - [x] Test email queue processing
+  - [x] Test template rendering
+  - [x] Test internationalization in emails
 
 ---
 
@@ -549,8 +549,8 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ## Progress Summary
 
-**Completed Epics:** 5 / 12
-**Completed Tasks:** ~180 / ~250
+**Completed Epics:** 6 / 12
+**Completed Tasks:** ~200 / ~250
 
 ### Epic Status
 
@@ -559,7 +559,7 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 - [x] E3: Multi-Tenancy (90%) ✅ (Backend + Frontend complete, Testing pending)
 - [x] E4: User Profiles (90%) ✅ (Backend + Frontend complete, Testing pending)
 - [x] E5: Billing (95%) ✅ (Backend + Frontend complete, E2E tests pending Stripe keys)
-- [ ] E6: Email System (0%)
+- [x] E6: Email System (100%) ✅ (React Email templates, BullMQ queue, full test coverage)
 - [ ] E7: Landing & UI Foundation (0%)
 - [ ] E8: Dashboard (0%)
 - [ ] E9: Admin Backoffice (0%)

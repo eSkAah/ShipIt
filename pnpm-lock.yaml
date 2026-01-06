@@ -171,6 +171,9 @@ importers:
       '@react-email/components':
         specifier: ^1.0.3
         version: 1.0.3(react-dom@19.2.3)(react@19.2.3)
+      '@react-email/render':
+        specifier: ^2.0.1
+        version: 2.0.1(react-dom@19.2.3)(react@19.2.3)
       '@sentry/node':
         specifier: ^10.32.1
         version: 10.32.1
@@ -194,7 +197,7 @@ importers:
         version: 5.1.1
       resend:
         specifier: ^6.6.0
-        version: 6.6.0
+        version: 6.6.0(@react-email/render@2.0.1)
       stripe:
         specifier: ^20.1.1
         version: 20.1.1(@types/node@20.19.27)
@@ -9726,7 +9729,7 @@ packages:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
     dev: false
 
-  /resend@6.6.0:
+  /resend@6.6.0(@react-email/render@2.0.1):
     resolution: {integrity: sha512-d1WoOqSxj5x76JtQMrieNAG1kZkh4NU4f+Je1yq4++JsDpLddhEwnJlNfvkCzvUuZy9ZquWmMMAm2mENd2JvRw==}
     engines: {node: '>=20'}
     peerDependencies:
@@ -9735,6 +9738,7 @@ packages:
       '@react-email/render':
         optional: true
     dependencies:
+      '@react-email/render': 2.0.1(react-dom@19.2.3)(react@19.2.3)
       svix: 1.76.1
     dev: false
 
