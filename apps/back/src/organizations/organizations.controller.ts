@@ -65,10 +65,9 @@ export class OrganizationsController {
   @Delete(':id')
   @UseGuards(SessionGuard, TenantGuard, RolesGuard)
   @Roles('admin')
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@CurrentOrganization() organization: Organization, @CurrentUser() user: User) {
     await this.organizationsService.delete(organization.id, user.id);
-    return { success: true };
   }
 
   @Get(':id/members')
