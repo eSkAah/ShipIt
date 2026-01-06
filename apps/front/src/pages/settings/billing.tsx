@@ -81,27 +81,27 @@ export function BillingSettingsPage() {
 
     const statusConfig = {
       active: {
-        color: 'bg-green-500/10 text-green-600 dark:text-green-400',
+        color: 'bg-success/10 text-success',
         icon: CheckCircle,
         label: t('settings.billing.status.active'),
       },
       trialing: {
-        color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+        color: 'bg-info/10 text-info',
         icon: CheckCircle,
         label: t('settings.billing.status.trialing'),
       },
       past_due: {
-        color: 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400',
+        color: 'bg-warning/10 text-warning',
         icon: AlertCircle,
         label: t('settings.billing.status.pastDue'),
       },
       canceled: {
-        color: 'bg-red-500/10 text-red-600 dark:text-red-400',
+        color: 'bg-error/10 text-error',
         icon: AlertCircle,
         label: t('settings.billing.status.canceled'),
       },
       incomplete: {
-        color: 'bg-gray-500/10 text-gray-600 dark:text-gray-400',
+        color: 'bg-gray-500/10 text-gray-500',
         icon: AlertCircle,
         label: t('settings.billing.status.incomplete'),
       },
@@ -208,23 +208,21 @@ export function BillingSettingsPage() {
                 </div>
               )}
               {subscriptionInfo.cancelAtPeriodEnd && (
-                <p className="text-sm text-yellow-600 dark:text-yellow-400">
-                  {t('settings.billing.cancelScheduled')}
-                </p>
+                <p className="text-sm text-warning">{t('settings.billing.cancelScheduled')}</p>
               )}
             </div>
           )}
 
           {/* Past due warning */}
           {isPastDue && (
-            <div className="mt-4 p-4 rounded-input bg-yellow-500/10 border border-yellow-500/20">
+            <div className="mt-4 p-4 rounded-input bg-warning/10 border border-warning/20">
               <div className="flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
+                <AlertCircle className="w-5 h-5 text-warning mt-0.5" />
                 <div>
-                  <h4 className="font-medium text-yellow-600 dark:text-yellow-400">
+                  <h4 className="font-medium text-warning">
                     {t('settings.billing.pastDueWarning.title')}
                   </h4>
-                  <p className="text-sm text-yellow-600/80 dark:text-yellow-400/80 mt-1">
+                  <p className="text-sm text-warning/80 mt-1">
                     {t('settings.billing.pastDueWarning.description')}
                   </p>
                 </div>
@@ -285,10 +283,8 @@ export function BillingSettingsPage() {
               )}
 
               {!STRIPE_PRICE_PREMIUM && (
-                <div className="p-4 rounded-input bg-blue-500/10 border border-blue-500/20">
-                  <p className="text-sm text-blue-600 dark:text-blue-400">
-                    {t('settings.billing.stripeNotConfigured')}
-                  </p>
+                <div className="p-4 rounded-input bg-info/10 border border-info/20">
+                  <p className="text-sm text-info">{t('settings.billing.stripeNotConfigured')}</p>
                 </div>
               )}
             </div>

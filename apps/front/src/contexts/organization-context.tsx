@@ -19,14 +19,14 @@ interface OrganizationContextType {
 const OrganizationContext = createContext<OrganizationContextType | undefined>(undefined);
 
 export function OrganizationProvider({ children }: { children: ReactNode }) {
-  const { currentOrganization, organizations, setCurrentOrganization } = useAuth();
+  const { currentOrganization, organizations, setCurrentOrganization, user } = useAuth();
 
   // Create a membership object from the current organization
   const currentMembership: OrganizationMembership | null = currentOrganization
     ? {
         id: currentOrganization.membershipId,
         role: currentOrganization.role,
-        userId: '', // Not needed for billing
+        userId: user?.id || '',
         organizationId: currentOrganization.id,
       }
     : null;
