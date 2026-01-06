@@ -32,7 +32,7 @@ export function AcceptInvitationPage() {
       setCurrentOrganization({
         ...result.organization,
         role: result.role,
-        membershipId: '',
+        membershipId: result.membershipId,
       });
       navigate('/dashboard');
     },
@@ -116,7 +116,9 @@ export function AcceptInvitationPage() {
                 {t('common.login')}
               </Button>
             </Link>
-            <Link to={`/signup?redirect=/invitations/${token}/accept&email=${invitation.email}`}>
+            <Link
+              to={`/signup?redirect=/invitations/${token}/accept&email=${encodeURIComponent(invitation.email)}`}
+            >
               <Button variant="secondary" className="w-full">
                 {t('common.signup')}
               </Button>

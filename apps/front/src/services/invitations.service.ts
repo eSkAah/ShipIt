@@ -16,6 +16,7 @@ export interface InvitationDetails {
 export interface AcceptInvitationResult {
   organization: Organization;
   role: 'admin' | 'member' | 'viewer';
+  membershipId: string;
 }
 
 export const invitationsService = {
@@ -28,7 +29,10 @@ export const invitationsService = {
       `/organizations/${organizationId}/invitations`,
       { email, role },
     );
-    return response.data.data!;
+    if (!response.data.data) {
+      throw new Error('Failed to create invitation');
+    }
+    return response.data.data;
   },
 
   async getInvitations(organizationId: string): Promise<Invitation[]> {
@@ -44,13 +48,19 @@ export const invitationsService = {
 
   async getInvitationByToken(token: string): Promise<InvitationDetails> {
     const response = await apiClient.get<ApiResponse<InvitationDetails>>(`/invitations/${token}`);
-    return response.data.data!;
+    if (!response.data.data) {
+      throw new Error('Invitation not found');
+    }
+    return response.data.data;
   },
 
   async acceptInvitation(token: string): Promise<AcceptInvitationResult> {
     const response = await apiClient.post<ApiResponse<AcceptInvitationResult>>(
       `/invitations/${token}/accept`,
     );
-    return response.data.data!;
+    if (!response.data.data) {
+      throw new Error('Failed to accept invitation');
+    }
+    return response.data.data;
   },
 };

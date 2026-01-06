@@ -19,8 +19,7 @@ export class TenantGuard implements CanActivate {
       throw new ForbiddenException('User not authenticated');
     }
 
-    const organizationId =
-      request.headers['x-organization-id'] || request.params.id || request.params.organizationId;
+    const organizationId = request.headers['x-organization-id'] || request.params.organizationId;
 
     if (!organizationId) {
       throw new BadRequestException('Organization ID is required');

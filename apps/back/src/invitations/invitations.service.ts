@@ -214,6 +214,7 @@ export class InvitationsService {
     return {
       organization: membership.organization,
       role: membership.role,
+      membershipId: membership.id,
     };
   }
 }

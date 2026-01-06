@@ -28,17 +28,26 @@ export const organizationsService = {
 
   async getOrganization(id: string): Promise<Organization> {
     const response = await apiClient.get<ApiResponse<Organization>>(`/organizations/${id}`);
-    return response.data.data!;
+    if (!response.data.data) {
+      throw new Error('Organization not found');
+    }
+    return response.data.data;
   },
 
   async createOrganization(name: string): Promise<Organization> {
     const response = await apiClient.post<ApiResponse<Organization>>('/organizations', { name });
-    return response.data.data!;
+    if (!response.data.data) {
+      throw new Error('Failed to create organization');
+    }
+    return response.data.data;
   },
 
   async updateOrganization(id: string, data: { name?: string }): Promise<Organization> {
     const response = await apiClient.patch<ApiResponse<Organization>>(`/organizations/${id}`, data);
-    return response.data.data!;
+    if (!response.data.data) {
+      throw new Error('Failed to update organization');
+    }
+    return response.data.data;
   },
 
   async deleteOrganization(id: string): Promise<void> {
@@ -61,7 +70,10 @@ export const organizationsService = {
       `/organizations/${organizationId}/members/${userId}`,
       { role },
     );
-    return response.data.data!;
+    if (!response.data.data) {
+      throw new Error('Failed to update member role');
+    }
+    return response.data.data;
   },
 
   async removeMember(organizationId: string, userId: string): Promise<void> {
