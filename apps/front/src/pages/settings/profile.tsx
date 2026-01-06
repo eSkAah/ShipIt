@@ -61,14 +61,13 @@ export function ProfileSettingsPage() {
     }
   }, [user, reset]);
 
-  // Watch language to update i18n
   const watchedLanguage = watch('language');
+  const watchedNotifications = watch('notificationsEnabled');
 
   const updateProfileMutation = useMutation({
     mutationFn: (data: UpdateProfileData) => usersService.updateProfile(data),
     onSuccess: (updatedUser) => {
       queryClient.invalidateQueries({ queryKey: ['session'] });
-      // Update i18n language if changed
       if (updatedUser.language !== i18n.language) {
         i18n.changeLanguage(updatedUser.language);
       }
@@ -122,131 +121,134 @@ export function ProfileSettingsPage() {
           <p className="text-muted mt-1">{t('settings.profile.description')}</p>
         </div>
 
-        {/* Avatar Section */}
-        <div className="glass-card p-6">
-          <h2 className="text-lg font-semibold mb-6 text-foreground">
-            {t('settings.profile.avatar.title')}
-          </h2>
-          <AvatarUpload
-            currentAvatarUrl={user?.avatarUrl}
-            onUpload={uploadAvatarMutation.mutateAsync}
-            onDelete={deleteAvatarMutation.mutateAsync}
-            isUploading={uploadAvatarMutation.isPending}
-            isDeleting={deleteAvatarMutation.isPending}
-          />
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+          {/* Avatar Section */}
+          <div className="glass-card p-6">
+            <h2 className="text-lg font-semibold mb-6 text-foreground">
+              {t('settings.profile.avatar.title')}
+            </h2>
+            <AvatarUpload
+              currentAvatarUrl={user?.avatarUrl}
+              onUpload={uploadAvatarMutation.mutateAsync}
+              onDelete={deleteAvatarMutation.mutateAsync}
+              isUploading={uploadAvatarMutation.isPending}
+              isDeleting={deleteAvatarMutation.isPending}
+            />
+          </div>
 
-        {/* Profile Form */}
-        <div className="glass-card p-6">
-          <h2 className="text-lg font-semibold mb-6 text-foreground">
-            {t('settings.profile.personalInfo')}
-          </h2>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Personal Info Section */}
+          <div className="glass-card p-6">
+            <h2 className="text-lg font-semibold mb-6 text-foreground">
+              {t('settings.profile.personalInfo')}
+            </h2>
+
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="firstName">{t('settings.profile.firstName')}</Label>
+                  <Input
+                    id="firstName"
+                    {...register('firstName')}
+                    error={errors.firstName?.message}
+                  />
+                  {errors.firstName && (
+                    <p className="mt-1 text-sm text-red-500">{errors.firstName.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <Label htmlFor="lastName">{t('settings.profile.lastName')}</Label>
+                  <Input id="lastName" {...register('lastName')} error={errors.lastName?.message} />
+                  {errors.lastName && (
+                    <p className="mt-1 text-sm text-red-500">{errors.lastName.message}</p>
+                  )}
+                </div>
+              </div>
+
               <div>
-                <Label htmlFor="firstName">{t('settings.profile.firstName')}</Label>
+                <Label htmlFor="email">{t('settings.profile.email')}</Label>
+                <Input id="email" type="email" value={user?.email || ''} disabled />
+                <p className="mt-1 text-xs text-muted">{t('settings.profile.emailHint')}</p>
+              </div>
+
+              <div>
+                <Label htmlFor="phone">{t('settings.profile.phone')}</Label>
                 <Input
-                  id="firstName"
-                  {...register('firstName')}
-                  error={errors.firstName?.message}
+                  id="phone"
+                  type="tel"
+                  {...register('phone')}
+                  placeholder={t('settings.profile.phonePlaceholder')}
                 />
-                {errors.firstName && (
-                  <p className="mt-1 text-sm text-red-500">{errors.firstName.message}</p>
-                )}
               </div>
+            </div>
+          </div>
 
+          {/* Preferences Section */}
+          <div className="glass-card p-6">
+            <h2 className="text-lg font-semibold mb-6 text-foreground">
+              {t('settings.profile.preferences')}
+            </h2>
+
+            <div className="space-y-6">
+              {/* Language */}
               <div>
-                <Label htmlFor="lastName">{t('settings.profile.lastName')}</Label>
-                <Input id="lastName" {...register('lastName')} error={errors.lastName?.message} />
-                {errors.lastName && (
-                  <p className="mt-1 text-sm text-red-500">{errors.lastName.message}</p>
-                )}
+                <Label htmlFor="language">{t('settings.profile.language')}</Label>
+                <Select
+                  id="language"
+                  options={languageOptions}
+                  value={watchedLanguage}
+                  onChange={(value) => {
+                    setValue('language', value as 'fr' | 'en', { shouldDirty: true });
+                  }}
+                />
+              </div>
+
+              {/* Theme */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>{t('settings.profile.theme')}</Label>
+                </div>
+                <ThemeToggle showLabel />
+              </div>
+
+              {/* Notifications */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label htmlFor="notifications">{t('settings.profile.notifications')}</Label>
+                  <p className="text-sm text-muted">{t('settings.profile.notificationsHint')}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setValue('notificationsEnabled', !watchedNotifications, { shouldDirty: true })
+                  }
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gold-500/50 ${
+                    watchedNotifications ? 'bg-gold-500' : 'bg-gray-300 dark:bg-gray-600'
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform duration-300 ${
+                      watchedNotifications ? 'translate-x-6' : 'translate-x-1'
+                    }`}
+                  />
+                </button>
               </div>
             </div>
+          </div>
 
-            <div>
-              <Label htmlFor="email">{t('settings.profile.email')}</Label>
-              <Input id="email" type="email" value={user?.email || ''} disabled />
-              <p className="mt-1 text-xs text-muted">{t('settings.profile.emailHint')}</p>
-            </div>
-
-            <div>
-              <Label htmlFor="phone">{t('settings.profile.phone')}</Label>
-              <Input
-                id="phone"
-                type="tel"
-                {...register('phone')}
-                placeholder={t('settings.profile.phonePlaceholder')}
-              />
-            </div>
-
+          {/* Single Save Button */}
+          <div className="flex justify-end">
             <Button
               type="submit"
               variant="primary"
               disabled={!isDirty}
               isLoading={updateProfileMutation.isPending}
+              className="px-8"
             >
               {t('common.save')}
             </Button>
-          </form>
-        </div>
-
-        {/* Preferences Section */}
-        <div className="glass-card p-6">
-          <h2 className="text-lg font-semibold mb-6 text-foreground">
-            {t('settings.profile.preferences')}
-          </h2>
-
-          <div className="space-y-6">
-            {/* Language */}
-            <div>
-              <Label htmlFor="language">{t('settings.profile.language')}</Label>
-              <Select
-                id="language"
-                options={languageOptions}
-                value={watchedLanguage}
-                onChange={(value) => {
-                  setValue('language', value as 'fr' | 'en', { shouldDirty: true });
-                }}
-              />
-            </div>
-
-            {/* Theme */}
-            <div>
-              <Label>{t('settings.profile.theme')}</Label>
-              <div className="mt-2">
-                <ThemeToggle showLabel />
-              </div>
-            </div>
-
-            {/* Notifications */}
-            <div className="flex items-center justify-between">
-              <div>
-                <Label htmlFor="notifications">{t('settings.profile.notifications')}</Label>
-                <p className="text-sm text-muted">{t('settings.profile.notificationsHint')}</p>
-              </div>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  {...register('notificationsEnabled')}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-500/20 dark:peer-focus:ring-gold-500/20 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-purple-500 dark:peer-checked:bg-gold-500"></div>
-              </label>
-            </div>
-
-            {isDirty && (
-              <Button
-                type="button"
-                variant="primary"
-                onClick={handleSubmit(onSubmit)}
-                isLoading={updateProfileMutation.isPending}
-              >
-                {t('common.save')}
-              </Button>
-            )}
           </div>
-        </div>
+        </form>
       </div>
     </DashboardLayout>
   );

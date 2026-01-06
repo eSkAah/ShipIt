@@ -2,8 +2,8 @@ import { ReactNode } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/auth-context';
-import { Button } from '../ui/button';
 import { OrganizationSwitcher } from '../common/organization-switcher';
+import { UserMenu } from '../common/user-menu';
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -28,7 +28,6 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const navLinks = [
     { href: '/dashboard', label: t('nav.dashboard') },
-    { href: '/settings/profile', label: t('nav.profile') },
     { href: '/settings/team', label: t('nav.team') },
     { href: '/settings/organization', label: t('nav.organization') },
   ];
@@ -66,25 +65,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
               </nav>
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className="text-right hidden sm:block">
-                <p className="font-medium text-foreground">
-                  {user?.firstName} {user?.lastName}
-                </p>
-                <p className="text-sm text-muted">{user?.email}</p>
-              </div>
-
-              <Button variant="ghost" onClick={handleLogout} title={t('nav.logout')}>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                  />
-                </svg>
-              </Button>
-            </div>
+            <UserMenu user={user} onLogout={handleLogout} />
           </div>
         </div>
       </header>
