@@ -11,6 +11,7 @@ import { DashboardLayout } from '../../components/layouts/dashboard-layout';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
+import { DangerConfirmModal } from '../../components/ui/danger-confirm-modal';
 import { organizationsService } from '../../services/organizations.service';
 
 export function OrganizationSettingsPage() {
@@ -18,7 +19,7 @@ export function OrganizationSettingsPage() {
   const navigate = useNavigate();
   const { currentOrganization, organizations, setCurrentOrganization } = useAuth();
   const queryClient = useQueryClient();
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const {
     register: registerUpdate,
@@ -36,7 +37,7 @@ export function OrganizationSettingsPage() {
   useEffect(() => {
     if (currentOrganization) {
       resetUpdate({ name: currentOrganization.name });
-      setShowDeleteConfirm(false);
+      setShowDeleteModal(false);
     }
   }, [currentOrganization, resetUpdate]);
 
@@ -52,6 +53,7 @@ export function OrganizationSettingsPage() {
     },
   });
 
+  // Delete mutation (only called when user confirms in modal)
   const deleteMutation = useMutation({
     mutationFn: () => organizationsService.deleteOrganization(currentOrganization!.id),
     onSuccess: () => {
@@ -61,6 +63,7 @@ export function OrganizationSettingsPage() {
         setCurrentOrganization(otherOrg);
       }
       toast.success(t('settings.organization.deleteSuccess'));
+      setShowDeleteModal(false);
       navigate('/dashboard');
     },
     onError: () => {
@@ -92,11 +95,17 @@ export function OrganizationSettingsPage() {
     }
   };
 
-  const handleDelete = async () => {
-    try {
-      await deleteMutation.mutateAsync();
-    } catch {
-      // Error is handled by onError callback in mutation
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteMutation.mutate();
+  };
+
+  const handleCloseDeleteModal = () => {
+    if (!deleteMutation.isPending) {
+      setShowDeleteModal(false);
     }
   };
 
@@ -184,30 +193,13 @@ export function OrganizationSettingsPage() {
                     {t('settings.organization.deleteDescription')}
                   </p>
                 </div>
-                {showDeleteConfirm ? (
-                  <div className="flex gap-2">
-                    <Button variant="ghost" size="sm" onClick={() => setShowDeleteConfirm(false)}>
-                      {t('common.cancel')}
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={handleDelete}
-                      isLoading={deleteMutation.isPending}
-                      className="text-red-500 bg-red-500/10 hover:bg-red-500/20"
-                    >
-                      {t('settings.organization.confirmDelete')}
-                    </Button>
-                  </div>
-                ) : (
-                  <Button
-                    variant="ghost"
-                    onClick={() => setShowDeleteConfirm(true)}
-                    className="text-red-500 hover:bg-red-500/10"
-                  >
-                    {t('settings.organization.delete')}
-                  </Button>
-                )}
+                <Button
+                  variant="ghost"
+                  onClick={handleDeleteClick}
+                  className="text-red-500 hover:bg-red-500/10"
+                >
+                  {t('settings.organization.delete')}
+                </Button>
               </div>
             )}
 
@@ -219,6 +211,17 @@ export function OrganizationSettingsPage() {
           </div>
         </div>
       </div>
+
+      <DangerConfirmModal
+        isOpen={showDeleteModal}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleConfirmDelete}
+        title={t('settings.organization.deleteTitle')}
+        warningMessage={t('settings.organization.deleteConfirmDescription')}
+        confirmText={currentOrganization?.name || ''}
+        confirmPlaceholder={t('settings.organization.typeOrgName')}
+        isLoading={deleteMutation.isPending}
+      />
     </DashboardLayout>
   );
 }

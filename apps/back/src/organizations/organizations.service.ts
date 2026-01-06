@@ -136,12 +136,9 @@ export class OrganizationsService {
     });
   }
 
-  async delete(id: string, userId: string) {
+  async delete(id: string, userId: string): Promise<void> {
     const organization = await this.prisma.organization.findUnique({
       where: { id },
-      include: {
-        members: true,
-      },
     });
 
     if (!organization) {
@@ -159,8 +156,6 @@ export class OrganizationsService {
     await this.prisma.organization.delete({
       where: { id },
     });
-
-    return { success: true };
   }
 
   async getMembers(organizationId: string) {
