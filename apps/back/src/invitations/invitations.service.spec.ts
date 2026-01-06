@@ -361,6 +361,7 @@ describe('InvitationsService', () => {
       const result = await service.accept('valid-token', acceptingUser);
 
       expect(result).toEqual({
+        membershipId: 'membership-123',
         organization: mockOrganization,
         role: 'member',
       });

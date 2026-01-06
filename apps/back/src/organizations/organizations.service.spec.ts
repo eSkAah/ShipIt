@@ -280,9 +280,8 @@ describe('OrganizationsService', () => {
       ]);
       mockPrismaService.organization.delete.mockResolvedValue(mockOrg);
 
-      const result = await service.delete('org-123', 'user-123');
+      await service.delete('org-123', 'user-123');
 
-      expect(result).toEqual({ success: true });
       expect(mockPrismaService.organization.delete).toHaveBeenCalledWith({
         where: { id: 'org-123' },
       });

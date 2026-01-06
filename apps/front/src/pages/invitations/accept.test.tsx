@@ -182,7 +182,7 @@ describe('AcceptInvitationPage', () => {
         const signupLink = screen.getByText('common.signup').closest('a');
         expect(signupLink).toHaveAttribute(
           'href',
-          `/signup?redirect=/invitations/valid-token/accept&email=${mockInvitation.email}`,
+          `/signup?redirect=/invitations/valid-token/accept&email=${encodeURIComponent(mockInvitation.email)}`,
         );
       });
     });
@@ -251,6 +251,7 @@ describe('AcceptInvitationPage', () => {
       vi.mocked(invitationsService.acceptInvitation).mockResolvedValue({
         organization: mockInvitation.organization,
         role: 'member',
+        membershipId: 'membership-123',
       } as any);
 
       renderComponent();
@@ -265,7 +266,7 @@ describe('AcceptInvitationPage', () => {
         expect(mockSetCurrentOrganization).toHaveBeenCalledWith({
           ...mockInvitation.organization,
           role: 'member',
-          membershipId: '',
+          membershipId: 'membership-123',
         });
         expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
       });
@@ -311,6 +312,7 @@ describe('AcceptInvitationPage', () => {
       resolvePromise!({
         organization: mockInvitation.organization,
         role: 'member',
+        membershipId: 'membership-123',
       });
     });
 

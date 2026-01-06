@@ -28,7 +28,9 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const navLinks = [
     { href: '/dashboard', label: t('nav.dashboard') },
+    { href: '/settings/profile', label: t('nav.profile') },
     { href: '/settings/team', label: t('nav.team') },
+    { href: '/settings/organization', label: t('nav.organization') },
   ];
 
   return (

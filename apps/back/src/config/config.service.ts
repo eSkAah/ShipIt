@@ -45,6 +45,10 @@ export class ConfigService {
     return this.configService.get<string>('AZURE_STORAGE_CONNECTION_STRING', '');
   }
 
+  get azureStorageAvatarsContainer(): string {
+    return this.configService.get<string>('AZURE_STORAGE_AVATARS_CONTAINER', 'avatars');
+  }
+
   get sentryDsn(): string {
     return this.configService.get<string>('SENTRY_DSN', '');
   }

@@ -13,6 +13,7 @@ import { VerifyEmailPage } from './pages/verify-email';
 import { DashboardPage } from './pages/dashboard';
 import { TeamSettingsPage } from './pages/settings/team';
 import { OrganizationSettingsPage } from './pages/settings/organization';
+import { ProfileSettingsPage } from './pages/settings/profile';
 import { AcceptInvitationPage } from './pages/invitations/accept';
 import { NotFoundPage } from './pages/not-found';
 import './i18n/config';
@@ -67,6 +68,14 @@ export default function App() {
                   element={
                     <ProtectedRoute>
                       <DashboardPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/settings/profile"
+                  element={
+                    <ProtectedRoute>
+                      <ProfileSettingsPage />
                     </ProtectedRoute>
                   }
                 />
