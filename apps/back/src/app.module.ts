@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
 import { HealthModule } from './health/health.module';
@@ -11,11 +11,14 @@ import { StorageModule } from './storage/storage.module';
 import { UsersModule } from './users/users.module';
 import { BillingModule } from './billing/billing.module';
 import { AdminModule } from './admin/admin.module';
+import { LoggerModule } from './logger';
+import { CorrelationIdMiddleware } from './common/middleware';
 
 @Module({
   imports: [
     ConfigModule,
     DatabaseModule,
+    LoggerModule,
     QueueModule,
     MailModule,
     StorageModule,
@@ -28,4 +31,8 @@ import { AdminModule } from './admin/admin.module';
     HealthModule,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(CorrelationIdMiddleware).forRoutes('*');
+  }
+}

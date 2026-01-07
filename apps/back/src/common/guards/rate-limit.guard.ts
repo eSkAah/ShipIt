@@ -51,11 +51,23 @@ export class RateLimitGuard implements CanActivate, OnModuleDestroy {
       'unknown';
     const key = `rate-limit:${request.route.path}:${ip}`;
 
+    const response = context.switchToHttp().getResponse();
+
     try {
       const current = await this.redis.get(key);
       const count = current ? parseInt(current, 10) : 0;
+      const ttl = await this.redis.ttl(key);
+
+      // Set rate limit headers
+      response.setHeader('X-RateLimit-Limit', rateLimitConfig.points);
+      response.setHeader('X-RateLimit-Remaining', Math.max(0, rateLimitConfig.points - count - 1));
+      response.setHeader(
+        'X-RateLimit-Reset',
+        Math.ceil(Date.now() / 1000) + (ttl > 0 ? ttl : rateLimitConfig.duration),
+      );
 
       if (count >= rateLimitConfig.points) {
+        response.setHeader('Retry-After', ttl > 0 ? ttl : rateLimitConfig.duration);
         throw new HttpException(
           {
             success: false,

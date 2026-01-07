@@ -6,6 +6,7 @@ import {
   organizationsService,
   OrganizationWithMembership,
 } from '../services/organizations.service';
+import { setUserContext, setOrganizationContext } from '../lib/sentry';
 
 interface AuthContextType {
   user: User | null;
@@ -43,6 +44,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     enabled: !!session?.user,
     staleTime: 30 * 1000, // 30 seconds - shorter to catch new orgs faster
   });
+
+  // Set Sentry user context when session changes
+  useEffect(() => {
+    if (session?.user) {
+      setUserContext({ id: session.user.id, email: session.user.email });
+    } else {
+      setUserContext(null);
+    }
+  }, [session?.user]);
+
+  // Set Sentry organization context when current organization changes
+  useEffect(() => {
+    setOrganizationContext(currentOrganization?.id || null);
+  }, [currentOrganization?.id]);
 
   useEffect(() => {
     if (organizations.length > 0) {
