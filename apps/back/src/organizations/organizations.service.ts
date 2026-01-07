@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException, ForbiddenException, Logger } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 import { QueueService } from '../queue/queue.service';
+import { StorageService } from '../storage/storage.service';
 import { User, Role } from '@prisma/client';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
@@ -12,6 +13,7 @@ export class OrganizationsService {
   constructor(
     private prisma: PrismaService,
     private queueService: QueueService,
+    private storageService: StorageService,
   ) {}
 
   private generateSlug(name: string): string {
@@ -361,5 +363,53 @@ export class OrganizationsService {
     });
 
     return { success: true };
+  }
+
+  async uploadLogo(
+    organizationId: string,
+    file: Express.Multer.File,
+  ): Promise<{ logoUrl: string }> {
+    const organization = await this.prisma.organization.findUnique({
+      where: { id: organizationId },
+    });
+
+    if (!organization) {
+      throw new NotFoundException('Organization not found');
+    }
+
+    // Delete old logo if exists
+    if (organization.logoUrl) {
+      await this.storageService.deleteBlob(organization.logoUrl);
+    }
+
+    // Upload new logo
+    const { url } = await this.storageService.uploadLogo(file, organizationId);
+
+    // Update organization with new logo URL
+    await this.prisma.organization.update({
+      where: { id: organizationId },
+      data: { logoUrl: url },
+    });
+
+    return { logoUrl: url };
+  }
+
+  async deleteLogo(organizationId: string): Promise<void> {
+    const organization = await this.prisma.organization.findUnique({
+      where: { id: organizationId },
+    });
+
+    if (!organization) {
+      throw new NotFoundException('Organization not found');
+    }
+
+    if (organization.logoUrl) {
+      await this.storageService.deleteBlob(organization.logoUrl);
+
+      await this.prisma.organization.update({
+        where: { id: organizationId },
+        data: { logoUrl: null },
+      });
+    }
   }
 }

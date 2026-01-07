@@ -58,6 +58,29 @@ export class StorageService {
     };
   }
 
+  async uploadLogo(file: Express.Multer.File, organizationId: string): Promise<UploadResult> {
+    this.validateFile(file);
+
+    if (!this.containerClient) {
+      throw new BadRequestException('Storage service not configured');
+    }
+
+    const extension = this.getFileExtension(file.mimetype);
+    const blobName = `logos/${organizationId}/${uuidv4()}.${extension}`;
+    const blockBlobClient = this.containerClient.getBlockBlobClient(blobName);
+
+    await blockBlobClient.uploadData(file.buffer, {
+      blobHTTPHeaders: {
+        blobContentType: file.mimetype,
+      },
+    });
+
+    return {
+      url: blockBlobClient.url,
+      blobName,
+    };
+  }
+
   async deleteBlob(blobUrl: string): Promise<void> {
     if (!this.containerClient || !blobUrl) {
       return;

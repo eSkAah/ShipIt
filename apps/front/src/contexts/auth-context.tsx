@@ -62,7 +62,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const hasDataChanged =
         currentOrgInList &&
         (currentOrgInList.name !== currentOrganization?.name ||
-          currentOrgInList.role !== currentOrganization?.role);
+          currentOrgInList.role !== currentOrganization?.role ||
+          currentOrgInList.logoUrl !== currentOrganization?.logoUrl);
 
       if (!currentOrganization || hasDataChanged) {
         setCurrentOrganizationState(targetOrg);

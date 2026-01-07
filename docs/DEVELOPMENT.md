@@ -333,31 +333,31 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ---
 
-## Epic 8: Dashboard (2-3 days)
+## Epic 8: Dashboard (2-3 days) ✅
 
 **Goal:** Protected dashboard with navigation
 
-- [ ] Dashboard Layout
-  - [ ] Create sidebar navigation
-  - [ ] Implement active link highlighting
-  - [ ] Add organization switcher to sidebar
-  - [ ] Create user dropdown menu
-  - [ ] Add dark mode toggle
-  - [ ] Make sidebar responsive (mobile drawer)
-- [ ] Dashboard Home
-  - [ ] Create dashboard overview page
-  - [ ] Show user welcome message
-  - [ ] Display organization info
-  - [ ] Show quick stats/metrics
-- [ ] Settings Pages
-  - [ ] Create settings layout (tabs or sidebar)
-  - [ ] Implement profile settings page
-  - [ ] Implement team settings page
-  - [ ] Implement billing settings page
-  - [ ] Implement preferences page
-- [ ] Navigation
-  - [ ] Implement breadcrumbs
-  - [ ] Handle nested routes
+- [x] Dashboard Layout
+  - [x] Create sidebar navigation
+  - [x] Implement active link highlighting
+  - [x] Add organization switcher to sidebar
+  - [x] Create user dropdown menu
+  - [x] Add dark mode toggle
+  - [x] Make sidebar responsive (mobile drawer)
+- [x] Dashboard Home
+  - [x] Create dashboard overview page
+  - [x] Show user welcome message
+  - [x] Display organization info
+  - [x] Show quick stats/metrics
+- [x] Settings Pages
+  - [x] Create settings layout (tabs or sidebar)
+  - [x] Implement profile settings page
+  - [x] Implement team settings page
+  - [x] Implement billing settings page
+  - [x] Implement preferences page
+- [x] Navigation
+  - [x] Implement breadcrumbs
+  - [x] Handle nested routes
   - [ ] Add keyboard shortcuts (optional)
 - [ ] Testing
   - [ ] E2E tests for dashboard navigation
@@ -549,8 +549,8 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ## Progress Summary
 
-**Completed Epics:** 7 / 12
-**Completed Tasks:** ~220 / ~250
+**Completed Epics:** 8 / 12
+**Completed Tasks:** ~235 / ~250
 
 ### Epic Status
 
@@ -561,7 +561,7 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 - [x] E5: Billing (95%) ✅ (Backend + Frontend complete, E2E tests pending Stripe keys)
 - [x] E6: Email System (100%) ✅ (React Email templates, BullMQ queue, full test coverage)
 - [x] E7: Landing & UI Foundation (95%) ✅ (Landing page, layouts, common components, i18n - Testing pending)
-- [ ] E8: Dashboard (0%)
+- [x] E8: Dashboard (90%) ✅ (Sidebar, breadcrumbs, mobile drawer, enhanced dashboard - Testing pending)
 - [ ] E9: Admin Backoffice (0%)
 - [ ] E10: Observability (0%)
 - [ ] E11: Testing (0%)
