@@ -245,8 +245,10 @@ describe('SignupPage', () => {
       const passwordInput = screen.getByLabelText('auth.signup.password');
       fireEvent.change(passwordInput, { target: { value: 'Weak1!' } });
 
-      // Password strength component should be rendered
-      // The actual strength display depends on the PasswordStrength component
+      // Password strength indicator should show weak/medium/strong label
+      expect(
+        screen.getByText(/auth\.signup\.passwordStrength\.(weak|medium|strong)/),
+      ).toBeInTheDocument();
     });
   });
 

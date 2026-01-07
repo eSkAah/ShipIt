@@ -78,8 +78,12 @@ test.describe('Authentication Flow', () => {
       await page.goto('/signup');
 
       await page.getByLabel(/password/i).fill('weak');
-      // Password strength indicator should show
-      // This depends on the implementation
+
+      // Verify password strength indicator is visible
+      const strengthIndicator = page
+        .locator('[data-testid="password-strength"]')
+        .or(page.locator('text=/weak|strong|strength/i'));
+      await expect(strengthIndicator).toBeVisible({ timeout: 3000 });
     });
   });
 

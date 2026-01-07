@@ -83,8 +83,8 @@ describe('AppController (e2e)', () => {
 
       const response = await request(app.getHttpServer()).get('/health/ready');
 
-      // Health check returns 503 when any service is down
-      expect([200, 503]).toContain(response.status);
+      // Health check must return 503 when database is down
+      expect(response.status).toBe(503);
     });
 
     it('should return 503 when Redis is unhealthy', async () => {
@@ -93,7 +93,7 @@ describe('AppController (e2e)', () => {
 
       const response = await request(app.getHttpServer()).get('/health/ready');
 
-      expect([200, 503]).toContain(response.status);
+      expect(response.status).toBe(503);
     });
   });
 });
