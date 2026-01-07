@@ -452,11 +452,24 @@
       "filterByTier": "Filter by tier",
       "allTiers": "All tiers",
       "columns": {
+        "organization": "Organization",
         "name": "Name",
         "tier": "Tier",
+        "status": "Status",
         "members": "Members",
         "owner": "Owner",
         "createdAt": "Created"
+      },
+      "tier": {
+        "free": "Free",
+        "premium": "Premium"
+      },
+      "subscriptionStatus": {
+        "active": "Active",
+        "past_due": "Past Due",
+        "canceled": "Canceled",
+        "trialing": "Trialing",
+        "incomplete": "Incomplete"
       }
     },
     "logs": {
@@ -477,7 +490,10 @@
         "warn": "Warning",
         "error": "Error",
         "debug": "Debug"
-      }
+      },
+      "clickToExpand": "Click to expand context",
+      "clickToCollapse": "Click to collapse",
+      "pagination": "Page {{current}} / {{total}}"
     },
     "overview": {
       "title": "Admin Overview",
@@ -485,9 +501,14 @@
       "stats": {
         "totalUsers": "Total Users",
         "totalOrganizations": "Total Organizations",
-        "premiumOrganizations": "Premium Organizations",
-        "activeToday": "Active Today"
-      }
+        "verifiedUsers": "Verified Users",
+        "premiumOrgs": "Premium Organizations",
+        "freeOrgs": "Free Organizations",
+        "unverifiedUsers": "Unverified Users"
+      },
+      "quickStats": "Quick Stats",
+      "platformHealth": "Platform Health",
+      "allSystemsOperational": "All systems operational"
     }
   }
 }
