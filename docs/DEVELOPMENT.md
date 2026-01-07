@@ -341,9 +341,10 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
   - [x] Create sidebar navigation
   - [x] Implement active link highlighting
   - [x] Add organization switcher to sidebar
-  - [x] Create user dropdown menu
-  - [x] Add dark mode toggle
+  - [x] Create user dropdown menu (popover with profile, theme, logout)
+  - [x] Add dark mode toggle (ThemeToggle reused from landing)
   - [x] Make sidebar responsive (mobile drawer)
+  - [x] Organization logo upload functionality
 - [x] Dashboard Home
   - [x] Create dashboard overview page
   - [x] Show user welcome message
@@ -358,6 +359,7 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 - [x] Navigation
   - [x] Implement breadcrumbs
   - [x] Handle nested routes
+  - [x] Non-navigable breadcrumb links for parent routes without pages
   - [ ] Add keyboard shortcuts (optional)
 - [ ] Testing
   - [ ] E2E tests for dashboard navigation
@@ -367,37 +369,42 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ---
 
-## Epic 9: Admin Backoffice (2-3 days)
+## Epic 9: Admin Backoffice (2-3 days) ✅
 
 **Goal:** Super admin dashboard
 
-- [ ] Admin Guard
-  - [ ] Create SuperAdminGuard
-  - [ ] Check isSuperAdmin flag
-  - [ ] Redirect non-admins to dashboard
-- [ ] User Management
-  - [ ] Implement GET /admin/users endpoint
-  - [ ] Add pagination support
-  - [ ] Add search functionality
-  - [ ] Create user list UI
-  - [ ] Add user details view
-  - [ ] Show user organizations and roles
-- [ ] Organization Management
-  - [ ] Implement GET /admin/organizations endpoint
-  - [ ] Add pagination and filtering by tier
-  - [ ] Create organization list UI
-  - [ ] Show subscription details
-  - [ ] Show member counts
-- [ ] Logs Management
-  - [ ] Implement GET /admin/logs endpoint
-  - [ ] Add filtering by level, date range
-  - [ ] Create logs viewer UI
-  - [ ] Implement log search
-  - [ ] Show structured log details
-- [ ] Admin Layout
-  - [ ] Create admin sidebar navigation
-  - [ ] Add admin badge/indicator
-  - [ ] Implement admin-specific styling
+- [x] Admin Guard
+  - [x] Create SuperAdminGuard
+  - [x] Check isSuperAdmin flag
+  - [x] Redirect non-admins to dashboard (AdminProtectedRoute)
+- [x] User Management
+  - [x] Implement GET /admin/users endpoint
+  - [x] Add pagination support
+  - [x] Add search functionality
+  - [x] Create user list UI
+  - [x] Show user organizations and roles
+  - [ ] Add user details view (not implemented - can be added later)
+- [x] Organization Management
+  - [x] Implement GET /admin/organizations endpoint
+  - [x] Add pagination and filtering by tier
+  - [x] Create organization list UI
+  - [x] Show subscription details
+  - [x] Show member counts
+- [x] Logs Management
+  - [x] Implement GET /admin/logs endpoint
+  - [x] Add filtering by level
+  - [x] Create logs viewer UI
+  - [x] Implement log search
+  - [x] Show structured log details (expandable JSON context)
+- [x] Admin Layout
+  - [x] Create admin sidebar navigation
+  - [x] Add admin badge/indicator (Admin Backoffice header)
+  - [x] Implement admin-specific styling (dark theme)
+- [x] Admin Overview
+  - [x] GET /admin/stats endpoint
+  - [x] Stats dashboard (users, orgs, verified, premium counts)
+  - [x] Quick stats panel
+  - [x] Platform health indicator
 - [ ] Testing
   - [ ] Unit tests for admin endpoints
   - [ ] E2E tests for admin access control
@@ -549,8 +556,8 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ## Progress Summary
 
-**Completed Epics:** 8 / 12
-**Completed Tasks:** ~235 / ~250
+**Completed Epics:** 9 / 12
+**Completed Tasks:** ~240 / ~260
 
 ### Epic Status
 
@@ -561,8 +568,8 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 - [x] E5: Billing (95%) ✅ (Backend + Frontend complete, E2E tests pending Stripe keys)
 - [x] E6: Email System (100%) ✅ (React Email templates, BullMQ queue, full test coverage)
 - [x] E7: Landing & UI Foundation (95%) ✅ (Landing page, layouts, common components, i18n - Testing pending)
-- [x] E8: Dashboard (90%) ✅ (Sidebar, breadcrumbs, mobile drawer, enhanced dashboard - Testing pending)
-- [ ] E9: Admin Backoffice (0%)
+- [x] E8: Dashboard (90%) ✅ (Sidebar, org switcher, user popover, org logo upload, breadcrumbs - Testing pending)
+- [x] E9: Admin Backoffice (90%) ✅ (SuperAdminGuard, admin pages, stats/users/orgs/logs - Testing pending)
 - [ ] E10: Observability (0%)
 - [ ] E11: Testing (0%)
 - [ ] E12: CI/CD & Deployment (0%)
