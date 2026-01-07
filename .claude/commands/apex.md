@@ -224,9 +224,6 @@ After the code is reviewed and complete, finalize the Git workflow:
    - Create login and signup endpoints
    - Add session validation middleware
 
-   🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-   Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
    ```
 
    Execute the commit:

@@ -162,7 +162,7 @@ export function AdminOrganizationsPage() {
                                   : 'bg-white/10 text-white/60'
                           }`}
                         >
-                          {org.subscriptionStatus}
+                          {t(`admin.organizations.subscriptionStatus.${org.subscriptionStatus}`)}
                         </span>
                       </td>
                       <td className="p-4">

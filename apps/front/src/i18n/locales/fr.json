@@ -463,6 +463,13 @@
       "tier": {
         "free": "Gratuit",
         "premium": "Premium"
+      },
+      "subscriptionStatus": {
+        "active": "Actif",
+        "past_due": "En retard",
+        "canceled": "Annulé",
+        "trialing": "Essai",
+        "incomplete": "Incomplet"
       }
     },
     "logs": {
@@ -483,7 +490,10 @@
         "warn": "Avertissement",
         "error": "Erreur",
         "debug": "Debug"
-      }
+      },
+      "clickToExpand": "Cliquez pour voir le contexte",
+      "clickToCollapse": "Cliquez pour réduire",
+      "pagination": "Page {{current}} / {{total}}"
     },
     "overview": {
       "title": "Vue d'ensemble Admin",

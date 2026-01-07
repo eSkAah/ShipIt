@@ -143,7 +143,9 @@ export function AdminLogsPage() {
                         <p className="text-white break-all">{log.message}</p>
                         {log.context && (
                           <p className="text-white/40 text-sm mt-1">
-                            {isExpanded ? 'Click to collapse' : 'Click to expand context'}
+                            {isExpanded
+                              ? t('admin.logs.clickToCollapse')
+                              : t('admin.logs.clickToExpand')}
                           </p>
                         )}
                       </div>
@@ -165,7 +167,10 @@ export function AdminLogsPage() {
           {pagination && pagination.totalPages > 1 && (
             <div className="flex items-center justify-between p-4 border-t border-white/10">
               <p className="text-sm text-white/60">
-                Page {pagination.page} / {pagination.totalPages}
+                {t('admin.logs.pagination', {
+                  current: pagination.page,
+                  total: pagination.totalPages,
+                })}
               </p>
               <div className="flex gap-2">
                 <Button

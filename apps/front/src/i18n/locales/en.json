@@ -463,6 +463,13 @@
       "tier": {
         "free": "Free",
         "premium": "Premium"
+      },
+      "subscriptionStatus": {
+        "active": "Active",
+        "past_due": "Past Due",
+        "canceled": "Canceled",
+        "trialing": "Trialing",
+        "incomplete": "Incomplete"
       }
     },
     "logs": {
@@ -483,7 +490,10 @@
         "warn": "Warning",
         "error": "Error",
         "debug": "Debug"
-      }
+      },
+      "clickToExpand": "Click to expand context",
+      "clickToCollapse": "Click to collapse",
+      "pagination": "Page {{current}} / {{total}}"
     },
     "overview": {
       "title": "Admin Overview",
