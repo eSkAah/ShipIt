@@ -17,8 +17,8 @@ export function AdminOverviewPage() {
       label: t('admin.overview.stats.totalUsers'),
       value: stats?.totalUsers ?? '-',
       icon: Users,
-      color: 'text-blue-500',
-      bgColor: 'bg-blue-500/10',
+      color: 'text-purple-400',
+      bgColor: 'bg-purple-500/10',
     },
     {
       label: t('admin.overview.stats.totalOrganizations'),
@@ -31,8 +31,8 @@ export function AdminOverviewPage() {
       label: t('admin.overview.stats.verifiedUsers'),
       value: stats?.verifiedUsers ?? '-',
       icon: CheckCircle,
-      color: 'text-green-500',
-      bgColor: 'bg-green-500/10',
+      color: 'text-gold-400',
+      bgColor: 'bg-gold-500/10',
     },
     {
       label: t('admin.overview.stats.premiumOrgs'),

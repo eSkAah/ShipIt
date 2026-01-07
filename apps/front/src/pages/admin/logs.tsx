@@ -23,10 +23,10 @@ const levelIcons: Record<string, typeof Info> = {
 };
 
 const levelColors: Record<string, string> = {
-  info: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
-  warn: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30',
+  info: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
+  warn: 'bg-gold-500/10 text-gold-400 border-gold-500/30',
   error: 'bg-red-500/10 text-red-400 border-red-500/30',
-  debug: 'bg-gray-500/10 text-gray-400 border-gray-500/30',
+  debug: 'bg-white/5 text-white/40 border-white/10',
 };
 
 export function AdminLogsPage() {
