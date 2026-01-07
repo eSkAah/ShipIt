@@ -48,6 +48,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
         scope.setTag('type', 'unhandled_exception');
         scope.setExtra('url', request.url);
         scope.setExtra('method', request.method);
+        if (request.correlationId) {
+          scope.setTag('correlationId', request.correlationId);
+        }
         if (request.user) {
           scope.setUser({
             id: request.user.id,
@@ -66,10 +69,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
       error: {
         message,
         code,
+        ...(request.correlationId && { correlationId: request.correlationId }),
       },
     };
 
-    this.logger.error(`${request.method} ${request.url} - ${status} - ${message}`);
+    this.logger.error(
+      `[${request.correlationId || 'no-id'}] ${request.method} ${request.url} - ${status} - ${message}`,
+    );
 
     response.status(status).json(errorResponse);
   }

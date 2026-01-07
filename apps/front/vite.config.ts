@@ -21,6 +21,7 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+    sourcemap: true, // Enable source maps for Sentry error tracking
   },
 
   test: {

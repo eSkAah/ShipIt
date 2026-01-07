@@ -413,40 +413,42 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ---
 
-## Epic 10: Observability (2 days)
+## Epic 10: Observability (2 days) ✅
 
 **Goal:** Error tracking, logging, and monitoring
 
-- [ ] Sentry Integration
-  - [ ] Install Sentry SDK (frontend)
-  - [ ] Install Sentry SDK (backend)
-  - [ ] Configure Sentry DSN
-  - [ ] Set up source maps for frontend
-  - [ ] Configure release tracking
-- [ ] Error Tracking
-  - [ ] Capture frontend exceptions
-  - [ ] Capture backend exceptions
-  - [ ] Add user context to errors
-  - [ ] Add organization context to errors
-  - [ ] Configure error sampling
-- [ ] Structured Logging
-  - [ ] Create Logger service
-  - [ ] Implement correlationId generation
-  - [ ] Log all HTTP requests
-  - [ ] Log all database queries (optional)
-  - [ ] Store logs in AppLog table
-  - [ ] Implement log rotation strategy
-- [ ] Performance Monitoring
-  - [ ] Enable Sentry performance tracking
-  - [ ] Track API endpoint performance
-  - [ ] Track frontend page load times
-  - [ ] Set up alerts for slow queries
-- [ ] Rate Limiting
-  - [ ] Implement Redis-based rate limiter
-  - [ ] Apply strict limits on auth endpoints
-  - [ ] Apply general limits on API endpoints
-  - [ ] Return 429 Too Many Requests
-  - [ ] Add rate limit headers
+- [x] Sentry Integration
+  - [x] Install Sentry SDK (frontend)
+  - [x] Install Sentry SDK (backend)
+  - [x] Configure Sentry DSN
+  - [x] Set up source maps for frontend
+  - [ ] Configure release tracking (requires CI/CD integration)
+- [x] Error Tracking
+  - [x] Capture frontend exceptions (ErrorBoundary + Sentry)
+  - [x] Capture backend exceptions (HttpExceptionFilter + Sentry)
+  - [x] Add user context to errors
+  - [x] Add organization context to errors
+  - [x] Configure error sampling (0.1 in prod, 1.0 in dev)
+- [x] Structured Logging
+  - [x] Create Logger service (LoggerService with AppLog integration)
+  - [x] Implement correlationId generation (CorrelationIdMiddleware)
+  - [x] Log all HTTP requests (LoggingInterceptor)
+  - [ ] Log all database queries (optional - skipped for performance)
+  - [x] Store logs in AppLog table
+  - [ ] Implement log rotation strategy (defer to DB maintenance)
+- [x] Performance Monitoring
+  - [x] Enable Sentry performance tracking (tracesSampleRate configured)
+  - [x] Track API endpoint performance (Sentry httpIntegration)
+  - [x] Track frontend page load times (browserTracingIntegration)
+  - [ ] Set up alerts for slow queries (requires Sentry dashboard config)
+- [x] Rate Limiting
+  - [x] Implement Redis-based rate limiter (RateLimitGuard)
+  - [x] Apply strict limits on auth endpoints (3-10 req/min depending on endpoint)
+  - [ ] Apply general limits on API endpoints (optional - can add as needed)
+  - [x] Return 429 Too Many Requests
+  - [x] Add rate limit headers (X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset)
+- [x] Health Checks
+  - [x] Redis health check added to /health/ready
 - [ ] Testing
   - [ ] Test Sentry error capture
   - [ ] Test logging middleware
@@ -556,8 +558,8 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 
 ## Progress Summary
 
-**Completed Epics:** 9 / 12
-**Completed Tasks:** ~240 / ~260
+**Completed Epics:** 10 / 12
+**Completed Tasks:** ~255 / ~275
 
 ### Epic Status
 
@@ -570,7 +572,7 @@ This document tracks the development progress of the ShipIt SaaS boilerplate acr
 - [x] E7: Landing & UI Foundation (95%) ✅ (Landing page, layouts, common components, i18n - Testing pending)
 - [x] E8: Dashboard (90%) ✅ (Sidebar, org switcher, user popover, org logo upload, breadcrumbs - Testing pending)
 - [x] E9: Admin Backoffice (90%) ✅ (SuperAdminGuard, admin pages, stats/users/orgs/logs - Testing pending)
-- [ ] E10: Observability (0%)
+- [x] E10: Observability (90%) ✅ (Sentry, logging, rate limiting, health checks - Testing pending)
 - [ ] E11: Testing (0%)
 - [ ] E12: CI/CD & Deployment (0%)
 

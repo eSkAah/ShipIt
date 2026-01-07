@@ -8,6 +8,7 @@ import {
   HttpCode,
   HttpStatus,
   UsePipes,
+  UseGuards,
 } from '@nestjs/common';
 import { Response, Request, CookieOptions } from 'express';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -15,6 +16,8 @@ import { AuthService } from './auth.service';
 import { ConfigService } from '../config/config.service';
 import { Public } from '../common/decorators/public.decorator';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
+import { RateLimit } from '../common/decorators/rate-limit.decorator';
+import { RateLimitGuard } from '../common/guards/rate-limit.guard';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
 import {
   SignupDto,
@@ -51,10 +54,13 @@ export class AuthController {
 
   @Public()
   @Post('signup')
+  @UseGuards(RateLimitGuard)
+  @RateLimit(5, 60) // 5 requests per minute
   @UsePipes(new ZodValidationPipe(signupSchema))
   @ApiOperation({ summary: 'Register a new user' })
   @ApiResponse({ status: 201, description: 'User successfully registered' })
   @ApiResponse({ status: 409, description: 'Email already in use' })
+  @ApiResponse({ status: 429, description: 'Too many requests' })
   async signup(@Body() dto: SignupDto) {
     const user = await this.authService.signup(dto);
     return {
@@ -66,11 +72,14 @@ export class AuthController {
 
   @Public()
   @Post('login')
+  @UseGuards(RateLimitGuard)
+  @RateLimit(5, 60) // 5 requests per minute
   @HttpCode(HttpStatus.OK)
   @UsePipes(new ZodValidationPipe(loginSchema))
   @ApiOperation({ summary: 'Login with email and password' })
   @ApiResponse({ status: 200, description: 'Successfully logged in' })
   @ApiResponse({ status: 401, description: 'Invalid credentials or email not verified' })
+  @ApiResponse({ status: 429, description: 'Too many requests' })
   async login(
     @Body() dto: LoginDto,
     @Req() request: Request,
@@ -121,11 +130,14 @@ export class AuthController {
 
   @Public()
   @Post('verify-email')
+  @UseGuards(RateLimitGuard)
+  @RateLimit(10, 60) // 10 requests per minute
   @HttpCode(HttpStatus.OK)
   @UsePipes(new ZodValidationPipe(verifyEmailSchema))
   @ApiOperation({ summary: 'Verify email address with token' })
   @ApiResponse({ status: 200, description: 'Email verified successfully' })
   @ApiResponse({ status: 400, description: 'Invalid or expired token' })
+  @ApiResponse({ status: 429, description: 'Too many requests' })
   async verifyEmail(@Body() dto: VerifyEmailDto) {
     await this.authService.verifyEmail(dto.token);
     return {
@@ -136,10 +148,13 @@ export class AuthController {
 
   @Public()
   @Post('forgot-password')
+  @UseGuards(RateLimitGuard)
+  @RateLimit(3, 60) // 3 requests per minute (stricter to prevent email spam)
   @HttpCode(HttpStatus.OK)
   @UsePipes(new ZodValidationPipe(forgotPasswordSchema))
   @ApiOperation({ summary: 'Request password reset' })
   @ApiResponse({ status: 200, description: 'Password reset email sent' })
+  @ApiResponse({ status: 429, description: 'Too many requests' })
   async forgotPassword(@Body() dto: ForgotPasswordDto) {
     await this.authService.forgotPassword(dto.email);
     return {
@@ -150,11 +165,14 @@ export class AuthController {
 
   @Public()
   @Post('reset-password')
+  @UseGuards(RateLimitGuard)
+  @RateLimit(5, 60) // 5 requests per minute
   @HttpCode(HttpStatus.OK)
   @UsePipes(new ZodValidationPipe(resetPasswordSchema))
   @ApiOperation({ summary: 'Reset password with token' })
   @ApiResponse({ status: 200, description: 'Password reset successfully' })
   @ApiResponse({ status: 400, description: 'Invalid or expired token' })
+  @ApiResponse({ status: 429, description: 'Too many requests' })
   async resetPassword(@Body() dto: ResetPasswordDto) {
     await this.authService.resetPassword(dto);
     return {

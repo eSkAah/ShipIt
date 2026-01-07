@@ -4,9 +4,37 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
+import * as Sentry from '@sentry/node';
 import { SessionGuard } from './common/guards/session.guard';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { LoggingInterceptor } from './common/interceptors';
 import { AuthService } from './auth/auth.service';
+import { LoggerService } from './logger';
+
+// Initialize Sentry before anything else
+const sentryDsn = process.env.SENTRY_DSN;
+if (sentryDsn) {
+  Sentry.init({
+    dsn: sentryDsn,
+    environment: process.env.NODE_ENV || 'development',
+    tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
+    profilesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
+    integrations: [
+      Sentry.httpIntegration(),
+      Sentry.nativeNodeFetchIntegration(),
+      Sentry.prismaIntegration(),
+    ],
+    beforeSend(event) {
+      // Filter out sensitive data
+      if (event.request?.headers) {
+        delete event.request.headers['authorization'];
+        delete event.request.headers['cookie'];
+      }
+      return event;
+    },
+  });
+  console.log('🔍 Sentry initialized');
+}
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -35,6 +63,10 @@ async function bootstrap() {
   const reflector = app.get(Reflector);
   const authService = app.get(AuthService);
   app.useGlobalGuards(new SessionGuard(authService, reflector));
+
+  // Global logging interceptor
+  const loggerService = app.get(LoggerService);
+  app.useGlobalInterceptors(new LoggingInterceptor(loggerService));
 
   // CORS configuration
   app.enableCors({
