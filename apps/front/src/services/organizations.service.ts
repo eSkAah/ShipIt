@@ -91,11 +91,6 @@ export const organizationsService = {
     const response = await apiClient.post<ApiResponse<{ logoUrl: string }>>(
       `/organizations/${organizationId}/logo`,
       formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      },
     );
     if (!response.data.data) {
       throw new Error('Failed to upload logo');
