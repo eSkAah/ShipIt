@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { NotFoundException, ForbiddenException } from '@nestjs/common';
 import { OrganizationsService } from './organizations.service';
 import { PrismaService } from '../database/prisma.service';
+import { QueueService } from '../queue/queue.service';
+import { StorageService } from '../storage/storage.service';
 import { User, Role } from '@prisma/client';
 
 describe('OrganizationsService', () => {
@@ -26,6 +28,17 @@ describe('OrganizationsService', () => {
     },
   };
 
+  const mockQueueService = {
+    getStripeQueue: jest.fn().mockReturnValue({
+      add: jest.fn().mockResolvedValue({}),
+    }),
+  };
+
+  const mockStorageService = {
+    uploadLogo: jest.fn(),
+    deleteBlob: jest.fn(),
+  };
+
   const mockUser: User = {
     id: 'user-123',
     email: 'test@example.com',
@@ -47,6 +60,14 @@ describe('OrganizationsService', () => {
         {
           provide: PrismaService,
           useValue: mockPrismaService,
+        },
+        {
+          provide: QueueService,
+          useValue: mockQueueService,
+        },
+        {
+          provide: StorageService,
+          useValue: mockStorageService,
         },
       ],
     }).compile();
