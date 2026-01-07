@@ -60,7 +60,7 @@ export function AdminOrganizationsPage() {
               setTier(e.target.value as '' | 'free' | 'premium');
               setPage(1);
             }}
-            className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value="">{t('admin.organizations.allTiers')}</option>
             <option value="free">{t('admin.organizations.tier.free')}</option>
@@ -142,11 +142,11 @@ export function AdminOrganizationsPage() {
                         {org.subscriptionTier === 'premium' ? (
                           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gold-500/10 text-gold-400 text-xs font-medium">
                             <Crown className="w-3.5 h-3.5" />
-                            Premium
+                            {t('admin.organizations.tier.premium')}
                           </span>
                         ) : (
                           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 text-white/60 text-xs font-medium">
-                            Free
+                            {t('admin.organizations.tier.free')}
                           </span>
                         )}
                       </td>

@@ -87,7 +87,7 @@ export function AdminLogsPage() {
               setLevel(e.target.value);
               setPage(1);
             }}
-            className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value="">{t('admin.logs.allLevels')}</option>
             <option value="info">{t('admin.logs.levels.info')}</option>
