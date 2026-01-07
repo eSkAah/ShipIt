@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -36,6 +36,8 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
   const navigate = useNavigate();
   const { user, logout, organizations, currentOrganization, setCurrentOrganization } = useAuth();
   const [orgMenuOpen, setOrgMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = async () => {
     try {
@@ -62,6 +64,20 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
     onCollapsedChange?.(!collapsed);
   };
 
+  // Close user menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    };
+
+    if (userMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [userMenuOpen]);
+
   const mainNavItems: NavItem[] = [
     {
       href: '/dashboard',
@@ -82,14 +98,6 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
       href: '/settings/billing',
       label: t('nav.billing'),
       icon: CreditCard,
-    },
-  ];
-
-  const settingsNavItems: NavItem[] = [
-    {
-      href: '/settings/profile',
-      label: t('nav.profile'),
-      icon: User,
     },
   ];
 
@@ -289,53 +297,6 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
           })}
         </div>
 
-        {/* Settings Section */}
-        <div
-          className={cn('pt-4 border-t border-gray-100 dark:border-gray-800', collapsed && 'pt-2')}
-        >
-          {!collapsed && (
-            <p className="px-3 py-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
-              {t('nav.settings')}
-            </p>
-          )}
-          {settingsNavItems.map((item) => {
-            const Icon = item.icon;
-            const active = isActive(item.href);
-
-            return (
-              <Link
-                key={item.href}
-                to={item.href}
-                onClick={handleNavClick}
-                className={cn(
-                  'group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200',
-                  active
-                    ? 'bg-gold-500/10 dark:bg-gold-500/15 text-gold-600 dark:text-gold-400'
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white',
-                  collapsed && 'justify-center px-2',
-                )}
-                title={collapsed ? item.label : undefined}
-              >
-                {active && (
-                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-gold-500 rounded-r-full" />
-                )}
-
-                <Icon
-                  className={cn(
-                    'flex-shrink-0 transition-colors duration-200',
-                    active
-                      ? 'text-gold-500'
-                      : 'text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300',
-                    collapsed ? 'w-6 h-6' : 'w-5 h-5',
-                  )}
-                />
-
-                {!collapsed && <span>{item.label}</span>}
-              </Link>
-            );
-          })}
-        </div>
-
         {/* Admin Section */}
         {user?.isSuperAdmin && (
           <div
@@ -381,31 +342,16 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
         )}
       </nav>
 
-      {/* Bottom Section - User & Actions */}
-      <div className="mt-auto border-t border-gray-100 dark:border-gray-800">
-        {/* Theme Toggle */}
-        <div
-          className={cn(
-            'flex items-center px-4 py-3',
-            collapsed ? 'justify-center' : 'justify-between',
-          )}
-        >
-          {!collapsed && (
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              {t('settings.profile.theme')}
-            </span>
-          )}
-          <ThemeToggle />
-        </div>
-
-        {/* User Profile */}
-        <div
-          className={cn('p-3 border-t border-gray-100 dark:border-gray-800', collapsed && 'p-2')}
-        >
-          <div
+      {/* Bottom Section - User Profile with Popover */}
+      <div className="mt-auto border-t border-gray-100 dark:border-gray-800 p-3" ref={userMenuRef}>
+        <div className="relative">
+          {/* User Avatar Button */}
+          <button
+            onClick={() => setUserMenuOpen(!userMenuOpen)}
             className={cn(
-              'flex items-center gap-3 p-2 rounded-xl',
-              'bg-gray-50 dark:bg-gray-900',
+              'w-full flex items-center gap-3 p-2 rounded-xl transition-all duration-200',
+              'hover:bg-gray-100 dark:hover:bg-gray-800',
+              userMenuOpen && 'bg-gray-100 dark:bg-gray-800',
               collapsed && 'justify-center p-1.5',
             )}
           >
@@ -413,46 +359,74 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
               <img
                 src={user.avatarUrl}
                 alt={`${user.firstName} ${user.lastName}`}
-                className={cn(
-                  'rounded-xl object-cover ring-2 ring-gray-200 dark:ring-gray-700',
-                  collapsed ? 'w-10 h-10' : 'w-10 h-10',
-                )}
+                className="w-10 h-10 rounded-xl object-cover ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0"
               />
             ) : (
-              <div
-                className={cn(
-                  'rounded-xl bg-gradient-to-br from-gold-400 to-purple-500 flex items-center justify-center ring-2 ring-gray-200 dark:ring-gray-700',
-                  collapsed ? 'w-10 h-10' : 'w-10 h-10',
-                )}
-              >
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400 to-purple-500 flex items-center justify-center ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
                 <span className="text-white text-sm font-bold">{initials}</span>
               </div>
             )}
 
             {!collapsed && (
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 text-left">
                 <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
                   {user?.firstName} {user?.lastName}
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user?.email}</p>
               </div>
             )}
-          </div>
-
-          {/* Logout Button */}
-          <button
-            onClick={handleLogout}
-            className={cn(
-              'w-full mt-2 flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium',
-              'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10',
-              'transition-colors duration-200',
-              collapsed && 'justify-center px-2',
-            )}
-            title={collapsed ? t('nav.logout') : undefined}
-          >
-            <LogOut className={cn('flex-shrink-0', collapsed ? 'w-5 h-5' : 'w-4 h-4')} />
-            {!collapsed && <span>{t('nav.logout')}</span>}
           </button>
+
+          {/* User Menu Popover */}
+          {userMenuOpen && (
+            <div
+              className={cn(
+                'absolute bottom-full mb-2 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg overflow-hidden animate-fade-in z-50',
+                collapsed ? 'left-0 w-56' : 'left-0 right-0',
+              )}
+            >
+              {/* Theme Toggle */}
+              <div className="p-3 border-b border-gray-100 dark:border-gray-800">
+                <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">
+                  {t('settings.profile.theme')}
+                </p>
+                <div className="flex justify-center">
+                  <ThemeToggle showLabel />
+                </div>
+              </div>
+
+              {/* Menu Items */}
+              <div className="p-2">
+                <Link
+                  to="/settings/profile"
+                  onClick={() => {
+                    setUserMenuOpen(false);
+                    onNavigate?.();
+                  }}
+                  className={cn(
+                    'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200',
+                    location.pathname === '/settings/profile'
+                      ? 'bg-gold-500/10 text-gold-600 dark:text-gold-400'
+                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800',
+                  )}
+                >
+                  <User className="w-4 h-4" />
+                  <span>{t('nav.profile')}</span>
+                </Link>
+
+                <button
+                  onClick={() => {
+                    setUserMenuOpen(false);
+                    handleLogout();
+                  }}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all duration-200"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>{t('nav.logout')}</span>
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

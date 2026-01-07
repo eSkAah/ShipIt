@@ -21,6 +21,9 @@ const routeLabels: Record<string, string> = {
   logs: 'admin.nav.logs',
 };
 
+// Routes that are intermediate (no dedicated page) and should not be clickable
+const nonNavigableRoutes = new Set(['settings']);
+
 export function Breadcrumbs() {
   const { t } = useTranslation();
   const location = useLocation();
@@ -37,10 +40,12 @@ export function Breadcrumbs() {
     const isLast = index === pathSegments.length - 1;
     const translationKey = routeLabels[segment];
     const label = translationKey ? t(translationKey) : segment;
+    const isNonNavigable = nonNavigableRoutes.has(segment);
 
     breadcrumbs.push({
       label,
-      href: isLast ? undefined : currentPath,
+      // Don't add href if it's the last segment or if it's a non-navigable route
+      href: isLast || isNonNavigable ? undefined : currentPath,
     });
   });
 
