@@ -10,6 +10,7 @@ import { InvitationsModule } from './invitations/invitations.module';
 import { StorageModule } from './storage/storage.module';
 import { UsersModule } from './users/users.module';
 import { BillingModule } from './billing/billing.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { BillingModule } from './billing/billing.module';
     InvitationsModule,
     UsersModule,
     BillingModule,
+    AdminModule,
     HealthModule,
   ],
 })

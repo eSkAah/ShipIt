@@ -6,6 +6,7 @@ import { OrganizationProvider } from './contexts/organization-context';
 import { ThemeProvider, useTheme } from './contexts/theme-context';
 import { ErrorBoundary } from './components/common/error-boundary';
 import { ProtectedRoute } from './components/auth/protected-route';
+import { AdminProtectedRoute } from './components/auth/admin-protected-route';
 import { LandingPage } from './pages/landing';
 import { LoginPage } from './pages/login';
 import { SignupPage } from './pages/signup';
@@ -18,6 +19,10 @@ import { OrganizationSettingsPage } from './pages/settings/organization';
 import { ProfileSettingsPage } from './pages/settings/profile';
 import { BillingSettingsPage } from './pages/settings/billing';
 import { AcceptInvitationPage } from './pages/invitations/accept';
+import { AdminOverviewPage } from './pages/admin/index';
+import { AdminUsersPage } from './pages/admin/users';
+import { AdminOrganizationsPage } from './pages/admin/organizations';
+import { AdminLogsPage } from './pages/admin/logs';
 import { NotFoundPage } from './pages/not-found';
 import './i18n/config';
 
@@ -108,6 +113,38 @@ export default function App() {
                     }
                   />
                   <Route path="/invitations/:token/accept" element={<AcceptInvitationPage />} />
+                  <Route
+                    path="/admin"
+                    element={
+                      <AdminProtectedRoute>
+                        <AdminOverviewPage />
+                      </AdminProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/users"
+                    element={
+                      <AdminProtectedRoute>
+                        <AdminUsersPage />
+                      </AdminProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/organizations"
+                    element={
+                      <AdminProtectedRoute>
+                        <AdminOrganizationsPage />
+                      </AdminProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/logs"
+                    element={
+                      <AdminProtectedRoute>
+                        <AdminLogsPage />
+                      </AdminProtectedRoute>
+                    }
+                  />
                   <Route path="/" element={<LandingPage />} />
                   <Route path="*" element={<NotFoundPage />} />
                 </Routes>

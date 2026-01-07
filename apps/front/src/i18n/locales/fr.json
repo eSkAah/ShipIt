@@ -452,11 +452,17 @@
       "filterByTier": "Filtrer par niveau",
       "allTiers": "Tous les niveaux",
       "columns": {
+        "organization": "Organisation",
         "name": "Nom",
         "tier": "Niveau",
+        "status": "Statut",
         "members": "Membres",
         "owner": "Propriétaire",
         "createdAt": "Créé le"
+      },
+      "tier": {
+        "free": "Free",
+        "premium": "Premium"
       }
     },
     "logs": {
@@ -485,9 +491,14 @@
       "stats": {
         "totalUsers": "Utilisateurs totaux",
         "totalOrganizations": "Organisations totales",
-        "premiumOrganizations": "Organisations Premium",
-        "activeToday": "Actifs aujourd'hui"
-      }
+        "verifiedUsers": "Utilisateurs vérifiés",
+        "premiumOrgs": "Organisations Premium",
+        "freeOrgs": "Organisations Free",
+        "unverifiedUsers": "Utilisateurs non vérifiés"
+      },
+      "quickStats": "Statistiques rapides",
+      "platformHealth": "Santé de la plateforme",
+      "allSystemsOperational": "Tous les systèmes sont opérationnels"
     }
   }
 }
