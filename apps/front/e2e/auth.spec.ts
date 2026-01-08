@@ -149,20 +149,6 @@ test.describe('Authentication Flow', () => {
   });
 });
 
-test.describe('Theme Toggle', () => {
-  test('should have theme toggle on login page', async ({ page }) => {
-    await page.goto('/login');
-
-    // Look for theme toggle button
-    const _themeToggle = page
-      .locator('[data-testid="theme-toggle"]')
-      .or(page.getByRole('button', { name: /theme|dark|light/i }));
-
-    // Theme toggle might not be present on all pages, this is optional
-    // Variable prefixed with _ to indicate intentional non-use
-  });
-});
-
 test.describe('OAuth Buttons', () => {
   test('should display OAuth buttons on login page', async ({ page }) => {
     await page.goto('/login');
