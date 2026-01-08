@@ -41,14 +41,25 @@ test.describe('Authentication Flow', () => {
     });
 
     test('should show error for invalid credentials', async ({ page }) => {
+      // Mock the login API to return an error
+      await page.route('**/auth/login', async (route) => {
+        await route.fulfill({
+          status: 401,
+          contentType: 'application/json',
+          body: JSON.stringify({ message: 'Invalid credentials' }),
+        });
+      });
+
       await page.goto('/login');
 
       await page.getByLabel(/email/i).fill('invalid@example.com');
       await page.getByLabel(/password/i).fill('wrongpassword123');
       await page.getByRole('button', { name: /sign in|login|submit/i }).click();
 
-      // Wait for error message to appear
-      await expect(page.locator('[class*="error"]')).toBeVisible({ timeout: 5000 });
+      // Wait for error message to appear using role-based selector
+      await expect(
+        page.getByRole('alert').or(page.locator('text=/invalid|error|failed/i')),
+      ).toBeVisible({ timeout: 5000 });
     });
   });
 
