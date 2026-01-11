@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../contexts/auth-context';
@@ -132,7 +132,7 @@ export function AcceptInvitationPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-4">
       <div className="glass-card p-8 max-w-md w-full text-center animate-slide-up">
-        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gold-400 to-purple-500 flex items-center justify-center mx-auto mb-4">
+        <div className="w-16 h-16 rounded-full bg-linear-to-br from-gold-400 to-purple-500 flex items-center justify-center mx-auto mb-4">
           <span className="text-white text-2xl font-bold">
             {invitation.organization.name.charAt(0).toUpperCase()}
           </span>

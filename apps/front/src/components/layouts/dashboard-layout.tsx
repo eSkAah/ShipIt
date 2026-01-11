@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Menu } from 'lucide-react';
 import { Sidebar } from './sidebar';
 import { MobileDrawer } from './mobile-drawer';

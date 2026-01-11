@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ForgotPasswordPage } from './forgot-password';
 import { authService } from '../services/auth.service';
@@ -31,9 +31,9 @@ describe('ForgotPasswordPage', () => {
 
     return render(
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+        <MemoryRouter>
           <ForgotPasswordPage />
-        </BrowserRouter>
+        </MemoryRouter>
       </QueryClientProvider>,
     );
   };

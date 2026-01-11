@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { Building2, Camera, Trash2 } from 'lucide-react';
 import { createOrganizationSchema, CreateOrganizationDto } from '@shipit/validators';
@@ -244,7 +244,7 @@ export function OrganizationSettingsPage() {
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
                 {/* Logo Preview */}
                 <div
-                  className={`relative w-24 h-24 rounded-xl overflow-hidden transition-all duration-300 flex-shrink-0 ${
+                  className={`relative w-24 h-24 rounded-xl overflow-hidden transition-all duration-300 shrink-0 ${
                     dragActive ? 'ring-4 ring-gold-500 ring-offset-2' : ''
                   }`}
                   onDragEnter={handleLogoDrag}
@@ -259,7 +259,7 @@ export function OrganizationSettingsPage() {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-gold-400 to-purple-500 flex items-center justify-center">
+                    <div className="w-full h-full bg-linear-to-br from-gold-400 to-purple-500 flex items-center justify-center">
                       <Building2 className="w-10 h-10 text-white" />
                     </div>
                   )}

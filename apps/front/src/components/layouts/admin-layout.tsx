@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Users, Building2, FileText, Shield, LayoutDashboard } from 'lucide-react';
 import { useAuth } from '../../contexts/auth-context';

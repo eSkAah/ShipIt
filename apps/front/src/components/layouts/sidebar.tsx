@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import {
   LayoutDashboard,
@@ -157,10 +157,10 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
               <img
                 src={currentOrganization.logoUrl}
                 alt={currentOrganization.name}
-                className="w-9 h-9 rounded-xl object-cover flex-shrink-0 shadow-sm"
+                className="w-9 h-9 rounded-xl object-cover shrink-0 shadow-sm"
               />
             ) : (
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-gold-400 to-purple-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0 shadow-sm">
+              <div className="w-9 h-9 rounded-xl bg-linear-to-br from-gold-400 to-purple-500 flex items-center justify-center text-white text-sm font-bold shrink-0 shadow-sm">
                 {currentOrganization?.name.charAt(0).toUpperCase() || '?'}
               </div>
             )}
@@ -207,10 +207,10 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
                         <img
                           src={org.logoUrl}
                           alt={org.name}
-                          className="w-8 h-8 rounded-lg object-cover flex-shrink-0"
+                          className="w-8 h-8 rounded-lg object-cover shrink-0"
                         />
                       ) : (
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-400 to-purple-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                        <div className="w-8 h-8 rounded-lg bg-linear-to-br from-gold-400 to-purple-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
                           {org.name.charAt(0).toUpperCase()}
                         </div>
                       )}
@@ -283,7 +283,7 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
 
                 <Icon
                   className={cn(
-                    'flex-shrink-0 transition-colors duration-200',
+                    'shrink-0 transition-colors duration-200',
                     active
                       ? 'text-gold-500'
                       : 'text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300',
@@ -328,7 +328,7 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
 
               <Shield
                 className={cn(
-                  'flex-shrink-0 transition-colors duration-200',
+                  'shrink-0 transition-colors duration-200',
                   location.pathname.startsWith('/admin')
                     ? 'text-purple-500'
                     : 'text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300',
@@ -359,10 +359,10 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
               <img
                 src={user.avatarUrl}
                 alt={`${user.firstName} ${user.lastName}`}
-                className="w-10 h-10 rounded-xl object-cover ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0"
+                className="w-10 h-10 rounded-xl object-cover ring-2 ring-gray-200 dark:ring-gray-700 shrink-0"
               />
             ) : (
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400 to-purple-500 flex items-center justify-center ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-linear-to-br from-gold-400 to-purple-500 flex items-center justify-center ring-2 ring-gray-200 dark:ring-gray-700 shrink-0">
                 <span className="text-white text-sm font-bold">{initials}</span>
               </div>
             )}

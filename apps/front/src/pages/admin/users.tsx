@@ -112,7 +112,7 @@ export function AdminUsersPage() {
                               className="w-10 h-10 rounded-xl object-cover"
                             />
                           ) : (
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-xl bg-linear-to-br from-purple-400 to-purple-600 flex items-center justify-center">
                               <span className="text-white text-sm font-bold">
                                 {user.firstName?.charAt(0)}
                                 {user.lastName?.charAt(0)}

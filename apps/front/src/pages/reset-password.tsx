@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { resetPasswordSchema, type ResetPasswordDto } from '@shipit/validators';
 import { Button } from '../components/ui/button';

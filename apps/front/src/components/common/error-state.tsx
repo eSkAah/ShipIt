@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 interface ErrorStateProps {
   title?: string;
@@ -83,7 +83,7 @@ export function ErrorAlert({ message, onDismiss, className = '' }: ErrorAlertPro
       className={`flex items-start gap-3 p-4 rounded-premium bg-error/10 border border-error/30 ${className}`}
       role="alert"
     >
-      <AlertTriangle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
+      <AlertTriangle className="w-5 h-5 text-error shrink-0 mt-0.5" />
       <p className="text-sm text-error flex-1">{message}</p>
       {onDismiss && (
         <button

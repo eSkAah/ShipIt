@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { LogOut, Settings } from 'lucide-react';
 import { ThemeToggle } from '../ui/theme-toggle';
@@ -50,7 +50,7 @@ export function UserMenu({ user, onLogout }: UserMenuProps) {
             className="w-9 h-9 rounded-full object-cover ring-2 ring-gold-500/30"
           />
         ) : (
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-gold-400 to-purple-500 flex items-center justify-center ring-2 ring-gold-500/30">
+          <div className="w-9 h-9 rounded-full bg-linear-to-br from-gold-400 to-purple-500 flex items-center justify-center ring-2 ring-gold-500/30">
             <span className="text-white text-sm font-bold">{initials}</span>
           </div>
         )}
