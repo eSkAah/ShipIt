@@ -547,6 +547,29 @@
     color: #FFD700;
   }
 
+  /* Dropdown Surface - for menus and popovers */
+  .dropdown-surface {
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid rgba(229, 231, 235, 1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .dropdown-surface {
+    background-color: #0B0F19;
+    border-color: rgba(55, 65, 81, 0.8);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Section Overlay - subtle separation between sections */
+  .section-overlay {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  .dark .section-overlay {
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+
   /* Text colors */
   .text-foreground {
     color: #1a1a1a;

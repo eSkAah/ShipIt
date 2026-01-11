@@ -114,7 +114,7 @@ function FeaturesSection() {
   return (
     <section id="features" className="section-padding relative">
       {/* Subtle overlay for section separation without breaking gradient */}
-      <div className="absolute inset-0 bg-black/[0.02] dark:bg-white/[0.02]" />
+      <div className="absolute inset-0 section-overlay" />
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">

@@ -190,7 +190,7 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
           {orgMenuOpen && !collapsed && (
             <>
               <div className="fixed inset-0 z-40" onClick={() => setOrgMenuOpen(false)} />
-              <div className="absolute left-0 right-0 top-full mt-2 z-50 bg-white dark:bg-gray-950 rounded-xl border border-gray-200 dark:border-gray-800/80 shadow-lg dark:shadow-[0_4px_30px_rgba(0,0,0,0.4)] overflow-hidden animate-fade-in">
+              <div className="absolute left-0 right-0 top-full mt-2 z-50 dropdown-surface overflow-hidden animate-fade-in">
                 <div className="p-2 max-h-48 overflow-y-auto">
                   {organizations.map((org) => (
                     <button
@@ -381,7 +381,7 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
           {userMenuOpen && (
             <div
               className={cn(
-                'absolute bottom-full mb-2 bg-white dark:bg-gray-950 rounded-xl border border-gray-200 dark:border-gray-800/80 shadow-lg dark:shadow-[0_4px_30px_rgba(0,0,0,0.4)] overflow-hidden animate-fade-in z-50',
+                'absolute bottom-full mb-2 dropdown-surface overflow-hidden animate-fade-in z-50',
                 collapsed ? 'left-0 w-56' : 'left-0 right-0',
               )}
             >
