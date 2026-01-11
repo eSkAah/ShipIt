@@ -24,7 +24,7 @@ export function MarketingLayout({ children }: MarketingLayoutProps) {
       <DotGrid />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-accent bg-white/80 dark:bg-gray-900/80 border-b border-gray-200/50 dark:border-gray-800/50">
+      <header className="sticky top-0 z-50 glass-nav border-b border-gray-200/30 dark:border-gray-800/30">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -112,7 +112,7 @@ export function MarketingLayout({ children }: MarketingLayoutProps) {
       <main className="relative z-10">{children}</main>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-gray-200/50 dark:border-gray-800/50 bg-white/50 dark:bg-gray-900/50 backdrop-blur-accent">
+      <footer className="relative z-10 border-t border-gray-200/30 dark:border-gray-800/30 glass-nav">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Brand */}
