@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BillingSettingsPage } from './billing';
 import { billingService } from '../../services/billing.service';
@@ -140,9 +140,9 @@ describe('BillingSettingsPage', () => {
   const renderComponent = () => {
     return render(
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+        <MemoryRouter>
           <BillingSettingsPage />
-        </BrowserRouter>
+        </MemoryRouter>
       </QueryClientProvider>,
     );
   };

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router';
 import { toast } from 'sonner';
 import { CreditCard, CheckCircle, AlertCircle, Crown, ExternalLink } from 'lucide-react';
 import { DashboardLayout } from '../../components/layouts/dashboard-layout';

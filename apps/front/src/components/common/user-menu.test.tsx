@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import { UserMenu } from './user-menu';
 
 vi.mock('../../contexts/theme-context', () => ({
@@ -27,9 +27,9 @@ describe('UserMenu', () => {
 
   const renderComponent = (user = mockUser) => {
     return render(
-      <BrowserRouter>
+      <MemoryRouter>
         <UserMenu user={user} onLogout={mockOnLogout} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
   };
 

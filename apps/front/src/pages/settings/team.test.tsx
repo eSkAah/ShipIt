@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TeamSettingsPage } from './team';
 import { organizationsService } from '../../services/organizations.service';
@@ -111,9 +111,9 @@ describe('TeamSettingsPage', () => {
 
     return render(
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+        <MemoryRouter>
           <TeamSettingsPage />
-        </BrowserRouter>
+        </MemoryRouter>
       </QueryClientProvider>,
     );
   };

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { OrganizationWithMembership } from '../../services/organizations.service';
 import { CreateOrganizationDialog } from './create-organization-dialog';
@@ -35,7 +35,7 @@ export function OrganizationSwitcher({
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-4 py-2 rounded-full border border-theme hover:bg-white/5 dark:hover:bg-white/10 transition-all duration-300"
       >
-        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-gold-400 to-purple-500 flex items-center justify-center text-white text-xs font-semibold">
+        <div className="w-6 h-6 rounded-full bg-linear-to-br from-gold-400 to-purple-500 flex items-center justify-center text-white text-xs font-semibold">
           {currentOrganization.name.charAt(0).toUpperCase()}
         </div>
         <span className="font-medium max-w-32 truncate text-foreground">
@@ -74,7 +74,7 @@ export function OrganizationSwitcher({
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold-400 to-purple-500 flex items-center justify-center text-white text-sm font-semibold">
+                      <div className="w-8 h-8 rounded-full bg-linear-to-br from-gold-400 to-purple-500 flex items-center justify-center text-white text-sm font-semibold">
                         {org.name.charAt(0).toUpperCase()}
                       </div>
                       <div className="flex-1 min-w-0">

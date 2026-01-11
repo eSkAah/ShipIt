@@ -56,7 +56,7 @@ export function DangerConfirmModal({
       <div className="space-y-6">
         {/* Warning Icon and Message */}
         <div className="flex items-start gap-4 p-4 bg-red-500/10 border border-red-500/30 rounded-premium">
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <svg
               className="w-6 h-6 text-red-500"
               fill="none"
