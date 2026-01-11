@@ -8,6 +8,9 @@
 @source "../../index.html";
 @source "../**/*.{js,ts,jsx,tsx}";
 
+/* Configure dark mode to use .dark class selector (instead of prefers-color-scheme) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ShipIt Design System Theme - Tailwind v4 CSS-first configuration */
 @theme {
   /* Typography - Manrope font */
@@ -163,7 +166,8 @@
 
   /* Dark mode body with premium gradient background */
   html.dark body {
-    background:
+    background-color: #0a0e17;
+    background-image:
       radial-gradient(ellipse 120% 60% at 50% 100%, rgba(124, 58, 237, 0.25) 0%, transparent 60%),
       radial-gradient(ellipse 80% 50% at 0% 100%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
       radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255, 215, 0, 0.12) 0%, transparent 45%),
@@ -227,14 +231,94 @@
   .dark .glass-card {
     background: linear-gradient(
       135deg,
-      rgba(24, 32, 47, 0.9) 0%,
-      rgba(31, 41, 55, 0.8) 100%
+      rgba(24, 32, 47, 0.85) 0%,
+      rgba(31, 41, 55, 0.75) 100%
     );
     backdrop-filter: blur(40px);
-    border: 1px solid rgba(255, 215, 0, 0.1);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 215, 0, 0.15);
     box-shadow:
       0 4px 30px rgba(0, 0, 0, 0.3),
+      0 0 40px rgba(255, 215, 0, 0.03),
       inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .dark .glass-card:hover {
+    border-color: rgba(255, 215, 0, 0.25);
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.4),
+      0 0 60px rgba(255, 215, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* Premium Glass Card Highlight - Gold accent only */
+  .glass-card-highlight {
+    background: rgba(255, 215, 0, 0.04);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 22px;
+    box-shadow:
+      0 4px 24px rgba(255, 215, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 500ms ease;
+  }
+
+  .glass-card-highlight:hover {
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow:
+      0 8px 32px rgba(255, 215, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  /* Dark Mode Glass Card Highlight */
+  .dark .glass-card-highlight {
+    background: rgba(255, 215, 0, 0.06);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    box-shadow:
+      0 4px 30px rgba(0, 0, 0, 0.3),
+      0 0 40px rgba(255, 215, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .dark .glass-card-highlight:hover {
+    border-color: rgba(255, 215, 0, 0.6);
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.4),
+      0 0 60px rgba(255, 215, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Glass CTA Section - Subtle gold accent */
+  .glass-cta {
+    background: rgba(255, 215, 0, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 215, 0, 0.15);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+  }
+
+  .dark .glass-cta {
+    background: rgba(255, 215, 0, 0.05);
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  }
+
+  /* Premium Glass Navigation - Header/Footer */
+  .glass-nav {
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    transition: all 300ms ease;
+  }
+
+  html:not(.dark) .glass-nav {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  html.dark .glass-nav {
+    background: rgba(11, 15, 25, 0.6);
   }
 
   /* Premium Button - Light Mode */
@@ -453,12 +537,37 @@
     padding-right: 1rem;
   }
 
-  /* Gradient Text */
+  /* Accent Text - Direct color instead of rainbow gradient */
   .text-gradient {
-    background-image: linear-gradient(to right, #FFD700, #7C3AED);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: #7C3AED;
+    font-weight: 700;
+  }
+
+  .dark .text-gradient {
+    color: #FFD700;
+  }
+
+  /* Dropdown Surface - for menus and popovers */
+  .dropdown-surface {
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid rgba(229, 231, 235, 1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .dropdown-surface {
+    background-color: #0B0F19;
+    border-color: rgba(55, 65, 81, 0.8);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Section Overlay - subtle separation between sections */
+  .section-overlay {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  .dark .section-overlay {
+    background-color: rgba(255, 255, 255, 0.02);
   }
 
   /* Text colors */
@@ -513,5 +622,16 @@
 
   .dark .glow-purple {
     box-shadow: 0 0 40px rgba(124, 58, 237, 0.1);
+  }
+
+  /* Select option styling for dark mode */
+  select option {
+    background-color: white;
+    color: #1a1a1a;
+  }
+
+  .dark select option {
+    background-color: #0B0F19;
+    color: #ffffff;
   }
 }

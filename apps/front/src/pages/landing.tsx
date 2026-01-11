@@ -112,8 +112,10 @@ function FeaturesSection() {
   ];
 
   return (
-    <section id="features" className="section-padding bg-gray-50/50 dark:bg-gray-900/50">
-      <div className="max-w-7xl mx-auto">
+    <section id="features" className="section-padding relative">
+      {/* Subtle overlay for section separation without breaking gradient */}
+      <div className="absolute inset-0 section-overlay" />
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-section font-bold leading-section text-black dark:text-white mb-4">
@@ -200,74 +202,28 @@ function PricingSection() {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`rounded-premium p-8 ${
-                plan.highlighted
-                  ? 'bg-black dark:bg-white text-white dark:text-black shadow-gold-glow'
-                  : 'glass-card'
-              }`}
+              className={`p-8 ${plan.highlighted ? 'glass-card-highlight' : 'glass-card'}`}
             >
               {/* Plan Name */}
-              <h3
-                className={`text-xl font-semibold mb-2 ${
-                  plan.highlighted ? 'text-white dark:text-black' : 'text-black dark:text-white'
-                }`}
-              >
-                {plan.name}
-              </h3>
+              <h3 className="text-xl font-semibold mb-2 text-black dark:text-white">{plan.name}</h3>
 
               {/* Price */}
               <div className="flex items-baseline gap-1 mb-4">
-                <span
-                  className={`text-4xl font-bold ${
-                    plan.highlighted ? 'text-white dark:text-black' : 'text-black dark:text-white'
-                  }`}
-                >
-                  {plan.price}
-                </span>
+                <span className="text-4xl font-bold text-black dark:text-white">{plan.price}</span>
                 {plan.period && (
-                  <span
-                    className={
-                      plan.highlighted
-                        ? 'text-white/60 dark:text-black/60'
-                        : 'text-black/60 dark:text-white/60'
-                    }
-                  >
-                    {plan.period}
-                  </span>
+                  <span className="text-black/60 dark:text-white/60">{plan.period}</span>
                 )}
               </div>
 
               {/* Description */}
-              <p
-                className={`mb-6 ${
-                  plan.highlighted
-                    ? 'text-white/70 dark:text-black/70'
-                    : 'text-black/60 dark:text-white/60'
-                }`}
-              >
-                {plan.description}
-              </p>
+              <p className="mb-6 text-black/60 dark:text-white/60">{plan.description}</p>
 
               {/* Features */}
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center gap-3">
-                    <Check
-                      className={`w-5 h-5 ${
-                        plan.highlighted
-                          ? 'text-gold-500 dark:text-gold-600'
-                          : 'text-purple-600 dark:text-gold-500'
-                      }`}
-                    />
-                    <span
-                      className={
-                        plan.highlighted
-                          ? 'text-white/90 dark:text-black/90'
-                          : 'text-black/80 dark:text-white/80'
-                      }
-                    >
-                      {feature}
-                    </span>
+                    <Check className="w-5 h-5 text-gold-500" />
+                    <span className="text-black/80 dark:text-white/80">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -275,11 +231,7 @@ function PricingSection() {
               {/* CTA */}
               <Link
                 to={plan.href}
-                className={`block text-center py-3 rounded-full font-semibold transition-all duration-700 ease-smooth ${
-                  plan.highlighted
-                    ? 'bg-white dark:bg-black text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900'
-                    : 'btn-secondary w-full'
-                }`}
+                className={`w-full ${plan.highlighted ? 'btn-primary' : 'btn-secondary'}`}
               >
                 {plan.cta}
               </Link>
@@ -295,16 +247,15 @@ function CTASection() {
   const { t } = useTranslation();
 
   return (
-    <section className="section-padding bg-black dark:bg-white text-white dark:text-black">
+    <section className="section-padding glass-cta">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-section font-bold leading-section mb-6">{t('marketing.cta.title')}</h2>
-        <p className="text-lg text-white/70 dark:text-black/70 mb-10 max-w-2xl mx-auto">
+        <h2 className="text-section font-bold leading-section mb-6 text-black dark:text-white">
+          {t('marketing.cta.title')}
+        </h2>
+        <p className="text-lg text-black/60 dark:text-white/70 mb-10 max-w-2xl mx-auto">
           {t('marketing.cta.subtitle')}
         </p>
-        <Link
-          to="/signup"
-          className="inline-flex items-center gap-2 bg-white dark:bg-black text-black dark:text-white rounded-full px-8 py-4 font-semibold shadow-gold-glow hover:shadow-gold-glow-hover transition-shadow duration-700 ease-smooth"
-        >
+        <Link to="/signup" className="btn-primary inline-flex items-center gap-2 px-8 py-4 h-auto">
           {t('marketing.cta.button')}
           <ArrowRight size={20} />
         </Link>
