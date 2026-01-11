@@ -1,0 +1,19 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": "..",
+  "testEnvironment": "node",
+  "testRegex": "test/.*\\.e2e-spec\\.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": ["ts-jest", { "tsconfig": "<rootDir>/tsconfig.spec.json" }]
+  },
+  "moduleNameMapper": {
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^nanoid$": "<rootDir>/src/__mocks__/nanoid.ts",
+    "^@shipit/validators$": "<rootDir>/../../libs/validators/src/index.ts",
+    "^@shipit/shared-types$": "<rootDir>/../../libs/shared-types/src/index.ts",
+    "^@shipit/constants$": "<rootDir>/../../libs/constants/src/index.ts"
+  },
+  "collectCoverageFrom": ["src/**/*.ts", "!src/main.ts"],
+  "coverageDirectory": "../coverage/e2e",
+  "testTimeout": 30000
+}
