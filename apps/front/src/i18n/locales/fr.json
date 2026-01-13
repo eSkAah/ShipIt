@@ -417,13 +417,49 @@
       "copyright": "© {{year}} ShipIt. Tous droits réservés."
     }
   },
+  "feedback": {
+    "title": "Envoyer un feedback",
+    "description": "Aidez-nous à nous améliorer en signalant des bugs ou en posant des questions.",
+    "type": "Que souhaitez-vous partager ?",
+    "types": {
+      "bug": "Signaler un bug",
+      "bugDescription": "Quelque chose ne fonctionne pas",
+      "help": "Demander de l'aide",
+      "helpDescription": "J'ai une question"
+    },
+    "subject": "Sujet",
+    "subjectPlaceholder": "Résumé de votre feedback",
+    "message": "Message",
+    "messagePlaceholder": "Décrivez votre problème ou votre question en détail...",
+    "submit": "Envoyer",
+    "submitSuccess": "Merci ! Votre feedback a été envoyé.",
+    "submitError": "Échec de l'envoi du feedback. Veuillez réessayer.",
+    "trigger": "Feedback"
+  },
   "admin": {
     "nav": {
       "overview": "Vue d'ensemble",
       "users": "Utilisateurs",
       "organizations": "Organisations",
+      "feedback": "Feedback",
       "logs": "Journaux",
       "backToDashboard": "Retour au tableau de bord"
+    },
+    "feedback": {
+      "title": "Feedback Utilisateurs",
+      "description": "Voir et gérer les retours utilisateurs et signalements de bugs",
+      "search": "Rechercher dans les feedbacks...",
+      "allTypes": "Tous les types",
+      "types": {
+        "bug": "Signalement de bug",
+        "help": "Demande d'aide"
+      },
+      "total": "{{count}} feedbacks",
+      "noFeedback": "Aucun feedback trouvé",
+      "unknownUser": "Utilisateur inconnu",
+      "organizationId": "ID Organisation",
+      "reply": "Répondre par email",
+      "pagination": "Page {{current}} / {{total}}"
     },
     "users": {
       "title": "Gestion des utilisateurs",

@@ -11,6 +11,7 @@ import { StorageModule } from './storage/storage.module';
 import { UsersModule } from './users/users.module';
 import { BillingModule } from './billing/billing.module';
 import { AdminModule } from './admin/admin.module';
+import { FeedbackModule } from './feedback/feedback.module';
 import { LoggerModule } from './logger';
 import { CorrelationIdMiddleware } from './common/middleware';
 
@@ -28,6 +29,7 @@ import { CorrelationIdMiddleware } from './common/middleware';
     UsersModule,
     BillingModule,
     AdminModule,
+    FeedbackModule,
     HealthModule,
   ],
 })

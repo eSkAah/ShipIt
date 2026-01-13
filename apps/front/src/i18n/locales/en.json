@@ -417,13 +417,49 @@
       "copyright": "© {{year}} ShipIt. All rights reserved."
     }
   },
+  "feedback": {
+    "title": "Send Feedback",
+    "description": "Help us improve by reporting bugs or asking questions.",
+    "type": "What would you like to share?",
+    "types": {
+      "bug": "Report a Bug",
+      "bugDescription": "Something isn't working",
+      "help": "Ask for Help",
+      "helpDescription": "I have a question"
+    },
+    "subject": "Subject",
+    "subjectPlaceholder": "Brief summary of your feedback",
+    "message": "Message",
+    "messagePlaceholder": "Please describe your issue or question in detail...",
+    "submit": "Send Feedback",
+    "submitSuccess": "Thank you! Your feedback has been sent.",
+    "submitError": "Failed to send feedback. Please try again.",
+    "trigger": "Feedback"
+  },
   "admin": {
     "nav": {
       "overview": "Overview",
       "users": "Users",
       "organizations": "Organizations",
+      "feedback": "Feedback",
       "logs": "Logs",
       "backToDashboard": "Back to Dashboard"
+    },
+    "feedback": {
+      "title": "User Feedback",
+      "description": "View and manage user feedback and bug reports",
+      "search": "Search feedback...",
+      "allTypes": "All types",
+      "types": {
+        "bug": "Bug Report",
+        "help": "Help Request"
+      },
+      "total": "{{count}} feedback submissions",
+      "noFeedback": "No feedback found",
+      "unknownUser": "Unknown User",
+      "organizationId": "Organization ID",
+      "reply": "Reply by Email",
+      "pagination": "Page {{current}} / {{total}}"
     },
     "users": {
       "title": "User Management",

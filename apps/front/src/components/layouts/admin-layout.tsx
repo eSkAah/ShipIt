@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Users, Building2, FileText, Shield, LayoutDashboard } from 'lucide-react';
+import { Users, Building2, FileText, Shield, LayoutDashboard, MessageSquare } from 'lucide-react';
 import { useAuth } from '../../contexts/auth-context';
 import { UserMenu } from '../common/user-menu';
 
@@ -30,6 +30,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     { href: '/admin', label: t('admin.nav.overview'), icon: LayoutDashboard },
     { href: '/admin/users', label: t('admin.nav.users'), icon: Users },
     { href: '/admin/organizations', label: t('admin.nav.organizations'), icon: Building2 },
+    { href: '/admin/feedback', label: t('admin.nav.feedback'), icon: MessageSquare },
     { href: '/admin/logs', label: t('admin.nav.logs'), icon: FileText },
   ];
 

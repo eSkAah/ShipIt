@@ -48,6 +48,11 @@ enum InvitationStatus {
   canceled
 }
 
+enum FeedbackType {
+  bug
+  help
+}
+
 model User {
   id                   String               @id @default(uuid()) @db.Uuid
   email                String               @unique
@@ -159,4 +164,16 @@ model AppLog {
   timestamp DateTime @default(now())
 
   @@map("app_logs")
+}
+
+model Feedback {
+  id             String       @id @default(uuid()) @db.Uuid
+  type           FeedbackType
+  subject        String
+  message        String
+  userId         String       @map("user_id") @db.Uuid
+  organizationId String?      @map("organization_id") @db.Uuid
+  createdAt      DateTime     @default(now()) @map("created_at")
+
+  @@map("feedbacks")
 }

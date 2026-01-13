@@ -25,16 +25,31 @@ interface InvitationEmailData {
   role: string;
 }
 
+interface FeedbackEmailData {
+  userEmail: string;
+  userName: string;
+  feedbackType: string;
+  subject: string;
+  message: string;
+  organizationId?: string;
+}
+
 export type EmailJobData =
   | { type: 'verification'; data: VerificationEmailData }
   | { type: 'reset-password'; data: ResetPasswordEmailData }
   | { type: 'welcome'; data: WelcomeEmailData }
-  | { type: 'invitation'; data: InvitationEmailData };
+  | { type: 'invitation'; data: InvitationEmailData }
+  | { type: 'feedback'; data: FeedbackEmailData };
 
 export interface EmailJob {
-  type: 'verification' | 'reset-password' | 'welcome' | 'invitation';
+  type: 'verification' | 'reset-password' | 'welcome' | 'invitation' | 'feedback';
   to: string;
-  data: VerificationEmailData | ResetPasswordEmailData | WelcomeEmailData | InvitationEmailData;
+  data:
+    | VerificationEmailData
+    | ResetPasswordEmailData
+    | WelcomeEmailData
+    | InvitationEmailData
+    | FeedbackEmailData;
   language: Language;
 }
 
@@ -143,6 +158,41 @@ export class MailService {
         role,
       },
       language,
+    };
+
+    await this.emailQueue.add('send-email', job, {
+      attempts: 3,
+      backoff: {
+        type: 'exponential',
+        delay: 2000,
+      },
+    });
+  }
+
+  async sendFeedbackNotificationEmail(
+    userEmail: string,
+    userName: string,
+    feedbackType: string,
+    subject: string,
+    message: string,
+    organizationId?: string,
+  ): Promise<void> {
+    this.logger.log(`Queuing feedback notification email for ${feedbackType}: ${subject}`);
+
+    const adminEmail = this.configService.fromEmail;
+
+    const job: EmailJob = {
+      type: 'feedback',
+      to: adminEmail,
+      data: {
+        userEmail,
+        userName,
+        feedbackType,
+        subject,
+        message,
+        organizationId,
+      },
+      language: Language.en,
     };
 
     await this.emailQueue.add('send-email', job, {

@@ -12,10 +12,12 @@ import {
   ChevronLeft,
   ChevronRight,
   Plus,
+  MessageSquare,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/auth-context';
 import { OrganizationWithMembership } from '../../services/organizations.service';
 import { ThemeToggle } from '../ui/theme-toggle';
+import { FeedbackDialog } from '../common/feedback-dialog';
 import { cn } from '../../lib/utils';
 
 interface SidebarProps {
@@ -37,6 +39,7 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
   const { user, logout, organizations, currentOrganization, setCurrentOrganization } = useAuth();
   const [orgMenuOpen, setOrgMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = async () => {
@@ -417,6 +420,17 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
                 <button
                   onClick={() => {
                     setUserMenuOpen(false);
+                    setFeedbackOpen(true);
+                  }}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>{t('feedback.trigger')}</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    setUserMenuOpen(false);
                     handleLogout();
                   }}
                   className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all duration-200"
@@ -429,6 +443,9 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
           )}
         </div>
       </div>
+
+      {/* Feedback Dialog */}
+      <FeedbackDialog isOpen={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
     </div>
   );
 }
