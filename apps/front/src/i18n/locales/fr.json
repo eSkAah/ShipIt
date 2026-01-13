@@ -417,6 +417,17 @@
       "copyright": "© {{year}} ShipIt. Tous droits réservés."
     }
   },
+  "support": {
+    "title": "Support",
+    "description": "Une question ou un problème ? Envoyez-nous un message et nous vous répondrons rapidement.",
+    "subject": "Sujet",
+    "subjectPlaceholder": "De quoi avez-vous besoin ?",
+    "message": "Message",
+    "messagePlaceholder": "Décrivez votre question ou problème en détail...",
+    "send": "Envoyer le message",
+    "success": "Votre message a été envoyé. Nous vous répondrons bientôt !",
+    "error": "Échec de l'envoi du message. Veuillez réessayer."
+  },
   "admin": {
     "nav": {
       "overview": "Vue d'ensemble",

@@ -132,3 +132,20 @@ export interface CheckoutSessionResult {
 export interface PortalSessionResult {
   url: string;
 }
+
+// Support types
+export interface SupportRequest {
+  id: string;
+  userId: string;
+  organizationId: string;
+  subject: string;
+  message: string;
+  status: 'pending' | 'in_progress' | 'resolved';
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface CreateSupportRequestData {
+  subject: string;
+  message: string;
+}

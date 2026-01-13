@@ -82,6 +82,18 @@ export const logsQuerySchema = paginationSchema.extend({
   to: z.coerce.date().optional(),
 });
 
+// Support validators
+export const createSupportRequestSchema = z.object({
+  subject: z
+    .string()
+    .min(3, 'Subject must be at least 3 characters')
+    .max(200, 'Subject must be at most 200 characters'),
+  message: z
+    .string()
+    .min(10, 'Message must be at least 10 characters')
+    .max(5000, 'Message must be at most 5000 characters'),
+});
+
 // Export types inferred from schemas
 export type LoginDto = z.infer<typeof loginSchema>;
 export type SignupDto = z.infer<typeof signupSchema>;
@@ -96,3 +108,4 @@ export type CreateCheckoutSessionDto = z.infer<typeof createCheckoutSessionSchem
 export type PaginationDto = z.infer<typeof paginationSchema>;
 export type SearchQueryDto = z.infer<typeof searchQuerySchema>;
 export type LogsQueryDto = z.infer<typeof logsQuerySchema>;
+export type CreateSupportRequestDto = z.infer<typeof createSupportRequestSchema>;
