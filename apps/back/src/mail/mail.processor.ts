@@ -8,6 +8,7 @@ import { renderVerificationEmailReact } from './templates/verification-email';
 import { renderResetPasswordEmailReact } from './templates/reset-password-email';
 import { renderWelcomeEmailReact } from './templates/welcome-email';
 import { renderInvitationEmailReact } from './templates/invitation-email';
+import { renderSupportRequestEmailReact } from './templates/support-request-email';
 
 @Processor('email')
 export class MailProcessor extends WorkerHost {
@@ -69,6 +70,29 @@ export class MailProcessor extends WorkerHost {
             language === 'fr'
               ? `Invitation à rejoindre ${invitationData.organizationName}`
               : `Invitation to join ${invitationData.organizationName}`;
+          break;
+        }
+
+        case 'support-request': {
+          const supportData = data as {
+            userName: string;
+            userEmail: string;
+            organizationName: string;
+            subject: string;
+            message: string;
+          };
+          html = await renderSupportRequestEmailReact(
+            supportData.userName,
+            supportData.userEmail,
+            supportData.organizationName,
+            supportData.subject,
+            supportData.message,
+            language,
+          );
+          subject =
+            language === 'fr'
+              ? `[Support] ${supportData.subject}`
+              : `[Support] ${supportData.subject}`;
           break;
         }
 

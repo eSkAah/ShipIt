@@ -12,10 +12,12 @@ import {
   ChevronLeft,
   ChevronRight,
   Plus,
+  HelpCircle,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/auth-context';
 import { OrganizationWithMembership } from '../../services/organizations.service';
 import { ThemeToggle } from '../ui/theme-toggle';
+import { SupportPopover } from '../features/support-popover';
 import { cn } from '../../lib/utils';
 
 interface SidebarProps {
@@ -37,7 +39,9 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
   const { user, logout, organizations, currentOrganization, setCurrentOrganization } = useAuth();
   const [orgMenuOpen, setOrgMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [supportPopoverOpen, setSupportPopoverOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const supportRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = async () => {
     try {
@@ -341,6 +345,36 @@ export function Sidebar({ onNavigate, collapsed = false, onCollapsedChange }: Si
           </div>
         )}
       </nav>
+
+      {/* Support Button */}
+      <div className="px-3 pb-2" ref={supportRef}>
+        <div className="relative">
+          <button
+            onClick={() => setSupportPopoverOpen(!supportPopoverOpen)}
+            className={cn(
+              'w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200',
+              'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white',
+              supportPopoverOpen && 'bg-gray-100 dark:bg-gray-800',
+              collapsed && 'justify-center px-2',
+            )}
+            title={collapsed ? t('support.title') : undefined}
+          >
+            <HelpCircle
+              className={cn(
+                'shrink-0 transition-colors duration-200 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300',
+                collapsed ? 'w-6 h-6' : 'w-5 h-5',
+              )}
+            />
+            {!collapsed && <span>{t('support.title')}</span>}
+          </button>
+
+          <SupportPopover
+            isOpen={supportPopoverOpen}
+            onClose={() => setSupportPopoverOpen(false)}
+            collapsed={collapsed}
+          />
+        </div>
+      </div>
 
       {/* Bottom Section - User Profile with Popover */}
       <div className="mt-auto border-t border-gray-100 dark:border-gray-800 p-3" ref={userMenuRef}>

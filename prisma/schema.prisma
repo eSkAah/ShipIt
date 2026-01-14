@@ -48,6 +48,12 @@ enum InvitationStatus {
   canceled
 }
 
+enum SupportRequestStatus {
+  pending
+  in_progress
+  resolved
+}
+
 model User {
   id                   String               @id @default(uuid()) @db.Uuid
   email                String               @unique
@@ -67,6 +73,7 @@ model User {
   sessions             Session[]
   accounts             Account[]
   memberships          OrganizationMember[]
+  supportRequests      SupportRequest[]
 
   @@map("users")
 }
@@ -118,6 +125,7 @@ model Organization {
   updatedAt            DateTime             @updatedAt @map("updated_at")
   members              OrganizationMember[]
   invitations          Invitation[]
+  supportRequests      SupportRequest[]
 
   @@map("organizations")
 }
@@ -159,4 +167,19 @@ model AppLog {
   timestamp DateTime @default(now())
 
   @@map("app_logs")
+}
+
+model SupportRequest {
+  id             String               @id @default(uuid()) @db.Uuid
+  userId         String               @map("user_id") @db.Uuid
+  organizationId String               @map("organization_id") @db.Uuid
+  subject        String
+  message        String               @db.Text
+  status         SupportRequestStatus @default(pending)
+  createdAt      DateTime             @default(now()) @map("created_at")
+  updatedAt      DateTime             @updatedAt @map("updated_at")
+  user           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@map("support_requests")
 }

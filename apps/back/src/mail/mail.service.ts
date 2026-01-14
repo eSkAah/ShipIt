@@ -25,16 +25,30 @@ interface InvitationEmailData {
   role: string;
 }
 
+interface SupportRequestEmailData {
+  userName: string;
+  userEmail: string;
+  organizationName: string;
+  subject: string;
+  message: string;
+}
+
 export type EmailJobData =
   | { type: 'verification'; data: VerificationEmailData }
   | { type: 'reset-password'; data: ResetPasswordEmailData }
   | { type: 'welcome'; data: WelcomeEmailData }
-  | { type: 'invitation'; data: InvitationEmailData };
+  | { type: 'invitation'; data: InvitationEmailData }
+  | { type: 'support-request'; data: SupportRequestEmailData };
 
 export interface EmailJob {
-  type: 'verification' | 'reset-password' | 'welcome' | 'invitation';
+  type: 'verification' | 'reset-password' | 'welcome' | 'invitation' | 'support-request';
   to: string;
-  data: VerificationEmailData | ResetPasswordEmailData | WelcomeEmailData | InvitationEmailData;
+  data:
+    | VerificationEmailData
+    | ResetPasswordEmailData
+    | WelcomeEmailData
+    | InvitationEmailData
+    | SupportRequestEmailData;
   language: Language;
 }
 
@@ -141,6 +155,38 @@ export class MailService {
         invitationUrl: `${this.configService.frontendUrl}/invitations/${token}/accept`,
         organizationName,
         role,
+      },
+      language,
+    };
+
+    await this.emailQueue.add('send-email', job, {
+      attempts: 3,
+      backoff: {
+        type: 'exponential',
+        delay: 2000,
+      },
+    });
+  }
+
+  async sendSupportRequestEmail(
+    userName: string,
+    userEmail: string,
+    organizationName: string,
+    subject: string,
+    message: string,
+    language: Language = Language.fr,
+  ): Promise<void> {
+    this.logger.log(`Queuing support request email from ${userEmail}`);
+
+    const job: EmailJob = {
+      type: 'support-request',
+      to: this.configService.supportEmail,
+      data: {
+        userName,
+        userEmail,
+        organizationName,
+        subject,
+        message,
       },
       language,
     };

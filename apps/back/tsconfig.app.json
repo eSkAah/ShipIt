@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "module": "CommonJS",
+    "moduleResolution": "node",
     "types": ["node", "multer"],
     "emitDecoratorMetadata": true,
     "target": "ES2021",
