@@ -96,3 +96,20 @@ export type CreateCheckoutSessionDto = z.infer<typeof createCheckoutSessionSchem
 export type PaginationDto = z.infer<typeof paginationSchema>;
 export type SearchQueryDto = z.infer<typeof searchQuerySchema>;
 export type LogsQueryDto = z.infer<typeof logsQuerySchema>;
+
+// Feedback validators
+export const createFeedbackSchema = z.object({
+  type: z.enum(['bug', 'help']),
+  subject: z.string().min(1, 'Subject is required').max(200, 'Subject is too long'),
+  message: z
+    .string()
+    .min(10, 'Message must be at least 10 characters')
+    .max(5000, 'Message is too long'),
+});
+
+export const feedbackQuerySchema = paginationSchema.extend({
+  type: z.enum(['bug', 'help']).optional(),
+});
+
+export type CreateFeedbackDto = z.infer<typeof createFeedbackSchema>;
+export type FeedbackQueryDto = z.infer<typeof feedbackQuerySchema>;

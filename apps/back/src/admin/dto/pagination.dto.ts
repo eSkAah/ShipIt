@@ -42,3 +42,13 @@ export class LogsQueryDto extends PaginationQueryDto {
   @IsString()
   level?: string;
 }
+
+export class FeedbackQueryDto extends PaginationQueryDto {
+  @ApiPropertyOptional({
+    enum: ['bug', 'help'],
+    description: 'Filter by feedback type',
+  })
+  @IsOptional()
+  @IsString()
+  type?: 'bug' | 'help';
+}

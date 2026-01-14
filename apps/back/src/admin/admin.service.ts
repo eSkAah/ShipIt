@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
-import { UsersQueryDto, OrganizationsQueryDto, LogsQueryDto } from './dto';
+import { UsersQueryDto, OrganizationsQueryDto, LogsQueryDto, FeedbackQueryDto } from './dto';
 
 @Injectable()
 export class AdminService {
@@ -169,6 +169,55 @@ export class AdminService {
       premiumOrgs,
       freeOrgs: totalOrganizations - premiumOrgs,
       unverifiedUsers: totalUsers - verifiedUsers,
+    };
+  }
+
+  async getFeedback(query: FeedbackQueryDto) {
+    const { page = 1, limit = 10, search, type } = query;
+    const skip = (page - 1) * limit;
+
+    const where: Record<string, unknown> = {};
+
+    if (search) {
+      where.OR = [
+        { subject: { contains: search, mode: 'insensitive' } },
+        { message: { contains: search, mode: 'insensitive' } },
+      ];
+    }
+
+    if (type) {
+      where.type = type;
+    }
+
+    const [feedbacks, total] = await Promise.all([
+      this.prisma.feedback.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+      }),
+      this.prisma.feedback.count({ where }),
+    ]);
+
+    const userIds = [...new Set(feedbacks.map((f) => f.userId))];
+    const users = await this.prisma.user.findMany({
+      where: { id: { in: userIds } },
+      select: { id: true, email: true, firstName: true, lastName: true },
+    });
+
+    const userMap = new Map(users.map((u) => [u.id, u]));
+
+    return {
+      data: feedbacks.map((feedback) => ({
+        ...feedback,
+        user: userMap.get(feedback.userId) || null,
+      })),
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+      },
     };
   }
 }

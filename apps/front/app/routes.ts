@@ -30,6 +30,7 @@ export default [
     index('routes/admin._index.tsx'),
     route('users', 'routes/admin.users.tsx'),
     route('organizations', 'routes/admin.organizations.tsx'),
+    route('feedback', 'routes/admin.feedback.tsx'),
     route('logs', 'routes/admin.logs.tsx'),
   ]),
 

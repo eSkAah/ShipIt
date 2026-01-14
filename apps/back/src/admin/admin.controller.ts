@@ -1,7 +1,7 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { AdminService } from './admin.service';
-import { UsersQueryDto, OrganizationsQueryDto, LogsQueryDto } from './dto';
+import { UsersQueryDto, OrganizationsQueryDto, LogsQueryDto, FeedbackQueryDto } from './dto';
 import { SessionGuard, SuperAdminGuard } from '../common/guards';
 
 @ApiTags('Admin')
@@ -36,6 +36,13 @@ export class AdminController {
   @ApiOperation({ summary: 'Get application logs with pagination' })
   async getLogs(@Query() query: LogsQueryDto) {
     const result = await this.adminService.getLogs(query);
+    return { success: true, ...result };
+  }
+
+  @Get('feedback')
+  @ApiOperation({ summary: 'Get user feedback with pagination' })
+  async getFeedback(@Query() query: FeedbackQueryDto) {
+    const result = await this.adminService.getFeedback(query);
     return { success: true, ...result };
   }
 }

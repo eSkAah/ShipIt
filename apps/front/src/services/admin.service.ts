@@ -71,6 +71,29 @@ export interface LogsQuery {
   level?: string;
 }
 
+export interface AdminFeedback {
+  id: string;
+  type: 'bug' | 'help';
+  subject: string;
+  message: string;
+  userId: string;
+  organizationId?: string;
+  createdAt: string;
+  user?: {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+  };
+}
+
+export interface FeedbackQuery {
+  page?: number;
+  limit?: number;
+  search?: string;
+  type?: 'bug' | 'help';
+}
+
 export const adminService = {
   async getStats(): Promise<AdminStats> {
     const response = await apiClient.get<ApiResponse<AdminStats>>('/admin/stats');
@@ -123,6 +146,22 @@ export const adminService = {
     const response = await apiClient.get<ApiResponse<AppLog[]> & PaginatedResponse<AppLog>>(
       `/admin/logs?${params.toString()}`,
     );
+    return {
+      data: response.data.data || [],
+      pagination: response.data.pagination,
+    };
+  },
+
+  async getFeedback(query: FeedbackQuery = {}): Promise<PaginatedResponse<AdminFeedback>> {
+    const params = new URLSearchParams();
+    if (query.page) params.append('page', query.page.toString());
+    if (query.limit) params.append('limit', query.limit.toString());
+    if (query.search) params.append('search', query.search);
+    if (query.type) params.append('type', query.type);
+
+    const response = await apiClient.get<
+      ApiResponse<AdminFeedback[]> & PaginatedResponse<AdminFeedback>
+    >(`/admin/feedback?${params.toString()}`);
     return {
       data: response.data.data || [],
       pagination: response.data.pagination,

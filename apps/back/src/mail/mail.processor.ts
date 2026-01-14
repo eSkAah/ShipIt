@@ -8,6 +8,7 @@ import { renderVerificationEmailReact } from './templates/verification-email';
 import { renderResetPasswordEmailReact } from './templates/reset-password-email';
 import { renderWelcomeEmailReact } from './templates/welcome-email';
 import { renderInvitationEmailReact } from './templates/invitation-email';
+import { renderFeedbackEmailReact } from './templates/feedback-email';
 
 @Processor('email')
 export class MailProcessor extends WorkerHost {
@@ -69,6 +70,28 @@ export class MailProcessor extends WorkerHost {
             language === 'fr'
               ? `Invitation à rejoindre ${invitationData.organizationName}`
               : `Invitation to join ${invitationData.organizationName}`;
+          break;
+        }
+
+        case 'feedback': {
+          const feedbackData = data as {
+            userEmail: string;
+            userName: string;
+            feedbackType: string;
+            subject: string;
+            message: string;
+            organizationId?: string;
+          };
+          html = await renderFeedbackEmailReact(
+            feedbackData.userEmail,
+            feedbackData.userName,
+            feedbackData.feedbackType,
+            feedbackData.subject,
+            feedbackData.message,
+            feedbackData.organizationId,
+          );
+          const typeLabel = feedbackData.feedbackType === 'bug' ? 'Bug Report' : 'Help Request';
+          subject = `[ShipIt] ${typeLabel}: ${feedbackData.subject}`;
           break;
         }
 

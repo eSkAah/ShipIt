@@ -132,3 +132,22 @@ export interface CheckoutSessionResult {
 export interface PortalSessionResult {
   url: string;
 }
+
+// Feedback types
+export type FeedbackType = 'bug' | 'help';
+
+export interface Feedback {
+  id: string;
+  type: FeedbackType;
+  subject: string;
+  message: string;
+  userId: string;
+  organizationId?: string;
+  createdAt: Date;
+}
+
+export interface CreateFeedbackData {
+  type: FeedbackType;
+  subject: string;
+  message: string;
+}
